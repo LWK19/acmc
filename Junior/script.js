@@ -9,7 +9,7 @@ globalThis.qn;
 async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
-    let url = "https://acmc2023-worker.acmc-junior.workers.dev/";
+    let url = "https://acmc-junior.acsimct.workers.dev/";
             
     var req = await fetch( url, {
         method: "POST",
