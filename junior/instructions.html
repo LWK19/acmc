@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>ACMC 2023 Instructions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="background-color: 325aa0;margin: 8px 0;">
+    <div id="head">
+        <div id="timer">
+        </div>
+        <div><img src="logo.jpeg" style="max-height:50px;"></div>
+        <!--div class="acs" style="padding: 0 10px;justify-content: center;flex:1;font-size: 50px;">ACMC 2022</div-->
+        <div id="name" style="padding: 10px;justify-content: flex-end;flex:1;text-align: right;padding-right: 20px;">
+        </div>
+    </div>
+    <div id="instruct-square">
+        <h1 style="margin:5px;text-align: center;font-size: xx-large;">Instructions to Candidates</h1>
+        <hr color="black" style="border-width:0.5px">
+        <!--TODO change instructions-->
+        <ul>
+            <li>You have 1 hour for this competition. The timer will begin when "Start Quiz" is pressed.</li>
+            <li>There are 15 questions in total.</li>
+            <li>The first 10 questions will be in a multiple choice format with 5 options. Each correct answer will award 2 marks.</li>
+            <li>The next 5 questions will be open ended. Each correct answer will award 3 marks.</li>
+            <li>There is no penalty for incorrect answers.</li>
+            <li>This is an open book test. Calculators are allowed.</li>
+            <li>Please click on "Save and Next" after you have selected or entered your answer. You can change the answers anytime during the competition. Unsaved answers will not be marked.</li>
+            <li>You can click on the question images to enlarge them.</li>
+        </ul>
+        <hr color="black" style="border-width:0.5px">
+        <div>
+            <button type="button" id="startBtn" class="btnDisable" disabled onclick="start();"></button>
+        </div>
+    </div>
+    <div id="load" class="hidden">
+        <div class="popup">
+            <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+            <div class="loader"></div>
+
+        </div>
+        <div class="dimmer"></div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    getName();
+    getTime();
+    window.addEventListener("focus",updateTime);
+
+</script>

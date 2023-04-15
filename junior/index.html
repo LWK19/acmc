@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>ACMC 2023 Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body style="background-color: 325aa0;">
+    <div id="login-square">
+        <div class="acs">ACMC</div>
+        <div style="display: block;">
+            <div class="form-title">Username</div>
+            <input type="text" placeholder="Username" id="username"></input>
+        </div>
+        <div style="display:block;margin-bottom: 30px;">
+            <div class="form-title">Password
+                
+            </div>
+            <input type="password" placeholder="••••••" id="password"> </input>
+        </div>
+        <div id="incorrect" style="text-align: center;color: red;font-style: italic;"></div>
+        <button type="button" id="login-button" onclick="login()" autofocus>LOG IN</button>
+
+    </div>
+    <div id="load" class="hidden">
+        <div class="popup">
+            <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+            <div class="loader"></div>
+
+        </div>
+        <div class="dimmer"></div>
+    </div>
+</body>
+
+</html>
