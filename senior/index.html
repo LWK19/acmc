@@ -34,5 +34,18 @@
         <div class="dimmer"></div>
     </div>
 </body>
-
+<script>
+    var u = document.getElementById("username");
+    u.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("login-button").click();
+    }});
+    var p = document.getElementById("password");
+    p.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("login-button").click();
+    }});
+</script>
 </html>
