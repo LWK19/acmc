@@ -10,7 +10,7 @@ async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
     //TODO JUNIOR/SENIOR
-    let url = "https://acmc2023-worker.acmc-senior.workers.dev/";
+    let url = "https://acmc-senior.acsimct.workers.dev/";
             
     var req = await fetch( url, {
         method: "POST",
