@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <title>ACMC 2023</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body style="margin:0px;background-color: #f2f2f2;"
+    onload="toggle_visibility('input-mcq','show');toggle_visibility('input-open','hide');">
+    <div id="head">
+        <div id="timer">
+            <div style="display: inline-block;width:90px;">Time Left:</div>
+            <div id="clock" style="display: inline-block;margin: 0 5px;"></div>
+            <div id="bar" style="display: inline-block;margin:0 5px">
+                <div id="progress"></div>
+            </div>
+        </div>
+        <div><img src="logo.jpeg" style="max-height:50px;"></div>
+        <!--div class="acs" style="padding: 0 10px;justify-content: center;flex:1;font-size: 50px;">ACMC 2022</div-->
+        <div id="name" style="padding: 10px;justify-content: flex-end;flex:1;text-align: right;padding-right: 20px;">
+        </div>
+    </div>
+    <div style="height:100%;display: flex;flex-flow: column;justify-content: space-between;">
+        <div style="padding-top: 80px; text-align:center;width: 100%;">
+            <div style="width: 50vw;margin: auto;display: flex;flex-direction: column;">
+                <div class="question-box">
+                    <div id="question-img" onclick="enlarge()">
+                        <img>
+                    </div>
+                </div>
+                <div class="question-num" id="question-num">Question</div>
+            </div>
+            <div id="input-mcq" style="display: flex;padding:10px;margin:0 20px;justify-content:center;">
+                <div class="option-wrap">
+                    <input type="checkbox" class="option" value="A" id="optA" name="opt[]">A</input>
+                </div>
+                <div class="option-wrap">
+                    <input type="checkbox" class="option" value="B" id="optB" name="opt[]">B</input>
+                </div>
+                <div class="option-wrap">
+                    <input type="checkbox" class="option" value="C" id="optC" name="opt[]">C</input>
+                </div>
+                <div class="option-wrap">
+                    <input type="checkbox" class="option" value="D" id="optD" name="opt[]">D</input>
+                </div>
+                <div class="option-wrap">
+                    <input type="checkbox" class="option" value="E" id="optE" name="opt[]">E</input>
+                </div>
+            </div>
+
+            <div id="input-open" style="display: flex;padding:10px 10px 0px;margin:0 20px;justify-content:center;height:5vh">
+                <input type="number" id="open" onkeydown="return event.keyCode !== 69" placeholder="Answer" style="width:30vw"></input>
+            </div>
+            <div id="inputerror" style="padding-bottom:10px;text-align: center;color: red;font-style: italic;"></div>
+        </div>
+        <div style="text-align:center;width: 100%;justify-content: flex-end;">
+            <div style="display: flex;justify-content: center;justify-self: flex-start;">
+                <button id="save" onclick="saveAns()">Save & Next</button>
+                <!--<button id="nextBtn" onclick="nextQn()">Next Question</button>-->
+            </div>
+            <div
+                style="background-color: lightgrey;display: flex; justify-content: center;justify-self: flex-end;margin-top: 10px;">
+                <button type="button" class="qnum-box" id="q1" onclick="changeQn(1)"> 1 </button>
+                <button type="button" class="qnum-box" id="q2" onclick="changeQn(2)"> 2 </button>
+                <button type="button" class="qnum-box" id="q3" onclick="changeQn(3)"> 3 </button>
+                <button type="button" class="qnum-box" id="q4" onclick="changeQn(4)"> 4 </button>
+                <button type="button" class="qnum-box" id="q5" onclick="changeQn(5)"> 5 </button>
+                <button type="button" class="qnum-box" id="q6" onclick="changeQn(6)"> 6 </button>
+                <button type="button" class="qnum-box" id="q7" onclick="changeQn(7)"> 7 </button>
+                <button type="button" class="qnum-box" id="q8" onclick="changeQn(8)"> 8 </button>
+                <button type="button" class="qnum-box" id="q9" onclick="changeQn(9)"> 9 </button>
+                <button type="button" class="qnum-box" id="q10" onclick="changeQn(10)"> 10 </button>
+                <button type="button" class="qnum-box" id="q11" onclick="changeQn(11)"> 11 </button>
+                <button type="button" class="qnum-box" id="q12" onclick="changeQn(12)"> 12 </button>
+                <button type="button" class="qnum-box" id="q13" onclick="changeQn(13)"> 13 </button>
+                <button type="button" class="qnum-box" id="q14" onclick="changeQn(14)"> 14 </button>
+                <button type="button" class="qnum-box" id="q15" onclick="changeQn(15)"> 15 </button>
+                <button type="button" id="submit" onclick="document.getElementById('confirmSubmit').classList.remove('hidden');document.getElementById('confirmSubmit').classList.add('visible')">Submit</button>
+            </div>
+            <div id="tail">
+                &copy 2023 MCT | All Rights Reserved
+            </div>
+        </div>
+
+    </div>
+    <div id="load" class="hidden">
+        <div class="popup">
+            <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+            <div class="loader"></div>
+        </div>
+        <div class="dimmer"></div>
+    </div>
+    <div id="confirmSubmit" class="hidden">
+        <div class="popup" style="padding: 20px 50px;height:auto;">
+            <div>
+                <h1 style="font-size: 30px;">Attention!</h1>
+            </div>
+            <hr>
+            <div style="padding: 20px 30px 30px;">Are you sure you want to submit? You cannot change anymore answers. Ensure all answers are saved before submitting. 
+            </div>
+            <div>
+                <button type="button" class="confirm" style="background-color: lightgreen;" onclick="finish()">
+                    Confirm</button>
+                <button type="button" class="confirm" style="background-color: red;" onclick="document.getElementById('confirmSubmit').classList.remove('visible');document.getElementById('confirmSubmit').classList.add('hidden');"> Cancel</button>
+            </div>
+        </div>
+        <div class="dimmer"></div>
+    </div>
+    <div id="lightbox" style="cursor:pointer;visibility: hidden;" onclick="document.getElementById('lightbox').style.visibility = 'hidden';">
+        <div style="position: fixed;top: 0;z-index: 20; width: 80%;height:80%;display: flex;align-items: center;padding:10vh 10vw;">
+            <div id="img-enlarge" style="width:100%;height:100%;margin: auto;display: flex;">
+            </div>
+        </div>
+        <div class="dimmer"></div>
+    </div>
+</body>
+<div id="spin">
+
+</div>
+
+</html>
+
+<script>
+    var qn = 1;
+    $("input:checkbox").on('click', function () {
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    })
+    getName();
+    shadeQNum();
+    initQn();
+    
+    getMainTime();
+    window.addEventListener("focus",updateMainTime);
+</script>
