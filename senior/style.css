@@ -12,11 +12,11 @@ input[type=number] {
 }
 @font-face {
   font-family: Chomsky;
-  src: url("fonts/Chomsky.woff") format("woff");
+  src: url("../assets/fonts/Chomsky.woff") format("woff");
 }
 @font-face{
   font-family: Olde-English;
-  src: url("fonts/Olde-English.woff") format("woff");
+  src: url("../assets/fonts/Olde-English.woff") format("woff");
 }
 #question-img {
   width: 100%;
@@ -49,7 +49,7 @@ button:hover:not([disabled]) {
   border-radius: 50px;
   box-shadow: 0px 0px 15px grey;
   padding: 5vh 5vw;
-  width: 20vw;
+  width: 30vw;
   position: absolute;
   top: 50%;
   left: 50%;
