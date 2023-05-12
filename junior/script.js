@@ -54,7 +54,6 @@ async function login() {
 async function updateMainTime() {
     var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
     if(resp.success) {
-        //TODO changed
         time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
     }else{
@@ -92,7 +91,6 @@ async function getTime() {
     }
 }
 
-//TODO changed
 async function getMainTime() {
     var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
     if(resp.success){
@@ -116,7 +114,6 @@ async function getMainTime() {
 }
 
 async function start() {
-    //TODO changed
     var resp = await post({"method":"start_time", "token":getCookie("token")});
     if (resp.success) {
         var ans_list = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];

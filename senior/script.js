@@ -9,7 +9,6 @@ globalThis.qn;
 async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
-    //TODO JUNIOR/SENIOR
     let url = "https://acmc-senior.acsimct.workers.dev/";
             
     var req = await fetch( url, {
@@ -55,7 +54,7 @@ async function login() {
 async function updateMainTime() {
     var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
     if(resp.success) {
-        time = parseInt(resp);
+        time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
     }else{
         if (resp.msg == "Error. Start Quiz") {
@@ -348,12 +347,13 @@ function preload(url, i) {
 }
 
 function handleErrors(resp){
-    //TODO add Input Error, appear msg like login
     if (resp.msg == "Token Error") {
         location.href = "index";
         alert("Login timeout. Please sign in again.");
+    } else if (resp.msg == "Already Started") {
+        location.href = "main";
     } else if (resp.msg == "Competition Over") {
-        location.href = "finish";
+        finish();
     } else if (resp.msg == "Competition Not Started") {
         location.href = "instructions";
     } else if (resp.msg == "Already Submitted") {
