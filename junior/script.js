@@ -56,7 +56,6 @@ async function updateMainTime() {
     if(resp.success) {
         time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
-        //TODO ERror here
     }else{
         if (resp.msg == "Error. Start Quiz") {
             location.href = "instructions";
@@ -354,7 +353,7 @@ function handleErrors(resp){
         location.href = "index";
         alert("Login timeout. Please sign in again.");
     } else if (resp.msg == "Competition Over") {
-        location.href = "finish";
+        finish();
     } else if (resp.msg == "Competition Not Started") {
         location.href = "instructions";
     } else if (resp.msg == "Already Submitted") {
