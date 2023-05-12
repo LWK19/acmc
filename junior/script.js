@@ -3,6 +3,7 @@ script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 globalThis.qn;
 globalThis.mainStarts;
+globalThis.time;
 ////////////////////////////////////////////////////////////////
 //API.js
 
@@ -249,7 +250,7 @@ function instructTimer() {
         }
     }, 100);
 }
-function mainTimer(time) {
+function mainTimer() {
     const mainInterval = setInterval(function () {
         var now = new Date().getTime() / 1000;
         var elapsed = now - mainStarts;
