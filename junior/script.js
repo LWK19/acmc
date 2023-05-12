@@ -54,7 +54,7 @@ async function login() {
 async function updateMainTime() {
     var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
     if(resp.success) {
-        time = parseInt(resp);
+        time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
     }else{
         if (resp.msg == "Error. Start Quiz") {
