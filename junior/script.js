@@ -2,6 +2,7 @@ var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 globalThis.qn;
+globalThis.mainStarts;
 ////////////////////////////////////////////////////////////////
 //API.js
 
@@ -56,6 +57,7 @@ async function updateMainTime() {
     if(resp.success) {
         time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
+        //TODO ERror here
     }else{
         if (resp.msg == "Error. Start Quiz") {
             location.href = "instructions";
@@ -114,6 +116,7 @@ async function getMainTime() {
 }
 
 async function start() {
+    //TODO check if start_time is filled
     var resp = await post({"method":"start_time", "token":getCookie("token")});
     if (resp.success) {
         var ans_list = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
