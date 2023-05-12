@@ -348,12 +348,11 @@ function preload(url, i) {
 }
 
 function handleErrors(resp){
-    //TODO add Input Error, appear msg like login
     if (resp.msg == "Token Error") {
         location.href = "index";
         alert("Login timeout. Please sign in again.");
     } else if (resp.msg == "Competition Over") {
-        finish();
+        //TODO finish();
     } else if (resp.msg == "Competition Not Started") {
         location.href = "instructions";
     } else if (resp.msg == "Already Submitted") {
