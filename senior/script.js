@@ -246,7 +246,7 @@ function instructTimer() {
         }
     }, 100);
 }
-function mainTimer(time) {
+function mainTimer() {
     const mainInterval = setInterval(function () {
         var now = new Date().getTime() / 1000;
         var elapsed = now - mainStarts;
