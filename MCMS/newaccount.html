@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Create New Account</title>
+</head>
+<body>
+    <div id="signin">
+        <h1>Create New Account</h1>
+        <form action="#" method="post">
+            <div class="forminput">
+                <input type="text" name="name" id="name" placeholder="Full Name" style="flex-shrink:1;" required>
+                <input type="text" name="class" id="class" placeholder="Class" style="flex-shrink:3;" required>
+            </div>
+            <div class="forminput">
+                <input type="text" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="forminput">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="forminput">
+                <input type="password" name="cfmpassword" id="cfmpassword" placeholder="Re-enter Password" required>
+            </div>
+            <div class="buttons">
+                <button onclick="window.location.href='newaccountlanding.html'"><i class="fa-solid fa-user-plus"></i> <span>Create Account</span></button>
+            </div>
+            <div class="smalllink">
+                <a href="index.html"><i class="fa-solid fa-caret-left"></i> <span>Or Back To Sign In</span></a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

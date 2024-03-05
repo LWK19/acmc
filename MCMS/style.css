@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+:root {
+    --blue: #080044;
+    --navy: #0000AA;
+    --red: #d73a49;
+    --gold: #f0ad4e;
+    --gray: #DDDDDD;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: var(--blue);
+}
+
+p {
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font: 44px 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+h2 {
+    font: 20px 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#signin {
+    margin: auto;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.forminput {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 0px;
+    border-radius: 6px;
+    align-items: center;
+    gap: 6px;
+}
+
+.forminput input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    outline: none;
+    font: 16px Helvetica, Arial, sans-serif;
+}
+
+.forminput input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.smalllink {
+    display: flex;
+    justify-content: end;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.smalllink span {
+    color: var(--gold);
+    cursor: pointer;
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 1px 
+    no-repeat;
+    transition:0.2s;
+}
+
+.smalllink span:hover {
+    --d: 100%;
+}
+
+.smalllink i {
+    margin: 0px;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.buttons button {
+    font: 20px 'Montserrat', sans-serif;
+    width: 100%;
+    margin: 6px 0 0;
+    padding: 12px;
+    background-color: var(--blue);
+    border-radius: 6px;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.buttons button span {
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 3px 
+    no-repeat;
+    transition:0.4s;
+}
+
+.buttons button:hover {
+    background-color: var(--gold);
+    color: var(--blue);
+    --d: 100%;
+}
+
+.error p {
+    min-height: 12px;
+    color: var(--blue);
+    text-align: center;
+}
+
+.sidebar {
+    background-color: var(--gold);
+    width: 20%;
+}
+
+i {
+    margin: 6px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--gold);
+}
+
