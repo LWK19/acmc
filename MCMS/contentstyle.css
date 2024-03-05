@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --blue: #080044;
-    --navy: #0000AA;
+    --blue: #080066;
     --red: #B00;
     --gold: #f0ad4e;
-    --gray: #dddddd;
+    --gray: #DEDEDE;
+    --grayer: #C4C4C4;
     --disabled: #555;
 }
 
@@ -15,26 +15,27 @@ body {
     background-color: var(--gray);
     margin: 0px;
     min-height: 100%;
+    height: 100%;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-p {
-    color: #fff;
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
-}
-
 h1 {
     font: 44px 'Montserrat', sans-serif;
-    text-align: center;
     color: var(--blue);
+    font-weight: 900;
 }
 
 h2 {
-    font: 20px 'Montserrat', sans-serif;
-    color: #fff;
+    font: 28px 'Montserrat', sans-serif;
+    color: var(--blue);
+    font-weight: 800;
+}
+
+form {
     padding: 12px 24px;
+    width: 100%;
 }
 
 i {
@@ -43,37 +44,117 @@ i {
 
 button {
     font: 20px 'Montserrat', sans-serif;
-    width: max-content;
+    width: 100%;
     height: max-content;
     padding: 12px;
     background-color: var(--blue);
-    border: none;
-    transition: background-color 0.2s ease;
     text-align: center;
     color: var(--gold);
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
 }
 
 button:disabled {
     color: var(--disabled);
 }
 
+button span {
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 2px 
+    no-repeat;
+    transition:0.4s;
+}
+
+button:hover:enabled {
+    background-color: var(--gold);
+    color: var(--blue);
+    --d: 100%;
+}
+
+input {
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 500;
+    width: max-content;
+    padding: 0px;
+    padding-bottom: 3px;
+    border: none;
+    border-bottom: 2px solid var(--blue);
+    background-color: var(--gray);
+    outline: none;
+}
+
+label {
+    font: 18px 'Montserrat', sans-serif;
+    margin-right: 12px;
+    color: var(--blue);
+    font-weight: 600;
+}
+
+table {
+    position: inherit;
+    display: table;
+    width: 100%;
+}
+
+th {
+    background-color: var(--blue);
+    color: var(--gold);
+    font: 20px 'Montserrat', sans-serif;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    text-align: center;
+    background-color: var(--gray);
+    color: var(--blue);
+    font: 16px 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+tr{
+    width: 100%;
+    height: 40px;
+}
+
+tr:nth-child(even) td {
+    background-color: var(--grayer);
+}
+
+.inputfields {
+    width: fit-content;
+    vertical-align: middle;
+    padding: 6px 0px;
+}
+
 #thebutton {
     background-color: var(--gold);
     color: var(--blue);
-    padding-left: 72px;
+    padding-left: 25%;
 }
 
 .container {
     display: flex;
     padding: 0px;
-    min-height: 100%;
 }
 
 .sidebar {
     position: relative;
-    width: 20%; 
+    min-width: 20%; 
+    width: 20%;
     background-color: var(--blue);
     margin: 0;
+    text-align: center;
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    padding: 24px;
+    color: white;
 }
 
 .centre {
@@ -81,32 +162,34 @@ button:disabled {
     margin: 0;
     flex-grow: 4;
     display: flex;
+    padding-left: 3%;
+    padding-right: 3%;
+    max-height: 100%;
 }
 
 .sidebtn {
-    position: relative;
     font: 16px 'Montserrat', sans-serif;
-    background-color: var(--blue);
-    padding-left: 60px;
-    width: 100%;
+    font-weight: 600;
+    position: relative;
+    padding-left: 20%;
+    min-height: 60px;
     height: 8%;
-    min-height: 54px;
-    border: none;
-    color: var(--gold);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.4s ease;
     transition: padding 0.4s ease;
     text-align: left;
+    border-radius: 0px;
 }
 
 #logout {
     background-color: var(--red);
     color: var(--gold);
+    border-bottom: 2px solid var(--gold);
 }
 
 .sidebtn span {
     background: 
       linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 3px 
+      0 100% /var(--d, 0) 2px 
     no-repeat;
     transition:0.4s;
 }
@@ -114,40 +197,31 @@ button:disabled {
 .sidebtn:hover {
     background-color: var(--gold);
     color: var(--blue);
-    padding-left: 72px;
-    --d: 100%;
-}
-
-
-.papers {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 12px auto;
-}
-
-.papers button {
-    border-radius: 6px;
-}
-
-.papers button span {
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 3px 
-    no-repeat;
-    transition:0.4s;
-}
-
-.papers button:hover:enabled {
-    background-color: var(--gold);
-    color: var(--blue);
+    padding-left: 25%;
     --d: 100%;
 }
 
 .downloadbtn {
     margin-top: 20px;
     border-radius: 6px;
+}
+
+#header {
+    height: 15%;
+    min-height: 150px;
+}
+
+#header .sidebar {
+    border-bottom: 2px solid var(--gold);
+}
+
+#header .centre {
+    justify-content: center;
+    align-items: center;
+}
+
+#maincontent {
+    height: 85%;
 }
 
 
