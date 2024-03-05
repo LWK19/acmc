@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="contentstyle.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class = "container" id = "header">
+        <div class="sidebar">
+            <h2>Math Competition Management System</h2>
+        </div>
+        <div class="centre">
+            <h1 style="padding-left: 24px;">Download Junior Results</h1>
+        </div>
+    </div>
+    <div class = "container" id = "maincontent" style="flex-grow: 10;">
+        <div class="sidebar">
+            <button class="sidebtn" onclick="window.location.href='mainlanding.html'"><span>Dashboard</span></button>
+            <button class="sidebtn"><span>View/Add Questions to the Junior Section</span></button>
+            <button class="sidebtn"><span>View/Add Questions to the Senior Section</span></button>
+            <button id="thebutton" class="sidebtn" value="juniordownload" onclick="window.location.href='downloadpage.html'"><span>Download Junior Results</span></button>
+            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>Download Senior Results</span></button>
+            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        </div>
+        <div class="centre", style="flex-direction: column; align-items: center;">
+            If results are available, the download button below would light up.
+            <button disabled class = "downloadbtn"><i class="fa-solid fa-file-arrow-down"></i><span>Download Junior Results</span></button>
+        </div>
+    </div>
+</body>
+</html>
