@@ -1,4 +1,4 @@
-function addNewInputRow(table, rowindex) {
+function addNewInputRow(table, rowindex = -1) {
     //Validation
     for (let h = 0; h < table.rows.length; h++) {
         let currentRow = table.rows[h];
@@ -20,7 +20,7 @@ function addNewInputRow(table, rowindex) {
     var cells = [];
     for (var i = 0; i < numcol; i++) {
         cells.push(row.insertCell(i));
-        cells[i].innerHTML = '<input class="participantinput" onkeypress="newrowhandler(event)">';
+        cells[i].innerHTML = '<input class="participantinput" onkeypress="rowhandler(event)">';
     }
     cells[0].getElementsByTagName('input')[0].focus();
 }
