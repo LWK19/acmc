@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="contentstyle.css">
+    <script src="mcmsscript.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class = "container" id = "header">
+        <div class="sidebar">
+            <h2>Math Competition Management System</h2>
+        </div>
+        <div class="centre">
+            <h1>Edit Senior Participants</h1>
+        </div>
+    </div>
+    <div class = "container" id = "maincontent">
+        <div class="sidebar">
+            <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+            <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
+            <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+            <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+            <button id="thebutton"  class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        </div>
+        <div class="centre" style="flex-direction: column; align-items: center;">
+            <div>
+                <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-floppy-disk"></i> <span>Save Senior Participants</span></button>
+            </div>
+            <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+                <table id="srparticipanttable">
+                    <tr>
+                        <th style="max-width: fit-content;">Name</th>
+                        <th style="max-width: fit-content;">ID</th>
+                        <th style="max-width: fit-content;">Password</th>
+                    </tr>
+                    <tr>
+                        <td><input class="participantinput" onkeypress="rowhandler(event)"></input></td>
+                        <td><input class="participantinput" onkeypress="rowhandler(event)"></input></td>
+                        <td><input class="participantinput" onkeypress="rowhandler(event)"></input></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const srTable = document.getElementById("srparticipanttable");
+        function rowhandler(event) {
+            var activeRow = event.target.closest('tr'); // Find the closest <tr> element containing the event target
+            var rowindex = activeRow.rowIndex;
+
+            if (event.key === 'Enter') {
+                addNewInputRow(srTable, rowindex);
+            } else if (event.key === 'Backspace' || event.key === 'Delete') {
+                if (confirm("You are about to delete a row. Are you sure?")) {
+                    deleteInputRow(srTable, rowindex);
+                }
+            }
+        }
+
+        document.getElementById("srparticipanttable").addEventListener("paste", function(e) {
+            e.preventDefault();
+            var pastedData = e.clipboardData.getData('text/plain');
+
+            // Split pasted content into rows
+            var rows = pastedData.trim().split('\n');
+
+            // Iterate over rows
+            rows.forEach(function(row) {
+                var rowData = row.trim().split('\t'); // Assuming tab-separated values
+                // Create a new row in the table
+                var newRow = addNewInputRow(srTable, -1);
+            });
+        });
+    </script>
+</body>
+</html>
