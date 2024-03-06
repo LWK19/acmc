@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
-    <title>Login Page</title>
+    <title>View Senior Results</title>
 </head>
 <body>
     <div class = "container" id = "header">
@@ -13,21 +13,115 @@
             <h2>Math Competition Management System</h2>
         </div>
         <div class="centre">
-            <h1 style="padding-left: 24px;">Download Senior Results</h1>
+            <h1>View Senior Results</h1>
         </div>
     </div>
-    <div class = "container" id = "maincontent" style="flex-grow: 10;">
+    <div class = "container" id = "maincontent">
         <div class="sidebar">
-            <button class="sidebtn" onclick="window.location.href='mainlanding.html'"><span>Dashboard</span></button>
-            <button class="sidebtn"><span>View/Add Questions to the Junior Section</span></button>
-            <button class="sidebtn"><span>View/Add Questions to the Senior Section</span></button>
-            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>Download Junior Results</span></button>
-            <button id="thebutton" class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>Download Senior Results</span></button>
+            <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+            <button class="sidebtn"><span>Edit Junior<br>Questions</span></button>
+            <button class="sidebtn"><span>Edit Senior<br>Questions</span></button>
+            <button class="sidebtn"><span>Edit Junior<br>Participants</span></button>
+            <button class="sidebtn"><span>Edit Senior<br>Participants</span></button>
+            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+            <button id="thebutton" class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
             <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
         </div>
-        <div class="centre", style="flex-direction: column; align-items: center;">
-            If results are available, the download button below would light up.
-            <button disabled class = "downloadbtn"><i class="fa-solid fa-file-arrow-down"></i><span>Download Senior Results</span></button>
+        <div class="centre" style="flex-direction: column; align-items: center;">
+            <div>
+                <button style="width: max-content; padding: 18px; margin-right: 24px;" onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh Results</span></button>
+                <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
+            </div>
+            <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+                <table>
+                    <tr>
+                        <th style="max-width: fit-content;">Name</th>
+                        <th style="max-width: fit-content;">ID</th>
+                        <th style="max-width: fit-content;">Score</th>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>123456</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </body>
