@@ -5,7 +5,8 @@
     --red: #B00;
     --gold: #f0ad4e;
     --gray: #DEDEDE;
-    --grayer: #C4C4C4;
+    --grayer: #CDCDCD;
+    --grayest: #BCBCBC;
     --disabled: #555;
 }
 
@@ -82,7 +83,17 @@ input {
     padding-bottom: 3px;
     border: none;
     border-bottom: 2px solid var(--blue);
-    background-color: var(--gray);
+    background-color: inherit;
+    outline: none;
+}
+
+.participantinput {
+    width: 80%;
+    border: none;
+    border-radius: 6px;
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: var(--blue);
     outline: none;
 }
 
@@ -97,6 +108,7 @@ table {
     position: inherit;
     display: table;
     width: 100%;
+    table-layout: fixed;
 }
 
 th {
@@ -114,6 +126,7 @@ td {
     color: var(--blue);
     font: 16px 'Montserrat', sans-serif;
     font-weight: 500;
+    word-break: break-all;
 }
 
 tr{
@@ -123,6 +136,10 @@ tr{
 
 tr:nth-child(even) td {
     background-color: var(--grayer);
+}
+
+tr:nth-child(odd) td {
+    background-color: var(--grayest);
 }
 
 .inputfields {
