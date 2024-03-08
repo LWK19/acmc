@@ -35,61 +35,99 @@
             <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
                 <table id="srparticipanttable">
                     <tr>
-                        <th style="max-width: fit-content;">Name</th>
-                        <th style="max-width: fit-content;">ID</th>
-                        <th style="max-width: fit-content;">Password</th>
+                        <th>Name</th>
+                        <th style="width: 20%; min-width: max-content;">ID</th>
+                        <th>Password</th>
+                        <th style="width: 10%; min-width: max-content;">Delete</th>
                     </tr>
                     <tr>
                         <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
                         <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
                         <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
+                        <td><button class="deletebutton" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 </table>
+            </div>
+            <div>
+                <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(srparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
             </div>
         </div>
     </div>
     <script>
         const srTable = document.getElementById("srparticipanttable");
+        // Define a global variable to track cursor position
+        var cursorAtEnd = false;
+
         function rowhandler(event) {
             var activeRow = event.target.closest('tr');
-            var activeCell = event.target;
+            var activeCell = event.target.parentElement;
             var rowindex = activeRow.rowIndex;
             var cellindex = event.target.parentElement.cellIndex;
+            var inputElement = event.target;
+            var c;
 
             if (event.keyCode === 13) {
                 addNewInputRow(srTable, rowindex);
             } else if (event.keyCode === 8 || event.keyCode === 46) {
-                deleteInputRow(srTable, rowindex);
-            } else if (isStartOfInput(activeCell) && event.keyCode === 37) {
-                var prevCell = activeRow.cells[cellindex  - 1];
-                if (prevCell) {
-                    prevCell.children[0].focus();
+                backspaceHandler(srTable, rowindex);
+            } else if (event.keyCode === 39) {
+                // Right Arrow
+                if (cursorAtEnd) {
+                    moveCaretToAdjacentCell(activeCell.nextElementSibling);
+                    cursorAtEnd = false;
                 }
-            } else if (event.keyCode === 38) {
-                var prevRow = srTable.rows[rowindex - 1];
-                if (prevRow) {
-                    prevRow.cells[cellindex].children[0].focus();
+            } else if (event.keyCode === 37) { 
+                // Left Arrow
+                if (cursorAtEnd && inputElement.selectionStart === 0) {
+                    moveCaretToAdjacentCell(activeCell.previousElementSibling);
+                    cursorAtEnd = false;
                 }
-            } else if (isEndOfInput(activeCell) && event.keyCode === 39) {
-                var nextCell = activeRow.cells[cellindex + 1];
-                if (nextCell) {
-                    nextCell.children[0].focus();
+            } else if (event.keyCode === 38) { 
+                // Up Arrow
+                var rowIndex = activeRow.rowIndex - 1;
+                if (rowIndex >= 0) {
+                    c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
                 }
-            } else if (event.keyCode === 40) {
-                var nextRow = srTable.rows[rowindex + 1];
-                if (nextRow) {
-                    nextRow.cells[cellindex].children[0].focus();
+            } else if (event.keyCode === 40) { 
+                // Down Arrow
+                var rowIndex = activeRow.rowIndex + 1;
+                if (rowIndex < activeRow.parentNode.rows.length) {
+                    c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
+                }
+            }
+
+            // If we didn't hit a boundary, update the current cell
+            if (c) {
+                c.querySelector('input').focus(); // Assuming there's an input element in each cell
+            }
+        }
+
+        // Function to check if the cursor is at the end of the text input
+        function isCursorAtEnd(inputElement) {
+            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionEnd === inputElement.value.length;
+        }
+
+        // Function to check if the cursor is at the start of the text input
+        function isCursorAtStart(inputElement) {
+            return inputElement.selectionStart === inputElement.selectionEnd && nputElement.selectionStart === 0;
+        }
+
+        function moveCaretToAdjacentCell(cell) {
+            if (cell) {
+                var input = cell.querySelector('input');
+                if (input) {
+                    input.focus();
                 }
             }
         }
 
-        function isEndOfInput(cell) {
-            return (cell.selectionStart === cell.selectionEnd && cell.selectionEnd === cell.value.length);
-        }
+        // Event listener for input events to track cursor position
+        document.addEventListener('input', function(event) {
+            var inputElement = event.target;
+            cursorAtEnd = isCursorAtEnd(inputElement);
+            window.alert(cursorAtEnd);
+        });
 
-        function isStartOfInput(cell) {
-            return cell.selectionStart === cell.selectionEnd && cell.selectionStart === 0;
-        }
 
         document.getElementById("srparticipanttable").addEventListener("paste", function(e) {
             e.preventDefault();
