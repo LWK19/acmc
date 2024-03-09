@@ -4,6 +4,7 @@
     --blue: #080066;
     --red: #B00;
     --gold: #f0ad4e;
+    --notsogray: #EDEDED;
     --gray: #DEDEDE;
     --grayer: #CDCDCD;
     --grayest: #BCBCBC;
@@ -12,7 +13,7 @@
 
 body {
     position: fixed;
-    font-family: Helvetica, Arial, sans-serif;
+    font: 20px 'Montserrat', sans-serif;
     background-color: var(--gray);
     margin: 0px;
     min-height: 100%;
@@ -26,12 +27,14 @@ h1 {
     font: 44px 'Montserrat', sans-serif;
     color: var(--blue);
     font-weight: 900;
+    margin: 0px;
 }
 
 h2 {
     font: 28px 'Montserrat', sans-serif;
     color: var(--blue);
     font-weight: 800;
+    margin: 0px;
 }
 
 form {
@@ -79,12 +82,12 @@ input {
     font: 18px 'Montserrat', sans-serif;
     font-weight: 500;
     width: max-content;
-    padding: 0px;
-    padding-bottom: 3px;
+    padding: 6px;
     border: none;
-    border-bottom: 2px solid var(--blue);
-    background-color: inherit;
+    background-color: var(--blue);
+    color: var(--gold);
     outline: none;
+    border-radius: 6px;
 }
 
 .participantinput {
@@ -120,9 +123,9 @@ th {
     top: 0;
 }
 
-td {
+td, td input{
     text-align: center;
-    background-color: var(--gray);
+    background-color: inherit;
     color: var(--blue);
     font: 16px 'Montserrat', sans-serif;
     font-weight: 500;
@@ -174,7 +177,6 @@ tr:nth-child(odd) td {
 }
 
 .centre {
-    background-color: var(--gray);
     margin: 0;
     flex-grow: 4;
     display: flex;
@@ -231,6 +233,67 @@ tr:nth-child(odd) td {
     background-color: var(--gold);
     color: var(--red);
     --d: 100%;
+}
+
+.mcq {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: var(--notsogray);
+}
+
+.mcq input[type = "image"]{
+    border-bottom: none;
+}
+
+.unselected {
+    background-color: var(--blue);
+    color: var(--gold);
+    border: 2px var(--gold) solid;
+}
+
+.selected {
+    background-color: var(--gold);
+    color: var(--blue);
+    border: 2px var(--blue) solid;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 6px;
+    border: none;
+}
+
+.optionName {
+    font: 18px 'Montserrat', sans-serif;
+    border-radius: 6px;
+    border: 2px var(--gold) solid;
+    font-weight: 700;
+    padding: 12px;
+    width: 100%;
+    margin-right: 12px;
+    max-width: fit-content;
+    transition: 0.4s background-color ease;
+    cursor: pointer;
+}
+
+.optionName:hover {
+    background-color: var(--gold);
+    color: var(--blue);
+}
+
+.optionValue {
+    border-radius: 0px;
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
 }
 
 #header {

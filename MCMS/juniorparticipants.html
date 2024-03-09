@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
+    <script src="mcmsscript.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
             <h2>Math Competition Management System</h2>
         </div>
         <div class="centre">
-            <h1 style="padding-left: 24px;">Dashboard</h1>
+            <h1>Edit Junior Participants</h1>
         </div>
     </div>
     <div class = "container" id = "maincontent">
@@ -21,71 +22,131 @@
             <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button id="thebutton"  class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+            <button id="thebutton" class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
             <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+            <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
             <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
         </div>
-        <div class="centre">
-            <form action="#" method="post">
-                <h2 style="margin-top: 0px;">Competition Details</h2>
-                <div class="inputfields">
-                    <label for="date">Competition Date:</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <br>
-                <div style="display: flex; flex-direction: row; column-gap: 3%;">
-                    <div class="inputfields">
-                        <label for="starttime">Competition Start Time:</label>
-                        <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
-                    </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition Duration:</label>
-                        <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
-                        <label for="duration">minutes</label>
-                    </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition End Time:</label>
-                        <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
-                            (Auto-generated)
-                        </label>
-                    </div>
-                </div>
-                <br>
-                <div class="inputfields">
-                    <label for="buffer">Buffer Time:</label>
-                    <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
-                    <label for="buffer">minutes</label>
-                </div>
-                <br>
-                <div class="inputfields">
-                    <label>Number of Questions:</label>
-                    <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Multiple Choice Questions and</label>
-                    <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Short Answer Questions</label>
-                </div>
-                <br>
-                <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
-            </form>
+        <div class="centre" style="flex-direction: column; align-items: center;">
+            <div>
+                <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-floppy-disk"></i> <span>Save Junior Participants</span></button>
+            </div>
+            <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+                <table id="jrparticipanttable">
+                    <tr>
+                        <th>Name</th>
+                        <th style="width: 20%; min-width: max-content;">ID</th>
+                        <th>Password</th>
+                        <th style="width: 10%; min-width: max-content;">Delete</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
+                        <td><button class="deletebutton" onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(jrparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
+            </div>
         </div>
     </div>
     <script>
-        function getEndTime() {
-            var date = document.getElementById('date').value;
-            var starttime = document.getElementById('starttime').value;
-            var duration = document.getElementById('duration').value;
+        const srTable = document.getElementById("jrparticipanttable");
+        // Define a global variable to track cursor position
+        var cursorAtEnd = false;
 
-            if(date == "" || starttime == "" || duration == "") {
-                return;
+        function rowhandler(event) {
+            var activeRow = event.target.closest('tr');
+            var activeCell = event.target.parentElement;
+            var rowindex = activeRow.rowIndex;
+            var cellindex = event.target.parentElement.cellIndex;
+            var inputElement = event.target;
+            var c;
+
+            if (event.keyCode === 13) {
+                addNewInputRow(srTable, rowindex);
+            } else if (event.keyCode === 8 || event.keyCode === 46) {
+                backspaceHandler(srTable, rowindex);
+            } else if (event.keyCode === 39) {
+                // Right Arrow
+                if (cursorAtEnd) {
+                    moveCaretToAdjacentCell(activeCell.nextElementSibling);
+                    cursorAtEnd = false;
+                }
+            } else if (event.keyCode === 37) { 
+                // Left Arrow
+                if (cursorAtEnd && inputElement.selectionStart === 0) {
+                    moveCaretToAdjacentCell(activeCell.previousElementSibling);
+                    cursorAtEnd = false;
+                }
+            } else if (event.keyCode === 38) { 
+                // Up Arrow
+                var rowIndex = activeRow.rowIndex - 1;
+                if (rowIndex >= 0) {
+                    c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
+                }
+            } else if (event.keyCode === 40) { 
+                // Down Arrow
+                var rowIndex = activeRow.rowIndex + 1;
+                if (rowIndex < activeRow.parentNode.rows.length) {
+                    c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
+                }
             }
-            var datestarttime = new Date(date + " " + starttime);
-            var dateendtime = new Date(datestarttime.getTime() + duration*60000);
-            var endtime = document.getElementById('endtime');
-            endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+            // If we didn't hit a boundary, update the current cell
+            if (c) {
+                c.querySelector('input').focus(); // Assuming there's an input element in each cell
+            }
         }
+
+        // Function to check if the cursor is at the end of the text input
+        function isCursorAtEnd(inputElement) {
+            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionEnd === inputElement.value.length;
+        }
+
+        // Function to check if the cursor is at the start of the text input
+        function isCursorAtStart(inputElement) {
+            return inputElement.selectionStart === inputElement.selectionEnd && nputElement.selectionStart === 0;
+        }
+
+        function moveCaretToAdjacentCell(cell) {
+            if (cell) {
+                var input = cell.querySelector('input');
+                if (input) {
+                    input.focus();
+                }
+            }
+        }
+
+        // Event listener for input events to track cursor position
+        document.addEventListener('input', function(event) {
+            var inputElement = event.target;
+            cursorAtEnd = isCursorAtEnd(inputElement);
+        });
+
+        document.getElementById('jrparticipanttable').addEventListener('paste', function(e) {
+            e.preventDefault();
+            var clipboardData = e.clipboardData || window.clipboardData;
+            var pastedData = clipboardData.getData('text');
+            var rows = pastedData.split('\n');
+            var rowindex = e.target.closest('tr').rowIndex; // Get the existing row
+
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].split('\t');
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = jrparticipanttable.rows[rowindex].cells[j]; // Get the existing cell
+                    var input = cell.querySelector('input'); // Get the existing input element
+                    if (input) {
+                        input.value = cells[j]; // Update input value
+                    }
+                }
+                addNewInputRow(srTable); // Add a new row
+                rowindex++;
+            }
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
-    <title>Dashboard</title>
+    <title>Edit Junior Questions</title>
 </head>
 <body>
     <div class = "container" id = "header">
@@ -13,7 +13,7 @@
             <h2>Math Competition Management System</h2>
         </div>
         <div class="centre">
-            <h1 style="padding-left: 24px;">Dashboard</h1>
+            <h1 style="padding-left: 24px;">Edit Junior Questions</h1>
         </div>
     </div>
     <div class = "container" id = "maincontent">
@@ -28,64 +28,27 @@
             <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
         </div>
         <div class="centre">
-            <form action="#" method="post">
-                <h2 style="margin-top: 0px;">Competition Details</h2>
-                <div class="inputfields">
-                    <label for="date">Competition Date:</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <br>
-                <div style="display: flex; flex-direction: row; column-gap: 3%;">
-                    <div class="inputfields">
-                        <label for="starttime">Competition Start Time:</label>
-                        <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
+            <div class="mcq">
+                <h2>Question 1</h2>
+                <input type="file" class="imageInput" accept="image/*" onchange="handleImageUpload(event)">
+                <div class="optionscontainer" onclick="select()">
+                    <div class="options unselected">
+                        <div class="optionName unselected">A</div>
+                        <input type="text" class="optionValue unselected">
                     </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition Duration:</label>
-                        <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
-                        <label for="duration">minutes</label>
-                    </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition End Time:</label>
-                        <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
-                            (Auto-generated)
-                        </label>
-                    </div>
+
                 </div>
-                <br>
-                <div class="inputfields">
-                    <label for="buffer">Buffer Time:</label>
-                    <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
-                    <label for="buffer">minutes</label>
-                </div>
-                <br>
-                <div class="inputfields">
-                    <label>Number of Questions:</label>
-                    <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Multiple Choice Questions and</label>
-                    <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Short Answer Questions</label>
-                </div>
-                <br>
-                <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
-            </form>
+            </div>
         </div>
     </div>
     <script>
-        function getEndTime() {
-            var date = document.getElementById('date').value;
-            var starttime = document.getElementById('starttime').value;
-            var duration = document.getElementById('duration').value;
-
-            if(date == "" || starttime == "" || duration == "") {
-                return;
+        function select() {
+            var options = document.getElementsByClassName("options");
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove("selected");
+                options[i].classList.add("unselected");
             }
-            var datestarttime = new Date(date + " " + starttime);
-            var dateendtime = new Date(datestarttime.getTime() + duration*60000);
-            var endtime = document.getElementById('endtime');
-            endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
 </body>
 </html>
