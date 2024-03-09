@@ -125,23 +125,27 @@
         document.addEventListener('input', function(event) {
             var inputElement = event.target;
             cursorAtEnd = isCursorAtEnd(inputElement);
-            window.alert(cursorAtEnd);
         });
 
-
-        document.getElementById("srparticipanttable").addEventListener("paste", function(e) {
+        document.getElementById('srparticipanttable').addEventListener('paste', function(e) {
             e.preventDefault();
-            var pastedData = e.clipboardData.getData('text/plain');
+            var clipboardData = e.clipboardData || window.clipboardData;
+            var pastedData = clipboardData.getData('text');
+            var rows = pastedData.split('\n');
+            var rowindex = e.target.closest('tr').rowIndex; // Get the existing row
 
-            // Split pasted content into rows
-            var rows = pastedData.trim().split('\n');
-
-            // Iterate over rows
-            rows.forEach(function(row) {
-                var rowData = row.trim().split('\t'); 
-                // Create a new row in the table
-                var newRow = addNewInputRow(srTable);
-            });
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].split('\t');
+                for (var j = 0; j < cells.length; j++) {
+                    var cell = srparticipanttable.rows[rowindex].cells[j]; // Get the existing cell
+                    var input = cell.querySelector('input'); // Get the existing input element
+                    if (input) {
+                        input.value = cells[j]; // Update input value
+                    }
+                }
+                addNewInputRow(srTable); // Add a new row
+                rowindex++;
+            }
         });
     </script>
 </body>
