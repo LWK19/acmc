@@ -32,22 +32,19 @@
                 <h2>Question 1</h2>
                 <input type="file" class="imageInput" accept="image/*" onchange="handleImageUpload(event)">
                 <div class="optionscontainer" onclick="select()">
-                    <div class="options unselected">
+                    <div class="options unselected" id="optionA">
                         <div class="optionName unselected">A</div>
                         <input type="text" class="optionValue unselected">
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <script>
         function select() {
-            var options = document.getElementsByClassName("options");
-            for (var i = 0; i < options.length; i++) {
-                options[i].classList.remove("selected");
-                options[i].classList.add("unselected");
-            }
+            var optionA = document.getElementById("optionA");
+            optionA.classList.remove("unselected");
+            optionA.classList.add("selected");
         }
     </script>
 </body>
