@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <script src="mcmsscript.js"></script>
     <link rel="stylesheet" href="contentstyle.css">
-    <title>Dashboard</title>
+    <title>Edit Senior Questions</title>
 </head>
 <body>
     <div class = "container" id = "header">
@@ -13,79 +14,53 @@
             <h2>Math Competition Management System</h2>
         </div>
         <div class="centre">
-            <h1 style="padding-left: 24px;">Dashboard</h1>
+            <h1 style="padding-left: 24px;">Edit Senior Questions</h1>
         </div>
     </div>
-    <div class = "container" id = "maincontent">
+    <div class = "container" id = "main-content">
         <div class="sidebar">
             <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-            <button id="thebutton"  class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+            <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
             <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
             <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
             <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
         </div>
-        <div class="centre">
-            <form action="#" method="post">
-                <h2 style="margin-top: 0px;">Competition Details</h2>
-                <div class="inputfields">
-                    <label for="date">Competition Date:</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <br>
-                <div style="display: flex; flex-direction: row; column-gap: 3%;">
-                    <div class="inputfields">
-                        <label for="starttime">Competition Start Time:</label>
-                        <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
+        <div class="centre" style="flex-direction: column;">
+            <div class="questions" id="mcq1">
+                <h2>Question Autocounter (This is a backend problem)</h2>
+                <div class="image-container">
+                    <div class="question-picture empty">
+                        <i class="fa fa-plus"></i> Add/Change Image
                     </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition Duration:</label>
-                        <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
-                        <label for="duration">minutes</label>
-                    </div>
-                    <div class="inputfields">
-                        <label for="duration">Competition End Time:</label>
-                        <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
-                            (Auto-generated)
-                        </label>
-                    </div>
+                    <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
                 </div>
-                <br>
-                <div class="inputfields">
-                    <label for="buffer">Buffer Time:</label>
-                    <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
-                    <label for="buffer">minutes</label>
+                <div class="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
+                    <div class="options unselected optionA" onclick="select('optionA', 1)">A</div>
+                    <div class="options unselected optionB" onclick="select('optionB', 1)">B</div>
+                    <div class="options unselected optionC" onclick="select('optionC', 1)">C</div>
+                    <div class="options unselected optionD" onclick="select('optionD', 1)">D</div>
+                    <div class="options unselected optionE" onclick="select('optionE', 1)">E</div>
                 </div>
-                <br>
-                <div class="inputfields">
-                    <label>Number of Questions:</label>
-                    <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Multiple Choice Questions and</label>
-                    <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Short Answer Questions</label>
-                </div>
-                <br>
-                <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
-            </form>
-        </div>
-    </div>
-    <script>
-        function getEndTime() {
-            var date = document.getElementById('date').value;
-            var starttime = document.getElementById('starttime').value;
-            var duration = document.getElementById('duration').value;
+            </div>
+            <!-- Repeat the above HTML structure for each question, changing the ID and function parameters -->
 
-            if(date == "" || starttime == "" || duration == "") {
-                return;
-            }
-            var datestarttime = new Date(date + " " + starttime);
-            var dateendtime = new Date(datestarttime.getTime() + duration*60000);
-            var endtime = document.getElementById('endtime');
-            endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
+            <div class="questions" id="srq1">
+                <h2>Question Autocounter (This is a backend problem)</h2>
+                <div class="image-container">
+                    <div class="question-picture empty">
+                        <i class="fa fa-plus"></i> Add/Change Image
+                    </div>
+                    <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
+                </div>
+                <div class="input-fields" style="margin-top: 12px;">
+                    <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
+                    <input type="text" class="answer-input">
+                </div>
+            </div>
+        </div>  
+    </div>
 </body>
 </html>

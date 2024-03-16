@@ -9,6 +9,7 @@
     --grayer: #CDCDCD;
     --grayest: #BCBCBC;
     --disabled: #555;
+    --invisible: #00000000;
 }
 
 body {
@@ -82,21 +83,9 @@ input {
     font: 18px 'Montserrat', sans-serif;
     font-weight: 500;
     width: max-content;
-    padding: 6px;
     border: none;
-    background-color: var(--blue);
-    color: var(--gold);
-    outline: none;
-    border-radius: 6px;
-}
-
-.participantinput {
-    width: 80%;
-    border: none;
-    border-radius: 6px;
-    font: 18px 'Montserrat', sans-serif;
-    font-weight: 500;
-    color: var(--blue);
+    border-bottom: var(--blue) 2px solid;
+    background-color: inherit;
     outline: none;
 }
 
@@ -144,13 +133,25 @@ tr:nth-child(odd) td {
     background-color: var(--grayest);
 }
 
-.inputfields {
+.participant-input {
+    padding: 6px 0px;
+    width: 80%;
+    border: none;
+    border-radius: 6px;
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: var(--blue);
+    align-items: center;
+}
+
+.input-fields {
     width: fit-content;
     vertical-align: middle;
     padding: 6px 0px;
+    margin: 12px 0px;
 }
 
-#thebutton {
+#the-button {
     background-color: var(--gold);
     color: var(--blue);
     padding-left: 25%;
@@ -171,9 +172,13 @@ tr:nth-child(odd) td {
 }
 
 .sidebar h2 {
+    width: 100%;
     font-size: 24px;
-    padding: 24px;
     color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .centre {
@@ -204,6 +209,18 @@ tr:nth-child(odd) td {
     border-bottom: 2px solid var(--gold);
 }
 
+.delete-button {
+    background-color: var(--red);
+    color: var(--gold);
+    width: min-content;
+    transition: background-color 0.4s ease;
+}
+
+.delete-button:hover {
+    background-color: var(--gold);
+    color: var(--red);
+}
+
 .sidebtn span {
     background: 
       linear-gradient(currentColor 0 0) 
@@ -219,81 +236,118 @@ tr:nth-child(odd) td {
     --d: 100%;
 }
 
-.deletebutton {
-    position: inherit;
-    background-color: var(--red);
-    color: var(--gold);
-    transition: background-color 0.4s ease;
-    text-align: center;
-    border-radius: 6px;
-    max-width: min-content;
-}
-
-.deletebutton:hover:enabled {
-    background-color: var(--gold);
-    color: var(--red);
-    --d: 100%;
-}
-
-.mcq {
-    width: 100%;
+.questions {
+    width: inherit;
     height: min-content;
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
+    padding: 12px 24px;
     border-radius: 6px;
     background-color: var(--notsogray);
+    margin-bottom: 3%;
 }
 
-.mcq input[type = "image"]{
-    border-bottom: none;
+.questions h2 {
+    margin-bottom: 12px;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Set initial height */
+    overflow: hidden;
+}
+
+.image-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.question-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    box-sizing: border-box;
+    border: var(--grayest) 4px dashed;
+    color: var(--grayest);
+    font: 44px 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding: auto;
+}
+
+.empty {
+    border: var(--grayest) 4px dashed;
+}
+
+.not-empty {
+    color: var(--invisible);
+    border: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.options {
+    display: flex;
+    width: max-content;
+    font: 24px 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-top: 12px;
+    padding: 12px 0px;
+    width: 100%;
+    border-radius: 6px;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
 }
 
 .unselected {
     background-color: var(--blue);
     color: var(--gold);
-    border: 2px var(--gold) solid;
 }
 
 .selected {
     background-color: var(--gold);
     color: var(--blue);
-    border: 2px var(--blue) solid;
 }
 
-.options {
+.input-container {
     display: flex;
-    flex-direction: row;
-    width: max-content;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 6px;
+    flex-direction: column;
+    width: inherit;
+    padding: 12px 0px;
+}
+
+.input-container h2 {
+    align-items: center;
+}
+
+.input-container input {
+    padding: 12px 12px;
     border: none;
-}
-
-.optionName {
-    font: 18px 'Montserrat', sans-serif;
+    background-color: var(--blue);
+    color: var(--gold);
     border-radius: 6px;
-    border: 2px var(--gold) solid;
-    font-weight: 700;
+}
+
+.answer-input {
     padding: 12px;
-    width: 100%;
-    margin-right: 12px;
-    max-width: fit-content;
-    transition: 0.4s background-color ease;
-    cursor: pointer;
-}
-
-.optionName:hover {
-    background-color: var(--gold);
-    color: var(--blue);
-}
-
-.optionValue {
-    border-radius: 0px;
     border: none;
-    border-bottom-width: 2px;
-    border-bottom-style: solid;
+    font: 20px 'Montserrat', sans-serif;
+    font-weight: 400;
+    background-color: var(--blue);
+    color: var(--gold);
+    border-radius: 6px;
 }
 
 #header {
@@ -303,6 +357,9 @@ tr:nth-child(odd) td {
 
 #header .sidebar {
     border-bottom: 2px solid var(--gold);
+    justify-content: center;
+    align-items: center;
+    width: inherit;
 }
 
 #header .centre {
@@ -310,8 +367,13 @@ tr:nth-child(odd) td {
     align-items: center;
 }
 
-#maincontent {
+#main-content {
     height: 85%;
+}
+
+#main-content .centre {
+    overflow-y: auto;
+    padding-bottom: 1%;
 }
 
 

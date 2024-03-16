@@ -17,12 +17,12 @@
             <h1>Edit Junior Participants</h1>
         </div>
     </div>
-    <div class = "container" id = "maincontent">
+    <div class = "container" id = "main-content">
         <div class="sidebar">
             <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button id="thebutton" class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+            <button id="the-button" class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
             <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
             <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
@@ -41,10 +41,10 @@
                         <th style="width: 10%; min-width: max-content;">Delete</th>
                     </tr>
                     <tr>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><button class="deletebutton" onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><button class="delete-button" onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 </table>
             </div>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <script>
-        const srTable = document.getElementById("jrparticipanttable");
+        const jrTable = document.getElementById("jrparticipanttable");
         // Define a global variable to track cursor position
         var cursorAtEnd = false;
 
@@ -67,9 +67,9 @@
             var c;
 
             if (event.keyCode === 13) {
-                addNewInputRow(srTable, rowindex);
+                addNewInputRow(jrTable, rowindex);
             } else if (event.keyCode === 8 || event.keyCode === 46) {
-                backspaceHandler(srTable, rowindex);
+                backspaceHandler(jrTable, rowindex);
             } else if (event.keyCode === 39) {
                 // Right Arrow
                 if (cursorAtEnd) {
@@ -143,7 +143,7 @@
                         input.value = cells[j]; // Update input value
                     }
                 }
-                addNewInputRow(srTable); // Add a new row
+                addNewInputRow(jrTable); // Add a new row
                 rowindex++;
             }
         });

@@ -17,13 +17,13 @@
             <h1>Edit Senior Participants</h1>
         </div>
     </div>
-    <div class = "container" id = "maincontent">
+    <div class = "container" id = "main-content">
         <div class="sidebar">
             <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-            <button id="thebutton"  class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+            <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
             <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
             <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
             <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
@@ -41,10 +41,10 @@
                         <th style="width: 10%; min-width: max-content;">Delete</th>
                     </tr>
                     <tr>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participantinput" onkeyup="rowhandler(event)"></input></td>
-                        <td><button class="deletebutton" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                        <td><button class="delete-button" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 </table>
             </div>

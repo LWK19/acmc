@@ -16,9 +16,9 @@
             <h1>Dashboard</h1>
         </div>
     </div>
-    <div class = "container" id = "maincontent">
+    <div class = "container" id = "main-content">
         <div class="sidebar">
-            <button id="thebutton" class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+            <button id="the-button" class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
             <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
@@ -29,44 +29,40 @@
         </div>
         <div class="centre">
             <form action="#" method="post">
-                <h2 style="margin-top: 0px;">Competition Details</h2>
-                <div class="inputfields">
+                <h2 style="margin-top: 0px; margin-bottom: 12px;">Competition Details</h2>
+                <div class="input-fields">
                     <label for="date">Competition Date:</label>
                     <input type="date" id="date" name="date" required>
                 </div>
-                <br>
                 <div style="display: flex; flex-direction: row; column-gap: 3%;">
-                    <div class="inputfields">
+                    <div class="input-fields" style="margin: 0px;">
                         <label for="starttime">Competition Start Time:</label>
                         <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
                     </div>
-                    <div class="inputfields">
+                    <div class="input-fields" style="margin: 0px;">
                         <label for="duration">Competition Duration:</label>
                         <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
                         <label for="duration">minutes</label>
                     </div>
-                    <div class="inputfields">
+                    <div class="input-fields" style="margin: 0px;">
                         <label for="duration">Competition End Time:</label>
                         <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
                             (Auto-generated)
                         </label>
                     </div>
                 </div>
-                <br>
-                <div class="inputfields">
+                <div class="input-fields">
                     <label for="buffer">Buffer Time:</label>
                     <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
                     <label for="buffer">minutes</label>
                 </div>
-                <br>
-                <div class="inputfields">
+                <div class="input-fields">
                     <label>Number of Questions:</label>
                     <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Multiple Choice Questions and</label>
+                    <label for="duration" style="margin-right: 30px;">Multiple Choice Questions</label>
                     <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
                     <label for="duration">Short Answer Questions</label>
                 </div>
-                <br>
                 <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
             </form>
         </div>
