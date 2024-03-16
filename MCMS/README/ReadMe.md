@@ -1,5 +1,5 @@
 # MCMS Documentation
 
-## File Structure
+## Flow Structure and Backend Needs (Good Luck Wai Kin)
 
-![Alt Text](path/to/image.jpg)
+![Dependency Diagram](mcmsdependency.drawio.png)
