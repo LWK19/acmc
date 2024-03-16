@@ -203,6 +203,21 @@ tr:nth-child(odd) td {
     border-radius: 0px;
 }
 
+.sidebtn span {
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 2px 
+    no-repeat;
+    transition:0.4s;
+}
+
+.sidebtn:hover {
+    background-color: var(--gold);
+    color: var(--blue);
+    padding-left: 25%;
+    --d: 100%;
+}
+
 #logout {
     background-color: var(--red);
     color: var(--gold);
@@ -219,21 +234,6 @@ tr:nth-child(odd) td {
 .delete-button:hover {
     background-color: var(--gold);
     color: var(--red);
-}
-
-.sidebtn span {
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 2px 
-    no-repeat;
-    transition:0.4s;
-}
-
-.sidebtn:hover {
-    background-color: var(--gold);
-    color: var(--blue);
-    padding-left: 25%;
-    --d: 100%;
 }
 
 .questions {
@@ -307,7 +307,7 @@ tr:nth-child(odd) td {
     justify-content: center;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.1s ease;
     min-width: 100px;
 }
 

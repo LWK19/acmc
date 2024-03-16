@@ -1,46 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
     --blue: #080066;
-    --navy: #0000AA;
     --red: #d73a49;
     --gold: #f0ad4e;
     --gray: #DDDDDD;
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    padding-top: 7%;
+    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
     background-color: var(--blue);
 }
 
-p {
-    color: #fff;
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
+i {
+    margin: 6px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--gold);
+}
+
+a span {
+    color: var(--gold);
+    cursor: pointer;
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 1px 
+    no-repeat;
+    transition:0.2s;
+}
+
+a span:hover {
+    --d: 100%;
 }
 
 h1 {
     font: 44px 'Montserrat', sans-serif;
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 900;
     color: #fff;
 }
 
 h2 {
     font: 20px 'Montserrat', sans-serif;
     margin-bottom: 20px;
+    font-weight: 800;
     color: #fff;
+}
+
+p {
+    color: #fff;
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-align: center;
+}
+
+button {
+    font: 20px 'Montserrat', sans-serif;
+    width: 100%;
+    height: max-content;
+    padding: 12px;
+    background-color: var(--blue);
+    text-align: center;
+    color: var(--gold);
+    font-weight: 600;
+    border: none;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+}
+
+button:disabled {
+    color: var(--disabled);
+}
+
+button span {
+    background: 
+      linear-gradient(currentColor 0 0) 
+      0 100% /var(--d, 0) 3px 
+    no-repeat;
+    transition:0.4s;
+}
+
+button:hover:enabled {
+    background-color: var(--gold);
+    color: var(--blue);
+    --d: 100%;
 }
 
 #signin {
     margin: auto;
-    max-width: 600px;
+    max-width: 800px;
     padding: 20px;
     border-radius: 6px;
     color: #fff;
 }
 
-.forminput {
+.form-input {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -51,7 +109,7 @@ h2 {
     gap: 6px;
 }
 
-.forminput input {
+.form-input input {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -61,7 +119,7 @@ h2 {
     font: 16px Helvetica, Arial, sans-serif;
 }
 
-.forminput input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active{
+.form-input input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
@@ -72,56 +130,8 @@ h2 {
     font-size: 14px;
 }
 
-.smalllink span {
-    color: var(--gold);
-    cursor: pointer;
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 1px 
-    no-repeat;
-    transition:0.2s;
-}
-
-.smalllink span:hover {
-    --d: 100%;
-}
-
 .smalllink i {
     margin: 0px;
-}
-.buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 18px;
-}
-
-.buttons button {
-    font: 20px 'Montserrat', sans-serif;
-    width: 100%;
-    margin: 6px 0 0;
-    padding: 12px;
-    background-color: var(--blue);
-    border-radius: 6px;
-    border: none;
-    color: var(--gold);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.buttons button span {
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 3px 
-    no-repeat;
-    transition:0.4s;
-}
-
-.buttons button:hover {
-    background-color: var(--gold);
-    color: var(--blue);
-    --d: 100%;
 }
 
 .error p {
@@ -135,12 +145,29 @@ h2 {
     width: 20%;
 }
 
-i {
-    margin: 6px;
+.fоrm-input {
+    margin: 6px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: start;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-a {
-    text-decoration: none;
-    color: var(--gold);
+.fоrm-input input {
+    width: 50px;
+    background-color: var(--blue); 
+    border: none; 
+    color: var(--gold); 
+    cursor: default;
+    padding-left: 50px;
+}
+
+.fоrm-input input:focus {
+    outline: none;
 }
 

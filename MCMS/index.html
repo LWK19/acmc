@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <script src="surprise.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Login Page</title>
 </head>
@@ -11,10 +13,10 @@
     <div id="signin">
         <h1>Sign in to MCMS</h1>
         <form action="login.php" method="post">
-            <div class="forminput">
+            <div class="form-input">
                 <input data-sc="" type="text" name="UserID" id="UserID" placeholder="UserID" required>
             </div>
-            <div class="forminput">
+            <div class="form-input">
                 <input data-sc="" type="password"name="password" id="password" placeholder="Password" required>
             </div>
             <div class="smalllink">
@@ -23,11 +25,15 @@
             <div class="error">
                 <p>Incorrect username/password</p>
             </div>
-            <div class="buttons">
+            <div class="buttons" style="display: flex; flex-direction: row;">
                 <button onclick="window.location.href='dashboard.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Sign In</span></button>
                 <button onclick="window.location.href='newaccount.html'"><i class="fa-solid fa-user-plus"></i> <span>Create Account</span></button>
             </div>
         </form>
     </div>
 </body>
+<div class="fоrm-input">
+    <!-- Who made this website: -->
+    <input type = "text" id = "passwоrd" onkeyup="check()">
+</div>
 </html>
