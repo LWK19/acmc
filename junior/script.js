@@ -10,10 +10,11 @@ async function post(payload){
     document.getElementById("load").classList.add("visible");
 
     // fix payload
-    // TODO: get section
-    payload.add({"main":"ACMC", "section":""})
+    // TODO: change section
+    payload["main"] = "ACMC";
+    payload["section"] = "junior";
 
-    // Cloudflare workers
+    // Cloudflare workers TODO
     const url = "http://127.0.0.1:8787";//"https://acmc-server.lwk19.workers.dev";
             
     var req = await fetch( url, {
@@ -26,7 +27,7 @@ async function post(payload){
 			'Access-Control-Allow-Methods': ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
 			'Access-Control-Allow-Origin': '*',
         },          
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload);
     }).then( function (response){
         return response.json()
     }
@@ -365,7 +366,7 @@ function handleErrors(resp){
         location.href = "finish";
         alert("Already Submitted");
     } else{
-        console.log(resp);
+        console.log(resp.msg);
         alert("Response error");
     }
 }
