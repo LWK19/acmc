@@ -8,8 +8,13 @@ var qn;
 async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
+
+    // fix payload
+    // TODO: get section
+    payload.add({"main":"ACMC", "section":""})
+
     // Cloudflare workers
-    const url = "https://acmc-server.lwk19.workers.dev";
+    const url = "http://127.0.0.1:8787";//"https://acmc-server.lwk19.workers.dev";
             
     var req = await fetch( url, {
         method: "POST",

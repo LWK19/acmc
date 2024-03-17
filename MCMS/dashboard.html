@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" href="contentstyle.css">
     <title>Dashboard</title>
 </head>
@@ -61,7 +62,7 @@
                 <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
                 <label for="duration">Short Answer Questions</label>
             </div>
-            <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
+            <button type="submit" class="submitbtn" onclick=updateCompetitionDetails() style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
         </form>
     </div>
     <script>
