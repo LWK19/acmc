@@ -27,7 +27,7 @@ async function post(payload){
 			'Access-Control-Allow-Methods': ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
 			'Access-Control-Allow-Origin': '*',
         },          
-        body: JSON.stringify(payload);
+        body: JSON.stringify(payload)
     }).then( function (response){
         return response.json()
     }
