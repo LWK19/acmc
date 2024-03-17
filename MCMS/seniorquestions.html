@@ -10,58 +10,54 @@
     <title>Edit Senior Questions</title>
 </head>
 <body>
-    <div class = "container" id = "header">
-        <div class="sidebar">
-            <h2>Math Competition Management System</h2>
-        </div>
-        <div class="centre">
-            <h1 style="padding-left: 24px;">Edit Senior Questions</h1>
-        </div>
+    <div class="header sidebar" id="logo">
+        <h2>Math Competition Management System</h2>
     </div>
-    <div class = "container" id = "main-content">
-        <div class="sidebar">
-            <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-            <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
-        </div>
-        <div class="centre" style="flex-direction: column;">
-            <div class="questions" id="mcq1">
-                <h2>Question Autocounter (This is a backend problem)</h2>
-                <div class="image-container">
-                    <div class="question-picture empty">
-                        <i class="fa fa-plus"></i> Add/Change Image
-                    </div>
-                    <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
+    <div class="header centre">
+        <h1 style="padding-left: 24px;">Edit Senior Questions</h1>
+    </div>
+    <div class="main-content sidebar">
+        <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
+        <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+    </div>
+    <div class="main-content centre" style="flex-direction: column;">
+        <div class="questions" id="mcq1">
+            <h2>Question Autocounter (This is a backend problem)</h2>
+            <div class="image-container">
+                <div class="question-picture empty">
+                    <i class="fa fa-plus"></i> Add/Change Image
                 </div>
-                <div class="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
-                    <div class="options unselected optionA" onclick="select('optionA', 1)">A</div>
-                    <div class="options unselected optionB" onclick="select('optionB', 1)">B</div>
-                    <div class="options unselected optionC" onclick="select('optionC', 1)">C</div>
-                    <div class="options unselected optionD" onclick="select('optionD', 1)">D</div>
-                    <div class="options unselected optionE" onclick="select('optionE', 1)">E</div>
-                </div>
+                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
             </div>
-            <!-- Repeat the above HTML structure for each question, changing the ID and function parameters -->
+            <div class="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
+                <div class="options unselected optionA" onclick="select('optionA', 1)">A</div>
+                <div class="options unselected optionB" onclick="select('optionB', 1)">B</div>
+                <div class="options unselected optionC" onclick="select('optionC', 1)">C</div>
+                <div class="options unselected optionD" onclick="select('optionD', 1)">D</div>
+                <div class="options unselected optionE" onclick="select('optionE', 1)">E</div>
+            </div>
+        </div>
+        <!-- Repeat the above HTML structure for each question, changing the ID and function parameters -->
 
-            <div class="questions" id="srq1">
-                <h2>Question Autocounter (This is a backend problem)</h2>
-                <div class="image-container">
-                    <div class="question-picture empty">
-                        <i class="fa fa-plus"></i> Add/Change Image
-                    </div>
-                    <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
+        <div class="questions" id="srq1">
+            <h2>Question Autocounter (This is a backend problem)</h2>
+            <div class="image-container">
+                <div class="question-picture empty">
+                    <i class="fa fa-plus"></i> Add/Change Image
                 </div>
-                <div class="input-fields" style="margin-top: 12px;">
-                    <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
-                    <input type="text" class="answer-input">
-                </div>
+                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
             </div>
-        </div>  
-    </div>
+            <div class="input-fields" style="margin-top: 12px;">
+                <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
+                <input type="text" class="answer-input">
+            </div>
+        </div>
+    </div>  
 </body>
 </html>

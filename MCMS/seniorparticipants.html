@@ -10,50 +10,47 @@
     <title>Edit Senior Participants</title>
 </head>
 <body>
-    <div class = "container" id = "header">
-        <div class="sidebar">
-            <h2>Math Competition Management System</h2>
+    <div class="header sidebar" id="logo">
+        <h2>Math Competition Management System</h2>
+    </div>
+    <div class="header centre">
+        <h1>Edit Senior Participants</h1>
+    </div>
+    <div class="main-content sidebar">
+        <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+        <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+    </div>
+    <div class="main-content centre" style="flex-direction: column; align-items: center;">
+        <div class="centre-button">
+            <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-floppy-disk"></i> <span>Save Senior Participants</span></button>
         </div>
-        <div class="centre">
-            <h1>Edit Senior Participants</h1>
+        <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+            <table id="srparticipanttable">
+                <tr>
+                    <th>Name</th>
+                    <th style="width: 20%; min-width: max-content;">ID</th>
+                    <th>Password</th>
+                    <th style="width: 10%; min-width: max-content;">Delete</th>
+                </tr>
+                <tr>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                    <td><button class="delete-button" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="centre-button">
+            <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(srparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
         </div>
     </div>
-    <div class = "container" id = "main-content">
-        <div class="sidebar">
-            <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-            <button id="the-button"  class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
-        </div>
-        <div class="centre" style="flex-direction: column; align-items: center;">
-            <div>
-                <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-floppy-disk"></i> <span>Save Senior Participants</span></button>
-            </div>
-            <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
-                <table id="srparticipanttable">
-                    <tr>
-                        <th>Name</th>
-                        <th style="width: 20%; min-width: max-content;">ID</th>
-                        <th>Password</th>
-                        <th style="width: 10%; min-width: max-content;">Delete</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                        <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                        <td><button class="delete-button" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(srparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
-            </div>
-        </div>
-    </div>
+
     <script>
         const srTable = document.getElementById("srparticipanttable");
         // Define a global variable to track cursor position

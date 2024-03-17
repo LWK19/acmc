@@ -9,120 +9,40 @@
     <title>View Senior Results</title>
 </head>
 <body>
-    <div class = "container" id = "header">
-        <div class="sidebar">
-            <h2>Math Competition Management System</h2>
-        </div>
-        <div class="centre">
-            <h1>View Senior Results</h1>
-        </div>
+    <div class="header sidebar" id="logo">
+        <h2>Math Competition Management System</h2>
     </div>
-    <div class = "container" id = "main-content">
-        <div class="sidebar">
-            <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-            <button id="the-button" class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+    <div class="header centre">
+        <h1>View Senior Results</h1>
+    </div>
+    <div class="main-content sidebar">
+        <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+        <button id="the-button" class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+    </div>
+    <div class="main-content centre" style="flex-direction: column; align-items: center;">
+        <div class="centre-button">
+            <button style="width: max-content; padding: 18px; margin-right: 24px;" onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh Results</span></button>
+            <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
         </div>
-        <div class="centre" style="flex-direction: column; align-items: center;">
-            <div>
-                <button style="width: max-content; padding: 18px; margin-right: 24px;" onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh Results</span></button>
-                <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
-            </div>
-            <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
-                <table>
-                    <tr>
-                        <th style="max-width: fit-content;">Name</th>
-                        <th style="max-width: fit-content;">ID</th>
-                        <th style="max-width: fit-content;">Score</th>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>123456</td>
-                        <td>100</td>
-                    </tr>
-                </table>
-            </div>
+        <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+            <table>
+                <tr>
+                    <th style="max-width: fit-content;">Name</th>
+                    <th style="max-width: fit-content;">ID</th>
+                    <th style="max-width: fit-content;">Score</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>

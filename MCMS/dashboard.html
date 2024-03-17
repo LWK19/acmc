@@ -9,64 +9,60 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <div class = "container" id = "header">
-        <div class="sidebar">
-            <h2>Math Competition Management System</h2>
-        </div>
-        <div class="centre">
-            <h1>Dashboard</h1>
-        </div>
+    <div class="header sidebar" id="logo">
+        <h2>Math Competition Management System</h2>
     </div>
-    <div class = "container" id = "main-content">
-        <div class="sidebar">
-            <button id="the-button" class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-            <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-            <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-            <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-            <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-            <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
-        </div>
-        <div class="centre">
-            <form action="#" method="post">
-                <h2 style="margin-top: 0px; margin-bottom: 12px;">Competition Details</h2>
-                <div class="input-fields">
-                    <label for="date">Competition Date:</label>
-                    <input type="date" id="date" name="date" required>
+    <div class="header centre">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="main-content sidebar">
+        <button id="the-button" class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+    </div>
+    <div class="main-content centre">
+        <form action="#" method="post">
+            <h2 style="margin-top: 0px; margin-bottom: 12px;">Competition Details</h2>
+            <div class="input-fields">
+                <label for="date">Competition Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div style="display: flex; flex-direction: row; column-gap: 3%;">
+                <div class="input-fields" style="margin: 0px;">
+                    <label for="starttime">Competition Start Time:</label>
+                    <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
                 </div>
-                <div style="display: flex; flex-direction: row; column-gap: 3%;">
-                    <div class="input-fields" style="margin: 0px;">
-                        <label for="starttime">Competition Start Time:</label>
-                        <input type="time" id="starttime" name="starttime" required onblur="getEndTime()">
-                    </div>
-                    <div class="input-fields" style="margin: 0px;">
-                        <label for="duration">Competition Duration:</label>
-                        <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
-                        <label for="duration">minutes</label>
-                    </div>
-                    <div class="input-fields" style="margin: 0px;">
-                        <label for="duration">Competition End Time:</label>
-                        <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
-                            (Auto-generated)
-                        </label>
-                    </div>
+                <div class="input-fields" style="margin: 0px;">
+                    <label for="duration">Competition Duration:</label>
+                    <input type="number" id="duration" name="duration" value="60" required style="width: 60px; text-align: center;" onblur="getEndTime()" min="1" max="999">
+                    <label for="duration">minutes</label>
                 </div>
-                <div class="input-fields">
-                    <label for="buffer">Buffer Time:</label>
-                    <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
-                    <label for="buffer">minutes</label>
+                <div class="input-fields" style="margin: 0px;">
+                    <label for="duration">Competition End Time:</label>
+                    <label id="endtime" name="endtime" style="width: 60px; text-align: center;">
+                        (Auto-generated)
+                    </label>
                 </div>
-                <div class="input-fields">
-                    <label>Number of Questions:</label>
-                    <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration" style="margin-right: 30px;">Multiple Choice Questions</label>
-                    <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
-                    <label for="duration">Short Answer Questions</label>
-                </div>
-                <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
-            </form>
-        </div>
+            </div>
+            <div class="input-fields">
+                <label for="buffer">Buffer Time:</label>
+                <input type="number" id="buffer" name="buffer" value="15" required style="width: 60px; text-align: center;" min="1" max="99">
+                <label for="buffer">minutes</label>
+            </div>
+            <div class="input-fields">
+                <label>Number of Questions:</label>
+                <input type="number" id="nummcq" name="nummcq" value="10"  required style="width: 60px; text-align: center;" min="1" max="999">
+                <label for="duration" style="margin-right: 30px;">Multiple Choice Questions</label>
+                <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
+                <label for="duration">Short Answer Questions</label>
+            </div>
+            <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
+        </form>
     </div>
     <script>
         function getEndTime() {
