@@ -1,15 +1,15 @@
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-globalThis.qn;
+var qn;
 ////////////////////////////////////////////////////////////////
-//API.js
 
 //CLOUDFLARE
 async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
-    let url = "https://acmc-junior.acsimct.workers.dev/";
+    // Cloudflare workers
+    const url = "https://acmc-server.lwk19.workers.dev";
             
     var req = await fetch( url, {
         method: "POST",
