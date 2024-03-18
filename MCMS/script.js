@@ -84,6 +84,50 @@ async function getCompetitionDetails() {
 
 }
 
+async function updateInstructions() {
+    var arr = []
+    const table = document.getElementById('instructionstable');
+    var cells = table.querySelectorAll("[required]")
+    for (var i = 0; i < cells.length; i++) {
+        if (!cells[i].reportValidity()) return;
+        arr[i] = cells[i].value;
+    }
+    console.log(arr)
+    const resp = await post({ "method": "updateInstructions", "token": getCookie("token"), "instructions": arr });
+    if (resp.success) {
+        //TODO: display confirmation message
+    } else {
+        handleErrors(resp);
+    }
+}
+
+async function getInstructions() {
+    const resp = await post({ "method": "getInstructions", "token": getCookie("token") });
+    if (resp.success) {
+        console.log(resp.reply)
+        const table = document.getElementById('instructionstable');
+        for (var i = 0; i < resp.reply.length; i++) {
+            var currRow = table.rows[i + 1].cells;
+            currRow[0].children[0].value = resp.reply[i];
+
+            //add rows
+            if (i < resp.reply.length - 1) {
+                var numcol = table.rows[0].cells.length;
+                var row = table.insertRow(i + 2);
+                var cells = [];
+                for (var j = 0; j < numcol; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = currRow[j].innerHTML;
+                }
+                cells[0].getElementsByTagName('input')[0].focus();
+            }
+        }
+    } else {
+        handleErrors(resp);
+    }
+
+}
+
 async function getNumQns() {
     const resp = await post({ "method": "getCompetitionDetails", "token": getCookie("token") });
     if (resp.success) {
@@ -183,6 +227,7 @@ async function updateParticipants(section) {
     for (var i = 0; i < cells.length; i++) {
         if (!cells[i].reportValidity()) return;
     }
+    // TODO delete first, then split if more than 50 rows
     var participants = [];
     for (var i = 1; i < table.rows.length; i++) {
         var currRow = table.rows[i].cells;

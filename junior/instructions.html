@@ -23,15 +23,7 @@
     <div id="instruct-square">
         <h1 style="margin:5px;text-align: center;font-size: xx-large;">Instructions to Candidates</h1>
         <hr color="black" style="border-width:0.5px">
-        <ul>
-            <li>You have 1 hour for this competition. The timer will begin when "Start Quiz" is pressed.</li>
-            <li>There are 15 questions in total.</li>
-            <li>The first 10 questions will be in a multiple choice format with 5 options. Each correct answer will award 2 marks.</li>
-            <li>The next 5 questions will be open ended. Each correct answer will award 3 marks.</li>
-            <li>There is no penalty for incorrect answers.</li>
-            <li>This is an open book test. Calculators are allowed.</li>
-            <li>Please click on "Save and Next" after you have selected or entered your answer. You can change the answers anytime during the competition. Unsaved answers will not be marked.</li>
-            <li>You can click on the question images to enlarge them.</li>
+        <ul id="instructions">
         </ul>
         <hr color="black" style="border-width:0.5px">
         <div>
@@ -53,6 +45,7 @@
 <script>
     getName();
     getTime();
+    getInstructions();
     window.addEventListener("focus",updateTime);
 
 </script>

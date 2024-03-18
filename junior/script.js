@@ -53,6 +53,27 @@ async function login() {
     }  
 }
 
+async function getInstructions() {
+    const instruct = document.getElementById("instructions")
+    var resp = await post({'method':"get_instructions", "token":getCookie("token")});
+    if (resp.success) {
+        for(var i=0;i<resp.reply.length;i++){
+            var li = document.createElement("li");
+            li.innerHTML = resp.reply[i]
+            instruct.appendChild(li);
+        }
+        
+    } else{
+        if (resp.msg == "Wrong Password") {
+            document.getElementById("incorrect").innerHTML = "Incorrect Password";
+        } else if (resp.msg == "Wrong Username") {
+            document.getElementById("incorrect").innerHTML = "Incorrect Username";
+        } else {
+            handleErrors(resp);
+        }
+    }  
+}
+
 async function updateMainTime() {
     var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
     if(resp.success) {
