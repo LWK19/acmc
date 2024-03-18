@@ -75,11 +75,12 @@
 <script>
     var nummcq, numsa;
     getNumQns().then((param)=>{
-        buildMCQ(qnwrapper, param.nummcq, 0);
-        buildSRQ(qnwrapper, param.numsa, param.nummcq);
-        getQuestions('junior', select, putAns, updateFileArray);
         nummcq = param.nummcq
         numsa = param.numsa;
+        buildMCQ(qnwrapper, nummcq, 0);
+        buildSRQ(qnwrapper, numsa, nummcq);
+        getQuestions('junior',numsa+nummcq, select, putAns, updateFileArray);
+        
     });
 </script>
 </html>
