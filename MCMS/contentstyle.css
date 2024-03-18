@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+
 :root {
     --blue: #080066;
     --red: #B00;
@@ -361,6 +370,17 @@ tr:nth-child(odd) td {
     background-color: var(--blue);
     color: var(--gold);
     border-radius: 6px;
+}
+
+.dimmer {
+    background: #000;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
 }
 
 .loader {

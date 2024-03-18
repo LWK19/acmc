@@ -177,6 +177,17 @@ input:-webkit-autofill:active {
     outline: none;
 }
 
+.dimmer {
+    background: #000;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
 .loader {
     display: flex;
     margin: auto;

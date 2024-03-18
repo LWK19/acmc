@@ -76,7 +76,6 @@
         </div>
     </div>
     <script>
-        // TODO: getEndTime() should run whenever page loads too. handle case where input is missing
         function getEndTime() {
             var date = document.getElementById('date').value;
             var starttime = document.getElementById('starttime').value;
@@ -90,7 +89,7 @@
             var endtime = document.getElementById('endtime');
             endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
-        getCompetitionDetails();
+        getCompetitionDetails().then(()=>getEndTime());
     </script>
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
 </body>

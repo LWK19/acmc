@@ -59,7 +59,7 @@
             </div>
             <div class="input-fields" style="margin-top: 12px;">
                 <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
-                <input type="text" id="answer-input" class="answer-input">
+                <input type="number" id="answer-input" class="answer-input">
             </div>
         </div>
     </div>   
@@ -77,7 +77,7 @@
     getNumQns().then((param)=>{
         buildMCQ(qnwrapper, param.nummcq, 0);
         buildSRQ(qnwrapper, param.numsa, param.nummcq);
-        getQuestions('junior', select, putAns)
+        getQuestions('junior', select, putAns, updateFileArray);
         nummcq = param.nummcq
         numsa = param.numsa;
     });

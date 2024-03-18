@@ -41,10 +41,10 @@
                     <th style="width: 10%; min-width: max-content;">Delete</th>
                 </tr>
                 <tr>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
                     <td><button class="delete-button" onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                 </tr>
             </table>

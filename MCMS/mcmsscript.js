@@ -11,6 +11,7 @@ function addNewInputRow(table, rowindex = table.rows.length - 1) {
             if (inputElement && inputElement.value === "") {
                 currentRow.cells[i].style.backgroundColor = "var(--gold)";
                 inputElement.focus();
+                inputElement.reportValidity()
                 return;
             } else {
                 currentRow.cells[i].style.backgroundColor = "";
@@ -47,15 +48,15 @@ function buildMCQ(parent, qnum, idx) {
         const clone = template.cloneNode(true);
         clone.id = clone.id + i;
         clone.children[0].innerHTML = "Question " + i;
-        
+
         clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
-        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, "+i+")")
+        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, " + i + ")")
         //;updateQuestions('junior', event, "+i+", 'mcq', selectedOptionValues["+i+"]);");
 
         const options = ['A', 'B', 'C', 'D', 'E']
         for (var j = 0; j < 5; j++) {
             clone.getElementsByClassName("optionscontainer")[0].children[j].removeAttribute("onclick");
-            clone.getElementsByClassName("optionscontainer")[0].children[j].setAttribute("onclick", "select(\'" + options[j]+"\', "+i+")");
+            clone.getElementsByClassName("optionscontainer")[0].children[j].setAttribute("onclick", "select(\'" + options[j] + "\', " + i + ")");
         }
         parent.appendChild(clone);
     }
@@ -70,7 +71,7 @@ function buildSRQ(parent, qnum, idx) {
         clone.children[0].innerHTML = "Question " + (i + idx);
 
         clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
-        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, "+(i+idx)+")")
+        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, " + (i + idx) + ")")
         //;updateQuestions('junior', event, "+(i+idx)+", 'srq',getAns("+(i+idx)+"));");
 
         parent.appendChild(clone);
@@ -116,15 +117,14 @@ function deleteInputRow(table, rowindex = table.rows.length - 1) {
 }
 
 function getAns(qnum) {
-    return document.getElementById("srq"+qnum).getElementsByClassName("answer-input")[0].value;
+    return document.getElementById("srq" + qnum).getElementsByClassName("answer-input")[0].value;
 }
 
 function putAns(x, qnum) {
-    return document.getElementById("srq"+qnum).getElementsByClassName("answer-input")[0].value = x;
+    return document.getElementById("srq" + qnum).getElementsByClassName("answer-input")[0].value = x;
 }
 
 //Multiple Choice Handler
-// TODO not 10
 var selectedOptionValues = [] // Initialize an array to store selected option values
 
 function select(x, questionNumber) {
@@ -170,7 +170,7 @@ function handleImageUpload(event, questionNumber) {
     if (image.size > 10_000_000) {
         return alert('Maximum upload size is 10MB!');
     }
-    files[questionNumber-1] = image;
+    files[questionNumber - 1] = image;
     const fileReader = new FileReader();
 
     fileReader.onload = (fileReaderEvent) => {
@@ -191,13 +191,17 @@ function handleImageUpload(event, questionNumber) {
     fileReader.readAsDataURL(image);
 }
 
+function updateFileArray(file, i){
+    files[i] = file;
+}
+
 function getQnArr(nummcq, numsa) {
     var arr = [];
-    for(var i=0;i<nummcq+numsa;i++){
+    for (var i = 0; i < nummcq + numsa; i++) {
         const file = i < files.length ? files[i] : null;
-        const ans =  i < nummcq ? (i < selectedOptionValues.length ? selectedOptionValues[i] : null) : getAns(i+1);
+        const ans = i < nummcq ? (i < selectedOptionValues.length ? selectedOptionValues[i] : null) : getAns(i + 1);
         const qnType = i < nummcq ? "mcq" : "srq";
-        arr[i] = {"file":file, "qn":i+1, "qnType":qnType, "ans":ans}
+        arr[i] = { "file": file, "qn": i + 1, "qnType": qnType, "ans": ans }
     }
 
     return arr;

@@ -11,8 +11,8 @@ async function post(payload) {
     payload["main"] = "MCMS";
 
     // Cloudflare workers
-    //const url = "https://acmc-server.lwk19.workers.dev";
-    const url = "http://127.0.0.1:8787";
+    const url = "https://acmc-server.lwk19.workers.dev";
+    //const url = "http://127.0.0.1:8787";
 
     var req = await fetch(url, {
         method: "POST",
@@ -27,7 +27,6 @@ async function post(payload) {
         body: JSON.stringify(payload)
     });
     req = req.json();
-
     document.getElementById("load").classList.remove("visible");
     document.getElementById("load").classList.add("hidden");
     return req;
@@ -115,8 +114,11 @@ async function updateQuestions(section, arr) {
     }
 }
 
-async function getQuestions(section, mcqFn, srqFn) {
+async function getQuestions(section, mcqFn, srqFn, fileFn) {
     const resp = await post({ "method": "getQuestions", "section": section, "token": getCookie("token") });
+    // this function takes a long time so manually add loader
+    document.getElementById("load").classList.remove("hidden");
+    document.getElementById("load").classList.add("visible");
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -153,6 +155,7 @@ async function getQuestions(section, mcqFn, srqFn) {
             if (qn != null) {
                 if (qn.file != null) {
                     var file = dataURLtoFile(qn.file, i + 1);
+                    fileFn(file, i);
                     pic(document.getElementById(qn.qnType + qn.qn).getElementsByClassName("question-picture")[0], file);
                 }
                 if (qn.ans != null) {
@@ -164,9 +167,12 @@ async function getQuestions(section, mcqFn, srqFn) {
                 }
             }
         }
+        
     } else {
         handleErrors(resp);
     }
+    document.getElementById("load").classList.remove("visible");
+    document.getElementById("load").classList.add("hidden");
 }
 
 async function updateParticipants(section) {
@@ -175,6 +181,10 @@ async function updateParticipants(section) {
         table = document.getElementById('jrparticipanttable');
     } else {
         table = document.getElementById('srparticipanttable');
+    }
+    var cells = table.querySelectorAll("[required]")
+    for (var i = 0;i<cells.length;i++) {
+        if(!cells[i].reportValidity()) return;
     }
     var participants = [];
     for (var i = 1; i < table.rows.length; i++) {
@@ -189,8 +199,8 @@ async function updateParticipants(section) {
             "time": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             "token": "init_token"
         }
+
     }
-    // TODO: no empty cell
     const resp = await post({ "method": "updateParticipants", "section": section, "token": getCookie("token"), "participants": participants });
     if (resp.success) {
         //TODO: display confirmation message

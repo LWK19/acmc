@@ -29,12 +29,8 @@ async function post(payload){
 			'Access-Control-Allow-Origin': '*',
         },          
         body: JSON.stringify(payload)
-    }).then( function (response){
-        return response.json()
-    }
-    ).then(function (data){
-        return data;
     })
+    req = await req.json();
     document.getElementById("load").classList.remove("visible");
     document.getElementById("load").classList.add("hidden");
     return req;
