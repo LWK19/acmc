@@ -28,13 +28,16 @@
         <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
     <div class="main-content centre" id="qnwrapper" style="flex-direction: column;">
+        <div class="centre-button">
+            <button style="width: max-content; padding: 18px; margin: 18px" onClick="updateQuestions('junior', getQnArr(nummcq, numsa))"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
+        </div>
         <div class="questions" id="mcq">
             <h2>Question Autocounter (This is a backend problem)</h2>
             <div class="image-container">
                 <div class="question-picture empty">
                     <i class="fa fa-plus"></i> Add/Change Image  (Max Size: 16MB)
                 </div>
-                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1);updateQuestions('junior', event, 1, 'mcq');">
+                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
             </div>
             <div class="optionscontainer" id="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
                 <div class="options unselected A" onclick="select('A', 1)">A</div>
@@ -52,12 +55,11 @@
                 <div class="question-picture empty">
                     <i class="fa fa-plus"></i> Add/Change Image (Max Size: 16MB)
                 </div>
-                <!--TODO change qnum-->
-                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1);updateQuestions('junior', event, 11,'srq')";>
+                <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)";>
             </div>
             <div class="input-fields" style="margin-top: 12px;">
                 <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
-                <input type="text" class="answer-input">
+                <input type="text" id="answer-input" class="answer-input">
             </div>
         </div>
     </div>   
@@ -71,10 +73,13 @@
     </div>            
 </body>
 <script>
+    var nummcq, numsa;
     getNumQns().then((param)=>{
         buildMCQ(qnwrapper, param.nummcq, 0);
         buildSRQ(qnwrapper, param.numsa, param.nummcq);
-        getQuestions('junior')
+        getQuestions('junior', select, putAns)
+        nummcq = param.nummcq
+        numsa = param.numsa;
     });
 </script>
 </html>

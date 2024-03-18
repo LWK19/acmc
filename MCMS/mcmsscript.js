@@ -47,6 +47,11 @@ function buildMCQ(parent, qnum, idx) {
         const clone = template.cloneNode(true);
         clone.id = clone.id + i;
         clone.children[0].innerHTML = "Question " + i;
+        
+        clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
+        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, "+i+")")
+        //;updateQuestions('junior', event, "+i+", 'mcq', selectedOptionValues["+i+"]);");
+
         const options = ['A', 'B', 'C', 'D', 'E']
         for (var j = 0; j < 5; j++) {
             clone.getElementsByClassName("optionscontainer")[0].children[j].removeAttribute("onclick");
@@ -63,6 +68,11 @@ function buildSRQ(parent, qnum, idx) {
         const clone = template.cloneNode(true);
         clone.id = clone.id + (i + idx);
         clone.children[0].innerHTML = "Question " + (i + idx);
+
+        clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
+        clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, "+(i+idx)+")")
+        //;updateQuestions('junior', event, "+(i+idx)+", 'srq',getAns("+(i+idx)+"));");
+
         parent.appendChild(clone);
     }
     template.remove();
@@ -105,9 +115,17 @@ function deleteInputRow(table, rowindex = table.rows.length - 1) {
     }
 }
 
+function getAns(qnum) {
+    return document.getElementById("srq"+qnum).getElementsByClassName("answer-input")[0].value;
+}
+
+function putAns(x, qnum) {
+    return document.getElementById("srq"+qnum).getElementsByClassName("answer-input")[0].value = x;
+}
+
 //Multiple Choice Handler
 // TODO not 10
-var selectedOptionValues = new Array(10).fill(null); // Initialize an array to store selected option values for 10 questions
+var selectedOptionValues = [] // Initialize an array to store selected option values
 
 function select(x, questionNumber) {
     var options = document.querySelectorAll('#mcq' + questionNumber + ' .options');
@@ -130,7 +148,7 @@ function select(x, questionNumber) {
         selectedOptionValues[questionNumber - 1] = selectedOption.textContent.trim(); // Store the selected option value
     }
 }
-
+var files = [];
 function handleImageUpload(event, questionNumber) {
     const fileUploadInput = event.target;
     const imageContainer = fileUploadInput.parentElement;
@@ -152,7 +170,7 @@ function handleImageUpload(event, questionNumber) {
     if (image.size > 10_000_000) {
         return alert('Maximum upload size is 10MB!');
     }
-
+    files[questionNumber-1] = image;
     const fileReader = new FileReader();
 
     fileReader.onload = (fileReaderEvent) => {
@@ -173,6 +191,16 @@ function handleImageUpload(event, questionNumber) {
     fileReader.readAsDataURL(image);
 }
 
+function getQnArr(nummcq, numsa) {
+    var arr = [];
+    for(var i=0;i<nummcq+numsa;i++){
+        const file = i < files.length ? files[i] : null;
+        const ans =  i < nummcq ? (i < selectedOptionValues.length ? selectedOptionValues[i] : null) : getAns(i+1);
+        const qnType = i < nummcq ? "mcq" : "srq";
+        arr[i] = {"file":file, "qn":i+1, "qnType":qnType, "ans":ans}
+    }
 
+    return arr;
+}
 
 

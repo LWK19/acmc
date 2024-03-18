@@ -94,8 +94,7 @@ async function getNumQns() {
     }
 }
 
-async function updateQuestions(section, event, qn, qnType, ans) {
-    const file = event.target.files[0];
+async function updateQuestions(section, arr) {
     function blobToBase64(blob) {
         return new Promise((resolve, _) => {
             const reader = new FileReader();
@@ -103,8 +102,12 @@ async function updateQuestions(section, event, qn, qnType, ans) {
             reader.readAsDataURL(blob);
         });
     }
-    const fileBase64 = await blobToBase64(file);
-    const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "file": fileBase64, "qn": qn, "qnType": qnType, "ans": ans });
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].file != null) {
+            arr[i].file = await blobToBase64(arr[i].file);
+        }
+    }
+    const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "arr": arr });
     if (resp.success) {
         //TODO: display confirmation message
     } else {
@@ -112,7 +115,7 @@ async function updateQuestions(section, event, qn, qnType, ans) {
     }
 }
 
-async function getQuestions(section) {
+async function getQuestions(section, mcqFn, srqFn) {
     const resp = await post({ "method": "getQuestions", "section": section, "token": getCookie("token") });
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
@@ -146,9 +149,19 @@ async function getQuestions(section) {
     }
     if (resp.success) {
         for (var i = 0; i < resp.reply.length; i++) {
-            if (resp.reply[i] != null) {
-                var file = dataURLtoFile(resp.reply[i].file, i + 1);
-                pic(document.getElementById(resp.reply[i].qnType + resp.reply[i].qn).getElementsByClassName("question-picture")[0], file);
+            var qn = resp.reply[i];
+            if (qn != null) {
+                if (qn.file != null) {
+                    var file = dataURLtoFile(qn.file, i + 1);
+                    pic(document.getElementById(qn.qnType + qn.qn).getElementsByClassName("question-picture")[0], file);
+                }
+                if (qn.ans != null) {
+                    if (qn.qnType == "mcq") {
+                        mcqFn(qn.ans, i + 1)
+                    } else {
+                        srqFn(qn.ans, i + 1)
+                    }
+                }
             }
         }
     } else {
@@ -255,8 +268,8 @@ async function downloadResults(section) {
     if (resp.success) {
         var csv = "data:text/csv;charset=utf-8,"
         var arrcomma = ""
-        for(var i=0;i<resp.reply[0].ans.length;i++) arrcomma+=',';
-        csv += "name,class,id,password,time_started,ans"+arrcomma+"time"+arrcomma+"time_finished"
+        for (var i = 0; i < resp.reply[0].ans.length; i++) arrcomma += ',';
+        csv += "name,class,id,password,time_started,ans" + arrcomma + "time" + arrcomma + "time_finished"
         csv += '\n';
         for (var i = 0; i < resp.reply.length; i++) {
             const obj = resp.reply[i];
