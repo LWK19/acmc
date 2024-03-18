@@ -25,11 +25,9 @@ a {
 a span {
     color: var(--gold);
     cursor: pointer;
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 1px 
-    no-repeat;
-    transition:0.2s;
+    background:
+        linear-gradient(currentColor 0 0) 0 100% /var(--d, 0) 1px no-repeat;
+    transition: 0.2s;
 }
 
 a span:hover {
@@ -77,11 +75,9 @@ button:disabled {
 }
 
 button span {
-    background: 
-      linear-gradient(currentColor 0 0) 
-      0 100% /var(--d, 0) 3px 
-    no-repeat;
-    transition:0.4s;
+    background:
+        linear-gradient(currentColor 0 0) 0 100% /var(--d, 0) 3px no-repeat;
+    transition: 0.4s;
 }
 
 button:hover:enabled {
@@ -119,7 +115,10 @@ button:hover:enabled {
     font: 16px Helvetica, Arial, sans-serif;
 }
 
-.form-input input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active{
+.form-input input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
@@ -134,10 +133,11 @@ button:hover:enabled {
     margin: 0px;
 }
 
-.error p {
+.error {
     min-height: 12px;
-    color: var(--blue);
-    text-align: center;
+    color: var(--red);
+    text-align: left;
+    padding-bottom: 12px;
 }
 
 .sidebar {
@@ -146,23 +146,29 @@ button:hover:enabled {
 }
 
 .fоrm-input {
-    margin: 6px; 
-    display: flex; 
+    margin: 6px;
+    display: flex;
     flex-direction: column;
     align-items: start;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .fоrm-input input {
     width: 50px;
-    background-color: var(--blue); 
-    border: none; 
-    color: var(--gold); 
+    background-color: var(--blue);
+    border: none;
+    color: var(--gold);
     cursor: default;
     padding-left: 50px;
 }
@@ -171,3 +177,124 @@ button:hover:enabled {
     outline: none;
 }
 
+.loader {
+    display: flex;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.8s linear infinite;
+    -webkit-animation: spin 1.8s linear infinite;
+}
+
+.loader:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 2px solid transparent;
+    border-top: 2px solid #e74c3c;
+    animation: spinOpp 0.8s linear infinite;
+    -webkit-animation: spinOpp 0.8s linear infinite;
+}
+
+.loader:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    top: 9px;
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+    border: 2px solid transparent;
+    border-top: 2px solid #f9c922;
+    animation: spin 3s linear infinite;
+    -webkit-animation: spin 3s linear infinite;
+}
+
+.popup{
+    display: block;
+    opacity: 1;
+    background-color: #ffffff;
+    color: black;
+    text-align: center;
+    border-radius: 30px;
+    padding: 20px 30px 30px;
+    position: absolute;
+    z-index: 101;
+    top: 5%;
+    left: 50%;
+    margin:auto;
+    transform: translateX(-50%);
+  }
+  .visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s linear;
+  }
+  .hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.3s linear;
+  }
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinOpp {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+        -ms-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes spinOpp {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+        -ms-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}

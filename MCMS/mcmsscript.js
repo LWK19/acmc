@@ -30,6 +30,17 @@ function addNewInputRow(table, rowindex = table.rows.length - 1) {
     cells[0].getElementsByTagName('input')[0].focus();
 }
 
+function buildResultTable(table, numQns) {
+    for(var i=1;i<numQns;i++) {
+        table.rows[0].appendChild(document.createElement("th")).innerHTML = "Question "+ (i+1);
+    }
+    
+    var numcol = table.rows[0].cells.length;
+    for (var i = 0; i < numcol-1; i++) {
+        table.rows[1].insertCell(i).innerHTML = table.rows[1].cells[0].innerHTML;
+    }
+}
+
 //Dont question it
 function backspaceHandler(table, rowindex = table.rows.length - 1) {
     var activeInput = document.activeElement;
@@ -68,6 +79,7 @@ function deleteInputRow(table, rowindex = table.rows.length - 1) {
 }
 
 //Multiple Choice Handler
+// TODO not 10
 var selectedOptionValues = new Array(10).fill(null); // Initialize an array to store selected option values for 10 questions
     
 function select(x, questionNumber) {
@@ -131,7 +143,6 @@ function handleImageUpload(event, questionNumber) {
         questionPicture.classList.add('not-empty');
     };
     
-
     fileReader.readAsDataURL(image);
 }
 

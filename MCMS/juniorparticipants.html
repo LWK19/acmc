@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
     <script src="mcmsscript.js"></script>
+    <script type="text/javascript" src="script.js"></script>
     <title>Edit Junior Participants</title>
 </head>
 <body>
@@ -17,18 +18,18 @@
         <h1>Edit Junior Participants</h1>
     </div>
     <div class="main-content sidebar">
-        <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-        <button id="the-button" class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-        <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        <button class="sidebtn" onclick="window.location.href='dashboard'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit Senior<br>Questions</span></button>
+        <button id="the-button" class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage'"><span>View Junior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
     <div class="main-content centre" style="flex-direction: column; align-items: center;">
         <div class="centre-button">
-            <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-floppy-disk"></i> <span>Save Junior Participants</span></button>
+            <button style="width: max-content; padding: 18px;" onClick="updateParticipants('junior')"><i class="fa-solid fa-floppy-disk"></i> <span>Save Junior Participants</span></button>
         </div>
         <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
             <table id="jrparticipanttable">
@@ -50,7 +51,16 @@
             <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(jrparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
         </div>
     </div>
+    <div id="load" class="hidden">
+        <div class="popup">
+            <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+            <div class="loader"></div>
+
+        </div>
+        <div class="dimmer"></div>
+    </div>
     <script>
+        getParticipants("junior");
         const jrTable = document.getElementById("jrparticipanttable");
         // Define a global variable to track cursor position
         var cursorAtEnd = false;

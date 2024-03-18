@@ -6,7 +6,9 @@
     <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="contentstyle.css">
+    
     <title>Dashboard</title>
 </head>
 <body>
@@ -17,17 +19,17 @@
         <h1>Dashboard</h1>
     </div>
     <div class="main-content sidebar">
-        <button id="the-button" class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        <button id="the-button" class="sidebtn" onclick="window.location.href='dashboard'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
     <div class="main-content centre">
-        <form action="#" method="post">
+        <form action="javascript:updateCompetitionDetails()">
             <h2 style="margin-top: 0px; margin-bottom: 12px;">Competition Details</h2>
             <div class="input-fields">
                 <label for="date">Competition Date:</label>
@@ -62,10 +64,19 @@
                 <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
                 <label for="duration">Short Answer Questions</label>
             </div>
-            <button type="submit" class="submitbtn" onclick=updateCompetitionDetails() style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
+            <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
         </form>
+        <div id="load" class="hidden">
+            <div class="popup">
+                <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+                <div class="loader"></div>
+    
+            </div>
+            <div class="dimmer"></div>
+        </div>
     </div>
     <script>
+        // TODO: getEndTime() should run whenever page loads too. handle case where input is missing
         function getEndTime() {
             var date = document.getElementById('date').value;
             var starttime = document.getElementById('starttime').value;
@@ -79,6 +90,7 @@
             var endtime = document.getElementById('endtime');
             endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
+        getCompetitionDetails();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
 </body>
