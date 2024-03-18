@@ -145,29 +145,3 @@ button:hover:enabled {
     width: 20%;
 }
 
-.fоrm-input {
-    margin: 6px; 
-    display: flex; 
-    flex-direction: column;
-    align-items: start;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
-.fоrm-input input {
-    width: 50px;
-    background-color: var(--blue); 
-    border: none; 
-    color: var(--gold); 
-    cursor: default;
-    padding-left: 50px;
-}
-
-.fоrm-input input:focus {
-    outline: none;
-}
-
