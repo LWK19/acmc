@@ -117,10 +117,6 @@ async function updateQuestions(section, arr) {
 }
 
 async function getQuestions(section, qnNum, mcqFn, srqFn, fileFn) {
-    // this function takes a long time so manually add loader
-    document.getElementById("load").classList.remove("hidden");
-    document.getElementById("load").classList.add("visible");
-
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -174,9 +170,6 @@ async function getQuestions(section, qnNum, mcqFn, srqFn, fileFn) {
             handleErrors(resp);
         }
     }
-
-    document.getElementById("load").classList.remove("visible");
-    document.getElementById("load").classList.add("hidden");
 }
 
 async function updateParticipants(section) {
