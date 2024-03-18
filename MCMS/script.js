@@ -94,7 +94,7 @@ async function getNumQns() {
     }
 }
 
-async function updateQuestions(section, event, qn, qnType) {
+async function updateQuestions(section, event, qn, qnType, ans) {
     const file = event.target.files[0];
     function blobToBase64(blob) {
         return new Promise((resolve, _) => {
@@ -104,7 +104,7 @@ async function updateQuestions(section, event, qn, qnType) {
         });
     }
     const fileBase64 = await blobToBase64(file);
-    const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "file": fileBase64, "qn": qn, "qnType": qnType });
+    const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "file": fileBase64, "qn": qn, "qnType": qnType, "ans": ans });
     if (resp.success) {
         //TODO: display confirmation message
     } else {
@@ -168,9 +168,9 @@ async function updateParticipants(section) {
         var currRow = table.rows[i].cells;
         participants[i - 1] = {
             'name': currRow[0].children[0].value,
-            "class": "class",
-            "id": currRow[1].children[0].value,
-            "password": currRow[2].children[0].value,
+            "class": currRow[1].children[0].value,
+            "id": currRow[2].children[0].value,
+            "password": currRow[3].children[0].value,
             "time_started": "",
             "ans": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             "time": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
@@ -198,9 +198,9 @@ async function getParticipants(section) {
         for (var i = 0; i < resp.reply.length; i++) {
             var currRow = table.rows[i + 1].cells;
             currRow[0].children[0].value = resp.reply[i].name;
-            //currRow[0].children[0].value = resp.reply[i].class;
-            currRow[1].children[0].value = resp.reply[i].id;
-            currRow[2].children[0].value = resp.reply[i].password;
+            currRow[1].children[0].value = resp.reply[i].class;
+            currRow[2].children[0].value = resp.reply[i].id;
+            currRow[3].children[0].value = resp.reply[i].password;
 
             //add rows
             if (i < resp.reply.length - 1) {
@@ -245,6 +245,38 @@ async function getResults(section) {
                 }
             }
         }
+    } else {
+        handleErrors(resp);
+    }
+}
+
+async function downloadResults(section) {
+    const resp = await post({ "method": "getParticipants", "section": section, "token": getCookie("token") });
+    if (resp.success) {
+        var csv = "data:text/csv;charset=utf-8,"
+        var arrcomma = ""
+        for(var i=0;i<resp.reply[0].ans.length;i++) arrcomma+=',';
+        csv += "name,class,id,password,time_started,ans"+arrcomma+"time"+arrcomma+"time_finished"
+        csv += '\n';
+        for (var i = 0; i < resp.reply.length; i++) {
+            const obj = resp.reply[i];
+            csv += obj.name + ','
+            csv += obj.class + ','
+            csv += obj.id + ','
+            csv += obj.password + ','
+            csv += obj.time_started + ','
+            csv += obj.ans + ','
+            csv += obj.time + ','
+            csv += obj.time_finished;
+            csv += '\n';
+        }
+        var encodedUri = encodeURI(csv);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     } else {
         handleErrors(resp);
     }

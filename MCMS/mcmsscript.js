@@ -31,14 +31,41 @@ function addNewInputRow(table, rowindex = table.rows.length - 1) {
 }
 
 function buildResultTable(table, numQns) {
-    for(var i=1;i<numQns;i++) {
-        table.rows[0].appendChild(document.createElement("th")).innerHTML = "Question "+ (i+1);
+    for (var i = 1; i < numQns; i++) {
+        table.rows[0].appendChild(document.createElement("th")).innerHTML = "Question " + (i + 1);
     }
-    
+
     var numcol = table.rows[0].cells.length;
-    for (var i = 0; i < numcol-1; i++) {
+    for (var i = 0; i < numcol - 1; i++) {
         table.rows[1].insertCell(i).innerHTML = table.rows[1].cells[0].innerHTML;
     }
+}
+
+function buildMCQ(parent, qnum, idx) {
+    const template = document.getElementById("mcq");
+    for (var i = 1; i <= qnum; i++) {
+        const clone = template.cloneNode(true);
+        clone.id = clone.id + i;
+        clone.children[0].innerHTML = "Question " + i;
+        const options = ['A', 'B', 'C', 'D', 'E']
+        for (var j = 0; j < 5; j++) {
+            clone.getElementsByClassName("optionscontainer")[0].children[j].removeAttribute("onclick");
+            clone.getElementsByClassName("optionscontainer")[0].children[j].setAttribute("onclick", "select(\'" + options[j]+"\', "+i+")");
+        }
+        parent.appendChild(clone);
+    }
+    template.remove();
+}
+
+function buildSRQ(parent, qnum, idx) {
+    const template = document.getElementById("srq");
+    for (var i = 1; i <= qnum; i++) {
+        const clone = template.cloneNode(true);
+        clone.id = clone.id + (i + idx);
+        clone.children[0].innerHTML = "Question " + (i + idx);
+        parent.appendChild(clone);
+    }
+    template.remove();
 }
 
 //Dont question it
@@ -81,7 +108,7 @@ function deleteInputRow(table, rowindex = table.rows.length - 1) {
 //Multiple Choice Handler
 // TODO not 10
 var selectedOptionValues = new Array(10).fill(null); // Initialize an array to store selected option values for 10 questions
-    
+
 function select(x, questionNumber) {
     var options = document.querySelectorAll('#mcq' + questionNumber + ' .options');
     for (var i = 0; i < options.length; i++) {
@@ -91,7 +118,7 @@ function select(x, questionNumber) {
             option.classList.add('unselected');
         }
     }
-    
+
     var selectedOption = document.querySelector('#mcq' + questionNumber + ' .' + x);
     if (selectedOption.classList.contains('selected')) {
         selectedOption.classList.remove('selected');
@@ -115,37 +142,37 @@ function handleImageUpload(event, questionNumber) {
 
     // using index [0] to take the first file from the array
     const image = fileUploadInput.files[0];
-  
+
     // Check if the file selected is not an image file
     if (!image.type.includes('image')) {
         return alert('Only images are allowed!');
     }
-  
+
     // Check if size (in bytes) exceeds 10 MB
     if (image.size > 10_000_000) {
         return alert('Maximum upload size is 10MB!');
     }
 
     const fileReader = new FileReader();
-    
+
     fileReader.onload = (fileReaderEvent) => {
         const questionPicture = imageContainer.querySelector('.question-picture');
         questionPicture.style.backgroundImage = `url(${fileReaderEvent.target.result})`;
-    
+
         // Wait for the image to be loaded before getting its height
         questionPicture.onload = () => {
             // Set the height of the container to the height of the image
             imageContainer.style.height = questionPicture.height + 'px';
         };
-    
+
         // Remove the 'empty' class and add the 'not-empty' class
         questionPicture.classList.remove('empty');
         questionPicture.classList.add('not-empty');
     };
-    
+
     fileReader.readAsDataURL(image);
 }
 
 
 
-    
+

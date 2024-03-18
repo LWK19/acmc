@@ -27,8 +27,8 @@
         <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage'"><span>View Senior<br>Results</span></button>
         <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
-    <div class="main-content centre" style="flex-direction: column;">
-        <div class="questions" id="mcq1">
+    <div class="main-content centre" id="qnwrapper" style="flex-direction: column;">
+        <div class="questions" id="mcq">
             <h2>Question Autocounter (This is a backend problem)</h2>
             <div class="image-container">
                 <div class="question-picture empty">
@@ -36,17 +36,17 @@
                 </div>
                 <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1);updateQuestions('junior', event, 1, 'mcq');">
             </div>
-            <div class="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
-                <div class="options unselected optionA" onclick="select('optionA', 1)">A</div>
-                <div class="options unselected optionB" onclick="select('optionB', 1)">B</div>
-                <div class="options unselected optionC" onclick="select('optionC', 1)">C</div>
-                <div class="options unselected optionD" onclick="select('optionD', 1)">D</div>
-                <div class="options unselected optionE" onclick="select('optionE', 1)">E</div>
+            <div class="optionscontainer" id="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
+                <div class="options unselected A" onclick="select('A', 1)">A</div>
+                <div class="options unselected B" onclick="select('B', 1)">B</div>
+                <div class="options unselected C" onclick="select('C', 1)">C</div>
+                <div class="options unselected D" onclick="select('D', 1)">D</div>
+                <div class="options unselected E" onclick="select('E', 1)">E</div>
             </div>
         </div>
         <!-- Repeat the above HTML structure for each question, changing the ID and function parameters -->
 
-        <div class="questions" id="srq1">
+        <div class="questions" id="srq">
             <h2>Question Autocounter (This is a backend problem)</h2>
             <div class="image-container">
                 <div class="question-picture empty">
@@ -71,6 +71,10 @@
     </div>            
 </body>
 <script>
-    getQuestions("junior");
+    getNumQns().then((param)=>{
+        buildMCQ(qnwrapper, param.nummcq, 0);
+        buildSRQ(qnwrapper, param.numsa, param.nummcq);
+        getQuestions('junior')
+    });
 </script>
 </html>
