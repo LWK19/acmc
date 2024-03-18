@@ -6,6 +6,9 @@
     <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="mcmsscript.js"></script>
+    
     <title>View Junior Results</title>
 </head>
 <body>
@@ -17,14 +20,14 @@
     </div>
     </div>
     <div class="main-content sidebar">
-        <button class="sidebtn" onclick="window.location.href='dashboard.html'"><span>Dashboard</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorquestions.html'"><span>Edit Junior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorquestions.html'"><span>Edit Senior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorparticipants.html'"><span>Edit Junior<br>Participants</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorparticipants.html'"><span>Edit Senior<br>Participants</span></button>
-        <button id="the-button" class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage.html'"><span>View Junior<br>Results</span></button>
-        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage.html'"><span>View Senior<br>Results</span></button>
-        <button id = "logout" class="sidebtn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        <button class="sidebtn" onclick="window.location.href='dashboard'"><span>Dashboard</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit Senior<br>Participants</span></button>
+        <button id="the-button" class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage'"><span>View Senior<br>Results</span></button>
+        <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
     <div class="main-content centre" style="flex-direction: column; align-items: center;">
         <div class="centre-button">
@@ -32,19 +35,33 @@
             <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
         </div>
         <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
-            <table>
+            <table id="jrresultstable">
                 <tr>
                     <th style="max-width: fit-content;">Name</th>
-                    <th style="max-width: fit-content;">ID</th>
-                    <th style="max-width: fit-content;">Score</th>
+                    <th style="max-width: fit-content;">Question 1</th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
                     <td></td>
                 </tr>
             </table>
         </div>
     </div>
+    <div id="load" class="hidden">
+        <div class="popup">
+            <div style="margin: 0 0 20px;font-size: 20px;">Loading...</div>
+            <div class="loader"></div>
+
+        </div>
+        <div class="dimmer"></div>
+    </div>
 </body>
+<script>
+    function load() {
+        getNumQns().then((param)=>{
+        buildResultTable(jrresultstable, param.nummcq+param.numsa);
+        getResults('junior')
+    });
+    }
+    load();
+</script>
 </html>
