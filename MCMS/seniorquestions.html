@@ -6,6 +6,7 @@
     <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <script src="mcmsscript.js"></script>
+    <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" href="contentstyle.css">
     <title>Edit Senior Questions</title>
 </head>
@@ -27,35 +28,38 @@
         <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
     </div>
     <div class="main-content centre" style="flex-direction: column;">
-        <div class="questions" id="mcq1">
+        <div class="centre-button">
+            <button style="width: max-content; padding: 18px; margin: 18px" onClick="updateQuestions('senior', getQnArr(nummcq, numsa))"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
+        </div>
+        <div class="questions" id="mcq">
             <h2>Question Autocounter (This is a backend problem)</h2>
             <div class="image-container">
                 <div class="question-picture empty">
-                    <i class="fa fa-plus"></i> Add/Change Image
+                    <i class="fa fa-plus"></i> Add/Change Image (Max Size: 10MB)
                 </div>
                 <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
             </div>
             <div class="optionscontainer" style="display: flex; flex-direction: row; column-gap: 12px;">
-                <div class="options unselected optionA" onclick="select('optionA', 1)">A</div>
-                <div class="options unselected optionB" onclick="select('optionB', 1)">B</div>
-                <div class="options unselected optionC" onclick="select('optionC', 1)">C</div>
-                <div class="options unselected optionD" onclick="select('optionD', 1)">D</div>
-                <div class="options unselected optionE" onclick="select('optionE', 1)">E</div>
+                <div class="options unselected A" onclick="select('A', 1)">A</div>
+                <div class="options unselected B" onclick="select('B', 1)">B</div>
+                <div class="options unselected C" onclick="select('C', 1)">C</div>
+                <div class="options unselected D" onclick="select('D', 1)">D</div>
+                <div class="options unselected E" onclick="select('E', 1)">E</div>
             </div>
         </div>
         <!-- Repeat the above HTML structure for each question, changing the ID and function parameters -->
 
-        <div class="questions" id="srq1">
+        <div class="questions" id="srq">
             <h2>Question Autocounter (This is a backend problem)</h2>
             <div class="image-container">
                 <div class="question-picture empty">
-                    <i class="fa fa-plus"></i> Add/Change Image
+                    <i class="fa fa-plus"></i> Add/Change Image (Max Size: 10MB)
                 </div>
                 <input type="file" class="image-input" accept="image/*" onchange="handleImageUpload(event, 1)">
             </div>
             <div class="input-fields" style="margin-top: 12px;">
                 <label for="question" style="font: 24px 'Montserrat', sans-serif; font-weight: 600;">Answer:</label>
-                <input type="text" class="answer-input">
+                <input type="text" id="answer-input" class="answer-input">
             </div>
         </div>
     </div>  
@@ -68,4 +72,14 @@
         <div class="dimmer"></div>
     </div>
 </body>
+<script>
+    var nummcq, numsa;
+    getNumQns().then((param)=>{
+        buildMCQ(qnwrapper, param.nummcq, 0);
+        buildSRQ(qnwrapper, param.numsa, param.nummcq);
+        getQuestions('senior', select, putAns, updateFileArray);
+        nummcq = param.nummcq
+        numsa = param.numsa;
+    });
+</script>
 </html>

@@ -10,7 +10,6 @@ async function post(payload){
     document.getElementById("load").classList.add("visible");
 
     // fix payload
-    // TODO: change section
     payload["main"] = "ACMC";
     payload["section"] = "junior";
 

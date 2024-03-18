@@ -1,15 +1,21 @@
 var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-globalThis.qn;
+var qn;
 ////////////////////////////////////////////////////////////////
-//API.js
 
 //CLOUDFLARE
 async function post(payload){
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
-    let url = "https://acmc-senior.acsimct.workers.dev/";
+
+    // fix payload
+    payload["main"] = "ACMC";
+    payload["section"] = "senior";
+
+    // Cloudflare workers TODO
+    const url = "https://acmc-server.lwk19.workers.dev";
+    //const url = "http://127.0.0.1:8787";
             
     var req = await fetch( url, {
         method: "POST",
@@ -22,12 +28,8 @@ async function post(payload){
 			'Access-Control-Allow-Origin': '*',
         },          
         body: JSON.stringify(payload)
-    }).then( function (response){
-        return response.json()
-    }
-    ).then(function (data){
-        return data;
     })
+    req = await req.json();
     document.getElementById("load").classList.remove("visible");
     document.getElementById("load").classList.add("hidden");
     return req;
@@ -360,7 +362,7 @@ function handleErrors(resp){
         location.href = "finish";
         alert("Already Submitted");
     } else{
-        console.log(resp);
+        console.log(resp.msg);
         alert("Response error");
     }
 }

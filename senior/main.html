@@ -136,10 +136,6 @@
             $box.prop("checked", false);
         }
     })
-    getName();
-    shadeQNum();
-    initQn();
-    
-    getMainTime();
+    getName().then(()=>shadeQNum()).then(()=>initQn()).then(()=>getMainTime());
     window.addEventListener("focus",updateMainTime);
 </script>

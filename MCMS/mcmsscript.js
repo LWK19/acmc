@@ -51,7 +51,6 @@ function buildMCQ(parent, qnum, idx) {
 
         clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
         clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, " + i + ")")
-        //;updateQuestions('junior', event, "+i+", 'mcq', selectedOptionValues["+i+"]);");
 
         const options = ['A', 'B', 'C', 'D', 'E']
         for (var j = 0; j < 5; j++) {
@@ -72,7 +71,6 @@ function buildSRQ(parent, qnum, idx) {
 
         clone.getElementsByClassName("image-input")[0].removeAttribute("onchange");
         clone.getElementsByClassName("image-input")[0].setAttribute("onchange", "handleImageUpload(event, " + (i + idx) + ")")
-        //;updateQuestions('junior', event, "+(i+idx)+", 'srq',getAns("+(i+idx)+"));");
 
         parent.appendChild(clone);
     }

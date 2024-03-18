@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +9,42 @@
     <link rel="stylesheet" href="contentstyle.css">
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="mcmsscript.js"></script>
-    
+
     <title>View Junior Results</title>
 </head>
+
 <body>
-    <div class= "header sidebar" id="logo">
+    <div class="header sidebar" id="logo">
         <h2>Math Competition Management System</h2>
     </div>
-    <div class= "header centre">
+    <div class="header centre">
         <h1>View Junior Results</h1>
     </div>
     </div>
     <div class="main-content sidebar">
         <button class="sidebtn" onclick="window.location.href='dashboard'"><span>Dashboard</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit Junior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit Senior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit Junior<br>Participants</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit Senior<br>Participants</span></button>
-        <button id="the-button" class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
-        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage'"><span>View Senior<br>Results</span></button>
-        <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit
+                Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit
+                Senior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit
+                Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit
+                Senior<br>Participants</span></button>
+        <button id="the-button" class="sidebtn" value="juniordownload"
+            onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
+        <button class="sidebtn" value="seniordownload" onclick="window.location.href='seniordownloadpage'"><span>View
+                Senior<br>Results</span></button>
+        <button id="logout" class="sidebtn" onclick="window.location.href='index'"><i
+                class="fa-solid fa-arrow-right-from-bracket"></i> <span>Log Out</span></button>
     </div>
     <div class="main-content centre" style="flex-direction: column; align-items: center;">
         <div class="centre-button">
-            <button style="width: max-content; padding: 18px; margin-right: 24px;" onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh Results</span></button>
-            <button style="width: max-content; padding: 18px;" id="jrdownload" onClick="downloadResults('junior')"><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
+            <button style="width: max-content; padding: 18px; margin-right: 24px;"
+                onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh
+                    Results</span></button>
+            <button style="width: max-content; padding: 18px;" id="jrdownload" onClick="downloadResults('junior')"><i
+                    class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
         </div>
         <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
             <table id="jrresultstable">
@@ -56,12 +68,11 @@
     </div>
 </body>
 <script>
-    function load() {
-        getNumQns().then((param)=>{
-        buildResultTable(jrresultstable, param.nummcq+param.numsa);
+    getNumQns().then((param) => {
+        buildResultTable(jrresultstable, param.nummcq + param.numsa);
         getResults('junior')
     });
-    }
-    load();
+
 </script>
+
 </html>

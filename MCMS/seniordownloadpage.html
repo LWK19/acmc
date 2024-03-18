@@ -6,6 +6,9 @@
     <meta author="Lee Wai Kin & Dominic Bryan">
     <script src="https://kit.fontawesome.com/26c6ac6f54.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="contentstyle.css">
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="mcmsscript.js"></script>
+
     <title>View Senior Results</title>
 </head>
 <body>
@@ -28,18 +31,15 @@
     <div class="main-content centre" style="flex-direction: column; align-items: center;">
         <div class="centre-button">
             <button style="width: max-content; padding: 18px; margin-right: 24px;" onClick="window.location.reload();"><i class="fa-solid fa-rotate-right"></i> <span>Refresh Results</span></button>
-            <button style="width: max-content; padding: 18px;" onClick=""><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
+            <button style="width: max-content; padding: 18px;" id="srdownload" onClick="downloadResults('senior')"><i class="fa-solid fa-file-arrow-down"></i> <span>Download Results</span></button>
         </div>
         <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
-            <table>
+            <table id="srresultstable">
                 <tr>
                     <th style="max-width: fit-content;">Name</th>
-                    <th style="max-width: fit-content;">ID</th>
-                    <th style="max-width: fit-content;">Score</th>
+                    <th style="max-width: fit-content;">Question 1</th>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
                     <td></td>
                 </tr>
             </table>
@@ -54,4 +54,11 @@
         <div class="dimmer"></div>
     </div>
 </body>
+<script>
+    getNumQns().then((param) => {
+        buildResultTable(srresultstable, param.nummcq + param.numsa);
+        getResults('senior')
+    });
+
+</script>
 </html>
