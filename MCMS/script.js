@@ -104,21 +104,23 @@ async function updateQuestions(section, arr) {
     for (var i = 0; i < arr.length; i++) {
         if (arr[i].file != null) {
             arr[i].file = await blobToBase64(arr[i].file);
+            const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "qn": arr[i] });
+            if (resp.success) {
+                //TODO: display confirmation message
+            } else {
+                handleErrors(resp);
+            }
         }
     }
-    const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "arr": arr });
-    if (resp.success) {
-        //TODO: display confirmation message
-    } else {
-        handleErrors(resp);
-    }
+    
+    
 }
 
-async function getQuestions(section, mcqFn, srqFn, fileFn) {
-    const resp = await post({ "method": "getQuestions", "section": section, "token": getCookie("token") });
+async function getQuestions(section, qnNum, mcqFn, srqFn, fileFn) {
     // this function takes a long time so manually add loader
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
+
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -149,28 +151,30 @@ async function getQuestions(section, mcqFn, srqFn, fileFn) {
 
         fileReader.readAsDataURL(image);
     }
-    if (resp.success) {
-        for (var i = 0; i < resp.reply.length; i++) {
-            var qn = resp.reply[i];
-            if (qn != null) {
-                if (qn.file != null) {
-                    var file = dataURLtoFile(qn.file, i + 1);
+
+    for (var i = 0; i < qnNum; i++) {
+        const resp = await post({ "method": "getQuestions", "section": section, "token": getCookie("token"), "qn": i + 1 });
+        if (resp.success) {
+            if (resp.reply != null) {
+                if (resp.reply.file != null) {
+                    var file = dataURLtoFile(resp.reply.file, i + 1);
                     fileFn(file, i);
-                    pic(document.getElementById(qn.qnType + qn.qn).getElementsByClassName("question-picture")[0], file);
+                    pic(document.getElementById(resp.reply.qnType + resp.reply.qn).getElementsByClassName("question-picture")[0], file);
                 }
-                if (qn.ans != null) {
-                    if (qn.qnType == "mcq") {
-                        mcqFn(qn.ans, i + 1)
+                if (resp.reply.ans != null) {
+                    if (resp.reply.qnType == "mcq") {
+                        mcqFn(resp.reply.ans, i + 1)
                     } else {
-                        srqFn(qn.ans, i + 1)
+                        srqFn(resp.reply.ans, i + 1)
                     }
                 }
             }
+
+        } else {
+            handleErrors(resp);
         }
-        
-    } else {
-        handleErrors(resp);
     }
+
     document.getElementById("load").classList.remove("visible");
     document.getElementById("load").classList.add("hidden");
 }
@@ -183,8 +187,8 @@ async function updateParticipants(section) {
         table = document.getElementById('srparticipanttable');
     }
     var cells = table.querySelectorAll("[required]")
-    for (var i = 0;i<cells.length;i++) {
-        if(!cells[i].reportValidity()) return;
+    for (var i = 0; i < cells.length; i++) {
+        if (!cells[i].reportValidity()) return;
     }
     var participants = [];
     for (var i = 1; i < table.rows.length; i++) {
