@@ -247,7 +247,7 @@ async function updateParticipants(section) {
             "token": "init_token"
         }
         idx++;
-        if (idx % 50 == 0) {
+        if (idx % 40 == 0) {
             const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
             if (!resp2.success) {
                 handleErrors(resp2);
