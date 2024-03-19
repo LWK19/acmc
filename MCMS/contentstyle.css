@@ -32,9 +32,8 @@ body {
     font: var(--small-text) 'Montserrat', sans-serif;
     background-color: var(--gray);
     margin: 0px;
-    min-height: 100%;
-    height: 100%;
-    min-width: 100%;
+    height: 100vh;
+    width: 100vw;
     display: grid;
     grid-template-columns: 20vw 80vw;
     grid-template-rows: 15vh 85vh;
@@ -44,7 +43,6 @@ body {
     min-width: 200px;
     background-color: var(--blue);
     margin: 0;
-    text-align: center;
 }
 
 .header {
@@ -56,8 +54,7 @@ body {
 
 .centre {
     margin: 0;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding: 0% max(12px, 5%);
     max-height: 100%;
     min-width: 765px;
 }
@@ -71,6 +68,7 @@ body {
 .sidebar h2 {
     font-size: var(--small-text);
     color: white;
+    margin-left: clamp(6px, 10%, 24px);
 }
 
 #logo {
@@ -89,11 +87,6 @@ h2 {
     color: var(--blue);
     font-weight: 800;
     margin: 0px;
-}
-
-form {
-    padding: 12px 24px;
-    width: 100%;
 }
 
 i {
@@ -153,7 +146,7 @@ table {
     position: inherit;
     display: table;
     width: 100%;
-    table-layout: fixed;
+    overflow: scroll;
 }
 
 th {
@@ -164,6 +157,8 @@ th {
     font-weight: 600;
     position: sticky;
     top: 0;
+    min-width: 4em;
+    width: max-content;
 }
 
 td, td input{
