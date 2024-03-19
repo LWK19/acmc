@@ -22,8 +22,8 @@ input[type=number] {
     --disabled: #555;
     --invisible: #00000000;
     --big-text: clamp(36px, min(10vh, 3vw), 56px);
-    --medium-text: clamp(24px, min(5vh, 2vw), 36px);
-    --small-text: clamp(18px, min(3vh, 1.4vw), 24px);
+    --medium-text: clamp(24px, min(5vh, 2vw), 30px);
+    --small-text: clamp(18px, min(3vh, 1.4vw), 20px);
     --smaller-text: clamp(16px, min(2vh, 1.2vw), 18px);
 }
 
@@ -97,7 +97,7 @@ button {
     font: var(--small-text) 'Montserrat', sans-serif;
     width: 100%;
     height: max-content;
-    padding: 12px;
+    padding: min(6px, 0.5em);
     background-color: var(--blue);
     text-align: center;
     color: var(--gold);
@@ -153,30 +153,26 @@ th {
     background-color: var(--blue);
     color: var(--gold);
     font: var(--small-text) 'Montserrat', sans-serif;
-    padding: 12px 0px;
+    padding:  max(6px, 1em) 0px;
     font-weight: 600;
     position: sticky;
     top: 0;
     min-width: 4em;
-    width: max-content;
 }
 
-td, td input{
+td {
     text-align: center;
     font: var(--smaller-text) 'Montserrat', sans-serif;
     font-weight: 500;
-    overflow-y: auto;
-    inline-size: 100%;
-    overflow-wrap: break-word;
-    padding: 6px 0px;
-    max-width: 90%;
-    width: 90%;
-    border: none;
-    align-items: center;
+    padding: max(6px, 0.8em) 0px;
 }
 
-tr{
-    height: 40px;
+td input {
+    text-align: center;
+    border: none;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+    margin: 0px;
 }
 
 tr:nth-child(even) td {
