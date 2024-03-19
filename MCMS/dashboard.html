@@ -65,11 +65,7 @@
                 <input type="number" id="numsa" name="numsa" value="5"  required style="width: 60px; text-align: center;" min="1" max="999">
                 <label for="duration">Short Answer Questions</label>
             </div>
-            <button type="submit" class="submitbtn" style="width: fit-content; float: centre; border-radius: 6px;"><span>Save Details</span></button>
         </form>
-        <div class="centre-button">
-            <button style="width: max-content; padding: 18px;" onClick="updateInstructions()"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
-        </div>
         <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
             <table id="instructionstable">
                 <tr>
@@ -84,6 +80,8 @@
         </div>
         <div class="centre-button">
             <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(instructionstable)"><i class="fa-solid fa-plus"></i> <span>Add New Instruction</span></button>
+
+            <button style="width: max-content; padding: 18px;" onClick="updateCompetitionDetails(); updateInstructions()"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
         </div>
         <div id="load" class="hidden">
             <div class="popup">

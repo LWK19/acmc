@@ -5,6 +5,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type=number] {
     appearance: textfield;
     -moz-appearance: textfield;
@@ -20,11 +21,15 @@ input[type=number] {
     --grayest: #BCBCBC;
     --disabled: #555;
     --invisible: #00000000;
+    --big-text: clamp(36px, min(10vh, 3vw), 56px);
+    --medium-text: clamp(24px, min(5vh, 2vw), 36px);
+    --small-text: clamp(18px, min(3vh, 1.4vw), 24px);
+    --smaller-text: clamp(16px, min(2vh, 1.2vw), 18px);
 }
 
 body {
     position: absolute;
-    font: 20px 'Montserrat', sans-serif;
+    font: var(--small-text) 'Montserrat', sans-serif;
     background-color: var(--gray);
     margin: 0px;
     min-height: 100%;
@@ -64,7 +69,7 @@ body {
 }
 
 .sidebar h2 {
-    font-size: 24px;
+    font-size: var(--small-text);
     color: white;
 }
 
@@ -74,14 +79,13 @@ body {
 
 
 h1 {
-    font: 44px 'Montserrat', sans-serif;
+    font-size: var(--big-text);
     color: var(--blue);
     font-weight: 900;
-    margin: 0px;
 }
 
 h2 {
-    font: 28px 'Montserrat', sans-serif;
+    font: var(--medium-text) 'Montserrat', sans-serif;
     color: var(--blue);
     font-weight: 800;
     margin: 0px;
@@ -97,7 +101,7 @@ i {
 }
 
 button {
-    font: 20px 'Montserrat', sans-serif;
+    font: var(--small-text) 'Montserrat', sans-serif;
     width: 100%;
     height: max-content;
     padding: 12px;
@@ -129,7 +133,7 @@ button:hover:enabled {
 }
 
 input {
-    font: 18px 'Montserrat', sans-serif;
+    font: var(--smaller-text) 'Montserrat', sans-serif;
     font-weight: 500;
     width: max-content;
     border: none;
@@ -139,7 +143,7 @@ input {
 }
 
 label {
-    font: 18px 'Montserrat', sans-serif;
+    font: var(--smaller-text) 'Montserrat', sans-serif;
     margin-right: 12px;
     color: var(--blue);
     font-weight: 600;
@@ -155,7 +159,8 @@ table {
 th {
     background-color: var(--blue);
     color: var(--gold);
-    font: 20px 'Montserrat', sans-serif;
+    font: var(--small-text) 'Montserrat', sans-serif;
+    padding: 12px 0px;
     font-weight: 600;
     position: sticky;
     top: 0;
@@ -163,11 +168,16 @@ th {
 
 td, td input{
     text-align: center;
-    background-color: inherit;
-    color: var(--blue);
-    font: 16px 'Montserrat', sans-serif;
+    font: var(--smaller-text) 'Montserrat', sans-serif;
     font-weight: 500;
-    word-break: break-all;
+    overflow-y: auto;
+    inline-size: 100%;
+    overflow-wrap: break-word;
+    padding: 6px 0px;
+    max-width: 90%;
+    width: 90%;
+    border: none;
+    align-items: center;
 }
 
 tr{
@@ -180,17 +190,6 @@ tr:nth-child(even) td {
 
 tr:nth-child(odd) td {
     background-color: var(--grayest);
-}
-
-.participant-input {
-    padding: 6px 0px;
-    width: 80%;
-    border: none;
-    border-radius: 6px;
-    font: 18px 'Montserrat', sans-serif;
-    font-weight: 500;
-    color: var(--blue);
-    align-items: center;
 }
 
 .input-fields {
@@ -207,7 +206,7 @@ tr:nth-child(odd) td {
 }
 
 .sidebtn {
-    font: 16px 'Montserrat', sans-serif;
+    font: clamp(14px, min(1.8vh, 1vw), 16px) 'Montserrat', sans-serif;
     font-weight: 600;
     position: relative;
     padding-left: 20%;
@@ -254,6 +253,8 @@ tr:nth-child(odd) td {
 
 .centre-button {
     display: flex;
+    flex-direction: row;
+    column-gap: 12px;
     justify-content: center;
     align-items: center;
     width: 100%;
