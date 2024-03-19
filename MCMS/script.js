@@ -92,7 +92,6 @@ async function updateInstructions() {
         if (!cells[i].reportValidity()) return;
         arr[i] = cells[i].value;
     }
-    console.log(arr)
     const resp = await post({ "method": "updateInstructions", "token": getCookie("token"), "instructions": arr });
     if (resp.success) {
         //TODO: display confirmation message
@@ -104,7 +103,6 @@ async function updateInstructions() {
 async function getInstructions() {
     const resp = await post({ "method": "getInstructions", "token": getCookie("token") });
     if (resp.success) {
-        console.log(resp.reply)
         const table = document.getElementById('instructionstable');
         for (var i = 0; i < resp.reply.length; i++) {
             var currRow = table.rows[i + 1].cells;
@@ -247,7 +245,7 @@ async function updateParticipants(section) {
             "token": "init_token"
         }
         idx++;
-        if (idx % 50 == 0) {
+        if (idx % 40 == 0) {
             const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
             if (!resp2.success) {
                 handleErrors(resp2);
