@@ -142,18 +142,22 @@ label {
     font-weight: 600;
 }
 
+.table-container {
+    margin: 3% 0%; 
+    width: inherit; 
+    display: block;
+    overflow-x: auto;
+}
+
 table {
-    position: inherit;
-    display: table;
     width: 100%;
-    overflow: scroll;
 }
 
 th {
     background-color: var(--blue);
     color: var(--gold);
     font: var(--small-text) 'Montserrat', sans-serif;
-    padding:  max(6px, 1em) 0px;
+    padding:  max(6px, 1rem) 0px;
     font-weight: 600;
     position: sticky;
     top: 0;
@@ -164,14 +168,13 @@ td {
     text-align: center;
     font: var(--smaller-text) 'Montserrat', sans-serif;
     font-weight: 500;
-    padding: max(6px, 0.8em) 0px;
+    padding: max(6px, 1rem) 0px;
 }
 
 td input {
-    text-align: center;
+    width: 90%;
+    text-align: start;
     border: none;
-    overflow-y: auto;
-    overflow-wrap: break-word;
     margin: 0px;
 }
 
