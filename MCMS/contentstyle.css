@@ -6,8 +6,9 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 input[type=number] {
+    appearance: textfield;
     -moz-appearance: textfield;
-  }
+}
 
 :root {
     --blue: #080066;
@@ -387,7 +388,7 @@ tr:nth-child(odd) td {
     display: flex;
     margin: auto;
     border: 2px solid transparent;
-    border-top: 2px solid #3498db;
+    border-top: 2px solid var(--blue);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -404,7 +405,7 @@ tr:nth-child(odd) td {
     right: 3px;
     bottom: 3px;
     border: 2px solid transparent;
-    border-top: 2px solid #e74c3c;
+    border-top: 2px solid var(--red);
     animation: spinOpp 0.8s linear infinite;
     -webkit-animation: spinOpp 0.8s linear infinite;
 }
@@ -418,18 +419,26 @@ tr:nth-child(odd) td {
     right: 9px;
     bottom: 9px;
     border: 2px solid transparent;
-    border-top: 2px solid #f9c922;
+    border-top: 2px solid var(--gold);
     animation: spin 3s linear infinite;
     -webkit-animation: spin 3s linear infinite;
+}
+
+.loader-text {
+    font: 24px 'Montserrat', sans-serif;
+    color: var(--blue);
+    margin: auto;
+    padding: 12px;
+    font-weight: 600;
 }
 
 .popup{
     display: block;
     opacity: 1;
-    background-color: #ffffff;
+    background-color: white;
     color: black;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 6px;
     padding: 20px 30px 30px;
     position: absolute;
     z-index: 101;
@@ -437,13 +446,13 @@ tr:nth-child(odd) td {
     left: 50%;
     margin:auto;
     transform: translateX(-50%);
-  }
-  .visible {
+}
+.visible {
     visibility: visible;
     opacity: 1;
     transition: opacity 0.3s linear;
-  }
-  .hidden {
+}
+.hidden {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.3s, opacity 0.3s linear;
