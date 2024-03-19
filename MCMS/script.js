@@ -156,8 +156,8 @@ async function updateQuestions(section, arr) {
             }
         }
     }
-    
-    
+
+
 }
 
 async function getQuestions(section, qnNum, mcqFn, srqFn, fileFn) {
@@ -228,10 +228,15 @@ async function updateParticipants(section) {
         if (!cells[i].reportValidity()) return;
     }
     // TODO delete first, then split if more than 50 rows
+    const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token") });
+    if (!resp.success) {
+        handleErrors(resp);
+    }
     var participants = [];
+    var idx = 1;
     for (var i = 1; i < table.rows.length; i++) {
         var currRow = table.rows[i].cells;
-        participants[i - 1] = {
+        participants[idx - 1] = {
             'name': currRow[0].children[0].value,
             "class": currRow[1].children[0].value,
             "id": currRow[2].children[0].value,
@@ -241,13 +246,22 @@ async function updateParticipants(section) {
             "time": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             "token": "init_token"
         }
+        idx++;
+        if (idx % 50 == 0) {
+            const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
+            if (!resp2.success) {
+                handleErrors(resp2);
+            }
+            participants = [];
+            idx = 1;
+        }
 
     }
-    const resp = await post({ "method": "updateParticipants", "section": section, "token": getCookie("token"), "participants": participants });
-    if (resp.success) {
+    const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
+    if (resp2.success) {
         //TODO: display confirmation message
     } else {
-        handleErrors(resp);
+        handleErrors(resp2);
     }
 }
 
