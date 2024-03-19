@@ -32,10 +32,13 @@ function addNewInputRow(table, rowindex = table.rows.length - 1) {
 }
 
 function buildResultTable(table, numQns) {
-    for (var i = 1; i < numQns; i++) {
-        table.rows[0].appendChild(document.createElement("th")).innerHTML = "Question " + (i + 1);
+    const template = table.rows[0].cells[1];
+    for (var i = 1; i <= numQns; i++) {
+        const clone = template.cloneNode();
+        clone.innerHTML = template.innerHTML + i;
+        table.rows[0].appendChild(clone);
     }
-
+    template.remove();
     var numcol = table.rows[0].cells.length;
     for (var i = 0; i < numcol - 1; i++) {
         table.rows[1].insertCell(i).innerHTML = table.rows[1].cells[0].innerHTML;
@@ -164,9 +167,9 @@ function handleImageUpload(event, questionNumber) {
         return alert('Only images are allowed!');
     }
 
-    // Check if size (in bytes) exceeds 10 MB
-    if (image.size > 10_000_000) {
-        return alert('Maximum upload size is 10MB!');
+    // Check if size (in bytes) exceeds 2 MB
+    if (image.size > 2_000_000) {
+        return alert('Maximum upload size is 2MB!');
     }
     files[questionNumber - 1] = image;
     const fileReader = new FileReader();
