@@ -35,10 +35,10 @@ function buildResultTable(table, numQns) {
     const template = table.rows[0].cells[1];
     for (var i = 1; i <= numQns; i++) {
         const clone = template.cloneNode();
-        clone.innerHTML += i;
+        clone.innerHTML = template.innerHTML + i;
         table.rows[0].appendChild(clone);
     }
-
+    template.remove();
     var numcol = table.rows[0].cells.length;
     for (var i = 0; i < numcol - 1; i++) {
         table.rows[1].insertCell(i).innerHTML = table.rows[1].cells[0].innerHTML;
