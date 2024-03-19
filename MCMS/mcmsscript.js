@@ -32,8 +32,11 @@ function addNewInputRow(table, rowindex = table.rows.length - 1) {
 }
 
 function buildResultTable(table, numQns) {
-    for (var i = 1; i < numQns; i++) {
-        table.rows[0].appendChild(document.createElement("th")).innerHTML = "Question " + (i + 1);
+    const template = table.rows[0].cells[1];
+    for (var i = 1; i <= numQns; i++) {
+        const clone = template.clone();
+        clone.innerHTML += i;
+        table.rows[0].appendChild(clone);
     }
 
     var numcol = table.rows[0].cells.length;
