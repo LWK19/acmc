@@ -138,6 +138,19 @@ input {
     outline: none;
 }
 
+textarea {
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 500;
+    width: max-content;
+    border: none;
+    border-bottom: var(--blue) 2px solid;
+    background-color: inherit;
+    outline: none;
+    word-break:normal;
+    resize: none;
+    line-height:normal;
+}
+
 label {
     font: 18px 'Montserrat', sans-serif;
     margin-right: 12px;
@@ -180,6 +193,24 @@ tr:nth-child(even) td {
 
 tr:nth-child(odd) td {
     background-color: var(--grayest);
+}
+
+.instructions-input {
+    padding: 6px 0px;
+    width: 90%;
+    border: none;
+    border-radius: 6px;
+    font: 18px 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: var(--blue);
+    align-items: center;
+    height:auto;
+
+    vertical-align:middle;
+}
+
+#instructions-cell {
+    height: auto;
 }
 
 .participant-input {

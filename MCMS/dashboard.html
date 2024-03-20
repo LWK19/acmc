@@ -77,7 +77,7 @@
                     <th style="width: 10%; min-width: max-content;">Delete</th>
                 </tr>
                 <tr>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
+                    <td id="instructions-cell"><textarea type="text" class="instructions-input" onkeyup="rowhandler(event)" oninput="resizeTextarea()" wrap="soft" required></textarea></td>
                     <td><button class="delete-button" onclick="deleteInputRow(instructionstable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                 </tr>
             </table>
@@ -108,7 +108,18 @@
             endtime.innerHTML = dateendtime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
         getCompetitionDetails().then(()=>getEndTime());
-        getInstructions();
+        getInstructions().then(resizeTextarea);
+
+        function resizeTextarea() {
+            const inputs = document.getElementById("instructionstable").getElementsByClassName("instructions-input");
+            for(var i =0;i<inputs.length;i++){
+                inputs[i].style.height = "22px";
+                console.log(inputs[i].style.height);
+                console.log(inputs[i].scrollHeight);
+                inputs[i].style.height = inputs[i].scrollHeight - 12 + 'px';
+            }
+        }
+
         const instTable = document.getElementById("instructionstable");
         // Define a global variable to track cursor position
         var cursorAtEnd = false;

@@ -112,12 +112,13 @@ async function getInstructions() {
             if (i < resp.reply.length - 1) {
                 var numcol = table.rows[0].cells.length;
                 var row = table.insertRow(i + 2);
+                row.id = "instructions-cell"
                 var cells = [];
                 for (var j = 0; j < numcol; j++) {
                     cells.push(row.insertCell(j));
                     cells[j].innerHTML = currRow[j].innerHTML;
                 }
-                cells[0].getElementsByTagName('input')[0].focus();
+                cells[0].getElementsByClassName('instructions-input')[0].focus();
             }
         }
     } else {
