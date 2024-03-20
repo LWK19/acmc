@@ -173,14 +173,15 @@ async function getQuestions(section, qnNum, mcqFn, srqFn, fileFn) {
     }
     function pic(questionPicture, image) {
         const fileReader = new FileReader();
-
-        fileReader.onload = (fileReaderEvent) => {
-            questionPicture.style.backgroundImage = `url(${fileReaderEvent.target.result})`;
-
+        
+        fileReader.onload = () => {
+            var img = new Image();
+            img.src = fileReader.result;
+            questionPicture.style.backgroundImage = `url(${img.src})`;
             // Wait for the image to be loaded before getting its height
-            questionPicture.onload = () => {
+            img.onload = () => {
                 // Set the height of the container to the height of the image
-                imageContainer.style.height = questionPicture.height + 'px';
+                questionPicture.parentNode.style.height = Math.min(img.height, 400) + 'px';
             };
 
             // Remove the 'empty' class and add the 'not-empty' class

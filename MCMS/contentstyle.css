@@ -181,7 +181,7 @@ td {
     text-align: center;
     font: var(--smaller-text) 'Montserrat', sans-serif;
     font-weight: 500;
-    padding: max(6px, 1rem) 0px;
+    padding: max(3px, 0.5rem) 0px;
 }
 
 td input {
@@ -312,7 +312,7 @@ tr:nth-child(odd) td {
 .image-container {
     position: relative;
     width: 100%;
-    height: 200px; /* Set initial height */
+    height: 200px; /* Set initial height, CHANGE THIS */
     overflow: hidden;
 }
 
@@ -321,7 +321,7 @@ tr:nth-child(odd) td {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; /*does not seem to change anything*/
     opacity: 0;
     cursor: pointer;
 }
@@ -340,6 +340,7 @@ tr:nth-child(odd) td {
     font-weight: 600;
     text-align: center;
     padding: auto;
+
 }
 
 .empty {
@@ -351,7 +352,7 @@ tr:nth-child(odd) td {
     border: none;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
 }
 
 

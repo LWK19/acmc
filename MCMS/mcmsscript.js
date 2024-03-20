@@ -174,14 +174,17 @@ function handleImageUpload(event, questionNumber) {
     files[questionNumber - 1] = image;
     const fileReader = new FileReader();
 
-    fileReader.onload = (fileReaderEvent) => {
+    fileReader.onload = () => {
+        var img = new Image();
+        img.src = fileReader.result;
+
         const questionPicture = imageContainer.querySelector('.question-picture');
-        questionPicture.style.backgroundImage = `url(${fileReaderEvent.target.result})`;
+        questionPicture.style.backgroundImage = `url(${img.src})`;
 
         // Wait for the image to be loaded before getting its height
-        questionPicture.onload = () => {
+        img.onload = () => {
             // Set the height of the container to the height of the image
-            imageContainer.style.height = questionPicture.height + 'px';
+            questionPicture.parentNode.style.height = Math.min(img.height, 400) + 'px';
         };
 
         // Remove the 'empty' class and add the 'not-empty' class

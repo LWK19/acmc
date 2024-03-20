@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <script type="text/javascript" src="script.js"></script>
     <title>Edit Junior Participants</title>
 </head>
+
 <body>
     <div class="header sidebar" id="logo">
         <h2>Math Competition Management System</h2>
@@ -19,17 +21,25 @@
     </div>
     <div class="main-content sidebar">
         <button class="sidebtn" onclick="window.location.href='dashboard'"><span>Dashboard</span></button>
-        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit Junior<br>Questions</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit Senior<br>Questions</span></button>
-        <button id="the-button" class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit Junior<br>Participants</span></button>
-        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit Senior<br>Participants</span></button>
-        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View Junior<br>Results</span></button>
-        <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage'"><span>View Junior<br>Results</span></button>
-        <button id = "logout" class="sidebtn" onclick="window.location.href='index'"><i class="fa-solid fa-arrow-right-from-bracket"></i>  <span>Log Out</span></button>
+        <button class="sidebtn" onclick="window.location.href='juniorquestions'"><span>Edit
+                Junior<br>Questions</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorquestions'"><span>Edit
+                Senior<br>Questions</span></button>
+        <button id="the-button" class="sidebtn" onclick="window.location.href='juniorparticipants'"><span>Edit
+                Junior<br>Participants</span></button>
+        <button class="sidebtn" onclick="window.location.href='seniorparticipants'"><span>Edit
+                Senior<br>Participants</span></button>
+        <button class="sidebtn" value="juniordownload" onclick="window.location.href='juniordownloadpage'"><span>View
+                Junior<br>Results</span></button>
+        <button class="sidebtn" value="Juniordownload" onclick="window.location.href='Juniordownloadpage'"><span>View
+                Junior<br>Results</span></button>
+        <button id="logout" class="sidebtn" onclick="window.location.href='index'"><i
+                class="fa-solid fa-arrow-right-from-bracket"></i> <span>Log Out</span></button>
     </div>
     <div class="main-content centre" style="flex-direction: column; align-items: center;">
         <div class="centre-button">
-            <button style="width: max-content; padding: 18px;" onClick="updateParticipants('junior')"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
+            <button style="width: max-content; padding: 18px;" onClick="updateParticipants('junior')"><i
+                    class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
         </div>
         <div class="table-container">
             <table id="jrparticipanttable">
@@ -41,16 +51,19 @@
                     <th>Delete</th>
                 </tr>
                 <tr>
-                    <td><input type="text" onkeyup="rowhandler(event)" required></input></td>
-                    <td><input type="text" onkeyup="rowhandler(event)" required></input></td>
-                    <td><input type="text" onkeyup="rowhandler(event)" required></input></td>
-                    <td><input type="text" onkeyup="rowhandler(event)" required></input></td>
-                    <td><button class="delete-button" onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
+                    <td><input type="text" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><button class="delete-button"
+                            onclick="deleteInputRow(jrparticipanttable, this.parentElement.parentElement.rowIndex)"><i
+                                class="fa-solid fa-trash-can"></i></button></td>
                 </tr>
             </table>
         </div>
         <div class="centre-button">
-            <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(jrparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
+            <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(jrparticipanttable)"><i
+                    class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
         </div>
     </div>
     <div id="load" class="hidden">
@@ -65,6 +78,7 @@
         const jrTable = document.getElementById("jrparticipanttable");
         // Define a global variable to track cursor position
         var cursorAtEnd = false;
+        var cursorAtStart = false;
 
         function rowhandler(event) {
             var activeRow = event.target.closest('tr');
@@ -74,29 +88,36 @@
             var inputElement = event.target;
             var c;
 
+
             if (event.keyCode === 13) {
                 addNewInputRow(jrTable, rowindex);
-            } else if (event.keyCode === 8 || event.keyCode === 46) {
+            } /*else if (event.keyCode === 8 || event.keyCode === 46) {
                 backspaceHandler(jrTable, rowindex);
-            } else if (event.keyCode === 39) {
+            } */else if (event.keyCode === 39) {
                 // Right Arrow
                 if (cursorAtEnd) {
-                    moveCaretToAdjacentCell(activeCell.nextElementSibling);
+                    moveCaretToAdjacentCell(activeCell.nextElementSibling, 0);
                     cursorAtEnd = false;
+                    if (activeCell.nextElementSibling != null) {
+                        inputElement = activeCell.nextElementSibling.querySelector('input');
+                    };
                 }
-            } else if (event.keyCode === 37) { 
+            } else if (event.keyCode === 37) {
                 // Left Arrow
-                if (cursorAtEnd && inputElement.selectionStart === 0) {
-                    moveCaretToAdjacentCell(activeCell.previousElementSibling);
-                    cursorAtEnd = false;
+                if (cursorAtStart) {
+                    moveCaretToAdjacentCell(activeCell.previousElementSibling, -1);
+                    cursorAtStart = false;
+                    if (activeCell.previousElementSibling != null) {
+                        inputElement = activeCell.previousElementSibling.querySelector('input');
+                    };
                 }
-            } else if (event.keyCode === 38) { 
+            } else if (event.keyCode === 38) {
                 // Up Arrow
                 var rowIndex = activeRow.rowIndex - 1;
                 if (rowIndex >= 0) {
                     c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
                 }
-            } else if (event.keyCode === 40) { 
+            } else if (event.keyCode === 40) {
                 // Down Arrow
                 var rowIndex = activeRow.rowIndex + 1;
                 if (rowIndex < activeRow.parentNode.rows.length) {
@@ -108,34 +129,54 @@
             if (c) {
                 c.querySelector('input').focus(); // Assuming there's an input element in each cell
             }
+            cursorAtStart = isCursorAtStart(inputElement);
+            cursorAtEnd = isCursorAtEnd(inputElement);
+        }
+
+        function onFocus(event) {
+            setTimeout(() => {
+                var inputElement = event.target;
+                cursorAtStart = isCursorAtStart(inputElement);
+                cursorAtEnd = isCursorAtEnd(inputElement);
+            })
         }
 
         // Function to check if the cursor is at the end of the text input
         function isCursorAtEnd(inputElement) {
-            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionEnd === inputElement.value.length;
+            if (inputElement == null) {
+                return false;
+            }
+            return inputElement.selectionStart === inputElement.value.length;
         }
 
         // Function to check if the cursor is at the start of the text input
         function isCursorAtStart(inputElement) {
-            return inputElement.selectionStart === inputElement.selectionEnd && nputElement.selectionStart === 0;
+            if (inputElement == null) {
+                return false;
+            }
+            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionStart === 0;
         }
 
-        function moveCaretToAdjacentCell(cell) {
+        function moveCaretToAdjacentCell(cell, idx) {
             if (cell) {
                 var input = cell.querySelector('input');
                 if (input) {
                     input.focus();
+                    if (idx == 0) {
+                        input.setSelectionRange(0, 0);
+                    }
                 }
             }
         }
 
         // Event listener for input events to track cursor position
-        document.addEventListener('input', function(event) {
+        document.addEventListener('input', function (event) {
             var inputElement = event.target;
             cursorAtEnd = isCursorAtEnd(inputElement);
+            cursorAtStart = isCursorAtStart(inputElement)
         });
 
-        document.getElementById('jrparticipanttable').addEventListener('paste', function(e) {
+        document.getElementById('jrparticipanttable').addEventListener('paste', function (e) {
             e.preventDefault();
             var clipboardData = e.clipboardData || window.clipboardData;
             var pastedData = clipboardData.getData('text');
@@ -157,4 +198,5 @@
         });
     </script>
 </body>
+
 </html>

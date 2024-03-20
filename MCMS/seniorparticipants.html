@@ -41,10 +41,10 @@
                     <th>Delete</th>
                 </tr>
                 <tr>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
-                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
+                    <td><input type="text" class="participant-input" onkeyup="rowhandler(event)" onmousedown="onFocus(event)" required></input></td>
                     <td><button class="delete-button" onclick="deleteInputRow(srparticipanttable, this.parentElement.parentElement.rowIndex)"><i class="fa-solid fa-trash-can"></i></button></td>
                 </tr>
             </table>
@@ -65,6 +65,7 @@
         const srTable = document.getElementById("srparticipanttable");
         // Define a global variable to track cursor position
         var cursorAtEnd = false;
+        var cursorAtStart = false;
 
         function rowhandler(event) {
             var activeRow = event.target.closest('tr');
@@ -73,22 +74,28 @@
             var cellindex = event.target.parentElement.cellIndex;
             var inputElement = event.target;
             var c;
-
+            
             if (event.keyCode === 13) {
                 addNewInputRow(srTable, rowindex);
-            } else if (event.keyCode === 8 || event.keyCode === 46) {
+            } /*else if (event.keyCode === 8 || event.keyCode === 46) {
                 backspaceHandler(srTable, rowindex);
-            } else if (event.keyCode === 39) {
+            } */else if (event.keyCode === 39) {
                 // Right Arrow
                 if (cursorAtEnd) {
-                    moveCaretToAdjacentCell(activeCell.nextElementSibling);
+                    moveCaretToAdjacentCell(activeCell.nextElementSibling, 0);
                     cursorAtEnd = false;
+                    if (activeCell.nextElementSibling != null) {
+                        inputElement = activeCell.nextElementSibling.querySelector('input');
+                    };
                 }
-            } else if (event.keyCode === 37) { 
+            } else if (event.keyCode === 37) {
                 // Left Arrow
-                if (cursorAtEnd && inputElement.selectionStart === 0) {
-                    moveCaretToAdjacentCell(activeCell.previousElementSibling);
-                    cursorAtEnd = false;
+                if (cursorAtStart) {
+                    moveCaretToAdjacentCell(activeCell.previousElementSibling, -1);
+                    cursorAtStart = false;
+                    if (activeCell.previousElementSibling != null) {
+                        inputElement = activeCell.previousElementSibling.querySelector('input');
+                    };
                 }
             } else if (event.keyCode === 38) { 
                 // Up Arrow
@@ -110,21 +117,38 @@
             }
         }
 
+        function onFocus(event) {
+            setTimeout(() => {
+                var inputElement = event.target;
+                cursorAtStart = isCursorAtStart(inputElement);
+                cursorAtEnd = isCursorAtEnd(inputElement);
+            })
+        }
+
         // Function to check if the cursor is at the end of the text input
         function isCursorAtEnd(inputElement) {
-            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionEnd === inputElement.value.length;
+            if (inputElement == null) {
+                return false;
+            }
+            return inputElement.selectionStart === inputElement.value.length;
         }
 
         // Function to check if the cursor is at the start of the text input
         function isCursorAtStart(inputElement) {
-            return inputElement.selectionStart === inputElement.selectionEnd && nputElement.selectionStart === 0;
+            if (inputElement == null) {
+                return false;
+            }
+            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionStart === 0;
         }
 
-        function moveCaretToAdjacentCell(cell) {
+        function moveCaretToAdjacentCell(cell, idx) {
             if (cell) {
                 var input = cell.querySelector('input');
                 if (input) {
                     input.focus();
+                    if (idx == 0) {
+                        input.setSelectionRange(0, 0);
+                    }
                 }
             }
         }
@@ -133,6 +157,7 @@
         document.addEventListener('input', function(event) {
             var inputElement = event.target;
             cursorAtEnd = isCursorAtEnd(inputElement);
+            cursorAtStart = isCursorAtStart(inputElement)
         });
 
         document.getElementById('srparticipanttable').addEventListener('paste', function(e) {

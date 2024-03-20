@@ -111,8 +111,6 @@
             const inputs = document.getElementById("instructionstable").getElementsByClassName("instructions-input");
             for(var i =0;i<inputs.length;i++){
                 inputs[i].style.height = "22px";
-                console.log(inputs[i].style.height);
-                console.log(inputs[i].scrollHeight);
                 inputs[i].style.height = inputs[i].scrollHeight - 12 + 'px';
             }
         }
