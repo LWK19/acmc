@@ -31,14 +31,14 @@
         <div class="centre-button">
             <button style="width: max-content; padding: 18px;" onClick="updateParticipants('senior')"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
         </div>
-        <div style="margin: 3%; width: 100%; overflow: scroll; display: block">
+        <div class="table-container">
             <table id="srparticipanttable">
                 <tr>
                     <th>Name</th>
                     <th>Class</th>
-                    <th style="width: 20%; min-width: max-content;">ID</th>
+                    <th>ID</th>
                     <th>Password</th>
-                    <th style="width: 10%; min-width: max-content;">Delete</th>
+                    <th>Delete</th>
                 </tr>
                 <tr>
                     <td><input type="text" class="participant-input" onkeyup="rowhandler(event)"></input></td>
