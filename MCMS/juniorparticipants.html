@@ -91,26 +91,6 @@
 
             if (event.keyCode === 13) {
                 addNewInputRow(jrTable, rowindex);
-            } /*else if (event.keyCode === 8 || event.keyCode === 46) {
-                backspaceHandler(jrTable, rowindex);
-            } */else if (event.keyCode === 39) {
-                // Right Arrow
-                if (cursorAtEnd) {
-                    moveCaretToAdjacentCell(activeCell.nextElementSibling, 0);
-                    cursorAtEnd = false;
-                    if (activeCell.nextElementSibling != null) {
-                        inputElement = activeCell.nextElementSibling.querySelector('input');
-                    };
-                }
-            } else if (event.keyCode === 37) {
-                // Left Arrow
-                if (cursorAtStart) {
-                    moveCaretToAdjacentCell(activeCell.previousElementSibling, -1);
-                    cursorAtStart = false;
-                    if (activeCell.previousElementSibling != null) {
-                        inputElement = activeCell.previousElementSibling.querySelector('input');
-                    };
-                }
             } else if (event.keyCode === 38) {
                 // Up Arrow
                 var rowIndex = activeRow.rowIndex - 1;
@@ -124,57 +104,7 @@
                     c = activeRow.parentNode.rows[rowIndex].cells[cellindex];
                 }
             }
-
-            // If we didn't hit a boundary, update the current cell
-            if (c) {
-                c.querySelector('input').focus(); // Assuming there's an input element in each cell
-            }
-            cursorAtStart = isCursorAtStart(inputElement);
-            cursorAtEnd = isCursorAtEnd(inputElement);
         }
-
-        function onFocus(event) {
-            setTimeout(() => {
-                var inputElement = event.target;
-                cursorAtStart = isCursorAtStart(inputElement);
-                cursorAtEnd = isCursorAtEnd(inputElement);
-            })
-        }
-
-        // Function to check if the cursor is at the end of the text input
-        function isCursorAtEnd(inputElement) {
-            if (inputElement == null) {
-                return false;
-            }
-            return inputElement.selectionStart === inputElement.value.length;
-        }
-
-        // Function to check if the cursor is at the start of the text input
-        function isCursorAtStart(inputElement) {
-            if (inputElement == null) {
-                return false;
-            }
-            return inputElement.selectionStart === inputElement.selectionEnd && inputElement.selectionStart === 0;
-        }
-
-        function moveCaretToAdjacentCell(cell, idx) {
-            if (cell) {
-                var input = cell.querySelector('input');
-                if (input) {
-                    input.focus();
-                    if (idx == 0) {
-                        input.setSelectionRange(0, 0);
-                    }
-                }
-            }
-        }
-
-        // Event listener for input events to track cursor position
-        document.addEventListener('input', function (event) {
-            var inputElement = event.target;
-            cursorAtEnd = isCursorAtEnd(inputElement);
-            cursorAtStart = isCursorAtStart(inputElement)
-        });
 
         document.getElementById('jrparticipanttable').addEventListener('paste', function (e) {
             e.preventDefault();
