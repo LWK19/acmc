@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>ACMC 2023 Login</title>
+    <title>ACMC</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -13,6 +13,8 @@
     object-fit: cover;">
     <div id="login-square">
         <div><img src="../assets/logo.png" style="max-width: 100%;"> </div>
+        <!--div class="acmc" id="acmc" style="padding: 0 10px;justify-content: center;flex:1;font-size: 50px;">ACMC</div-->
+
         <div style="display: block;">
             <div class="form-title">Username</div>
             <input type="text" placeholder="Username" id="username"></input>
@@ -49,5 +51,8 @@
         event.preventDefault();
         document.getElementById("login-button").click();
     }});
+    var yr = new Date().getFullYear();
+    document.getElementById("acmc").innerHTML += " "+ yr; 
+    document.title += " "+ yr + " Login";
 </script>
 </html>

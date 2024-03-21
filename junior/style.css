@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -7,17 +9,25 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 *{
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: large;
 }
-@font-face {
-  font-family: Chomsky;
-  src: url("../assets/fonts/Chomsky.woff") format("woff");
+:root {
+  --blue: #080066;
+  --red: #B00;
+  --gold: #f0ad4e;
+  --notsogray: #EDEDED;
+  --gray: #DEDEDE;
+  --grayer: #CDCDCD;
+  --grayest: #BCBCBC;
+  --disabled: #555;
+  --invisible: #00000000;
+  --big-text: clamp(36px, min(10vh, 3vw), 56px);
+  --medium-text: clamp(24px, min(5vh, 2vw), 30px);
+  --small-text: clamp(18px, min(3vh, 1.4vw), 20px);
+  --smaller-text: clamp(16px, min(2vh, 1.2vw), 18px);
 }
-@font-face{
-  font-family: Olde-English;
-  src: url("../assets/fonts/Olde-English.woff") format("woff");
-}
+
 #question-img {
   width: 100%;
   height: 100%;
@@ -38,13 +48,11 @@ button[disabled]{
 button:hover:not([disabled]) {
   background-position:bottom;
 }
-
-
-.acs{
+.acmc{
   text-align: center;
-  font-family: Olde-English;
   font-size: 80px;
   padding-bottom: 20px;
+  color: var(--blue);
 }
 #login-square{
   background-color: aliceblue;

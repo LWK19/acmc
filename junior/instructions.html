@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>ACMC 2023 Instructions</title>
+    <title>ACMC</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -47,5 +47,7 @@
     getTime();
     getInstructions();
     window.addEventListener("focus",updateTime);
-
+    var yr = new Date().getFullYear();
+    document.getElementById("acmc").innerHTML += " "+ yr; 
+    document.title += " "+ yr + " Instructions";
 </script>

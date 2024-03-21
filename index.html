@@ -1,13 +1,13 @@
 <html>
 
 <head>
-    <title>ACMC 2023</title>
+    <title>ACMC</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="junior/style.css">
 </head>
 
-<body style="background:#325aa0;">
+<body style="background:#485c7e;">
     
     <img id="bg" src='assets/bg.png' style="opacity:0.3;filter: blur(3px);
     max-width:100%;max-height:100%;width:100vw;height: 100vh;
@@ -15,6 +15,7 @@
     
     <div id="login-square">
         <div><img src="assets/logo.png" style="max-width: 100%;"> </div>
+        <!--div class="acmc" id="acmc">ACMC</div-->
         <div style="display: block;"></div>
         <div style="display:flex;">
         <button type="button" id="login-button" style="margin-right:5px" onclick="location.href='junior'">Junior</button>
@@ -22,5 +23,9 @@
         </div>
     </div>
 </body>
-
+<script>
+    var yr = new Date().getFullYear();
+    document.getElementById("acmc").innerHTML += " "+ yr; 
+    document.title += " "+ yr;
+</script>
 </html>
