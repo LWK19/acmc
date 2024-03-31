@@ -9,12 +9,12 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body style="margin:0px;background-color: #f2f2f2;"
+<body style="margin:0px;background-color: #DEDEDE; max-height: 100%;"
     onload="toggle_visibility('input-mcq','show');toggle_visibility('input-open','hide');">
     <div id="head">
         <div id="timer">
             <div style="display: inline-block;width:90px;">Time Left:</div>
-            <div id="clock" style="display: inline-block;margin: 0 5px;"></div>
+            <div id="clock" style="display: inline-block;margin: 0 5px;width: 70px"></div>
             <div id="bar" style="display: inline-block;margin:0 5px">
                 <div id="progress"></div>
             </div>
@@ -24,8 +24,8 @@
         <div id="name" style="padding: 10px;justify-content: flex-end;flex:1;text-align: right;padding-right: 20px;">
         </div>
     </div>
-    <div style="height:100%;display: flex;flex-flow: column;justify-content: space-between;">
-        <div style="padding-top: 80px; text-align:center;width: 100%;">
+    <div style="max-height:vh-117px;display: flex;flex-flow: column;justify-content: space-between;">
+        <div style="padding-top: 10px; text-align:center;width: 100%;">
             <div style="width: 50vw;margin: auto;display: flex;flex-direction: column;">
                 <div class="question-box">
                     <div id="question-img" onclick="enlarge()">
@@ -52,40 +52,25 @@
                 </div>
             </div>
 
-            <div id="input-open" style="display: flex;padding:10px 10px 0px;margin:0 20px;justify-content:center;height:5vh">
-                <input type="number" id="open" onkeydown="return event.keyCode !== 69" placeholder="Answer" style="width:30vw"></input>
+            <div id="input-open"
+                style="display: flex;padding:10px 10px 0px;margin:0 20px;justify-content:center;height:5vh">
+                <input type="number" id="open" onkeydown="return event.keyCode !== 69" placeholder="Answer"
+                    style="width:30vw"></input>
             </div>
             <div id="inputerror" style="padding-bottom:10px;text-align: center;color: red;font-style: italic;"></div>
         </div>
-        <div style="text-align:center;width: 100%;justify-content: flex-end;">
-            <div style="display: flex;justify-content: center;justify-self: flex-start;">
-                <button id="save" onclick="saveAns()">Save & Next</button>
-                <!--<button id="nextBtn" onclick="nextQn()">Next Question</button>-->
-            </div>
-            <div
-                style="background-color: lightgrey;display: flex; justify-content: center;justify-self: flex-end;margin-top: 10px;">
-                <button type="button" class="qnum-box" id="q1" onclick="changeQn(1)"> 1 </button>
-                <button type="button" class="qnum-box" id="q2" onclick="changeQn(2)"> 2 </button>
-                <button type="button" class="qnum-box" id="q3" onclick="changeQn(3)"> 3 </button>
-                <button type="button" class="qnum-box" id="q4" onclick="changeQn(4)"> 4 </button>
-                <button type="button" class="qnum-box" id="q5" onclick="changeQn(5)"> 5 </button>
-                <button type="button" class="qnum-box" id="q6" onclick="changeQn(6)"> 6 </button>
-                <button type="button" class="qnum-box" id="q7" onclick="changeQn(7)"> 7 </button>
-                <button type="button" class="qnum-box" id="q8" onclick="changeQn(8)"> 8 </button>
-                <button type="button" class="qnum-box" id="q9" onclick="changeQn(9)"> 9 </button>
-                <button type="button" class="qnum-box" id="q10" onclick="changeQn(10)"> 10 </button>
-                <button type="button" class="qnum-box" id="q11" onclick="changeQn(11)"> 11 </button>
-                <button type="button" class="qnum-box" id="q12" onclick="changeQn(12)"> 12 </button>
-                <button type="button" class="qnum-box" id="q13" onclick="changeQn(13)"> 13 </button>
-                <button type="button" class="qnum-box" id="q14" onclick="changeQn(14)"> 14 </button>
-                <button type="button" class="qnum-box" id="q15" onclick="changeQn(15)"> 15 </button>
-                <button type="button" id="submit" onclick="document.getElementById('confirmSubmit').classList.remove('hidden');document.getElementById('confirmSubmit').classList.add('visible')">Submit</button>
-            </div>
-            <div id="tail">
-                &copy 2023 MCT | All Rights Reserved
-            </div>
+        <div style="position: fixed; bottom: 117px; width: 100%;margin-top:5vh;display: flex;justify-content: center;justify-self: flex-start;">
+            <button id="save" onclick="saveAns()">Save & Next</button>
+        </div>
+        <div id="bottom-bar">
+            <button type="button" class="qnum-box" id="q-template"> </button>
+            <button type="button" id="submit"
+                onclick="document.getElementById('confirmSubmit').classList.remove('hidden');document.getElementById('confirmSubmit').classList.add('visible')">Submit</button>
         </div>
 
+        <div id="tail">
+            &copy 2023 MCT | All Rights Reserved
+        </div>
     </div>
     <div id="load" class="hidden">
         <div class="popup">
@@ -100,18 +85,23 @@
                 <h1 style="font-size: 30px;">Attention!</h1>
             </div>
             <hr>
-            <div style="padding: 20px 30px 30px;">Are you sure you want to submit? You cannot change anymore answers. Ensure all answers are saved before submitting. 
+            <div style="padding: 20px 30px 30px;">Are you sure you want to submit? You cannot change anymore answers.
+                Ensure all answers are saved before submitting.
             </div>
             <div>
                 <button type="button" class="confirm" style="background-color: lightgreen;" onclick="finish()">
                     Confirm</button>
-                <button type="button" class="confirm" style="background-color: red;" onclick="document.getElementById('confirmSubmit').classList.remove('visible');document.getElementById('confirmSubmit').classList.add('hidden');"> Cancel</button>
+                <button type="button" class="confirm" style="background-color: red;"
+                    onclick="document.getElementById('confirmSubmit').classList.remove('visible');document.getElementById('confirmSubmit').classList.add('hidden');">
+                    Cancel</button>
             </div>
         </div>
         <div class="dimmer"></div>
     </div>
-    <div id="lightbox" style="cursor:pointer;visibility: hidden;" onclick="document.getElementById('lightbox').style.visibility = 'hidden';">
-        <div style="position: fixed;top: 0;z-index: 20; width: 80%;height:80%;display: flex;align-items: center;padding:10vh 10vw;">
+    <div id="lightbox" style="cursor:pointer;visibility: hidden;"
+        onclick="document.getElementById('lightbox').style.visibility = 'hidden';">
+        <div
+            style="position: fixed;top: 0;z-index: 20; width: 80%;height:80%;display: flex;align-items: center;padding:10vh 10vw;">
             <div id="img-enlarge" style="width:100%;height:100%;margin: auto;display: flex;">
             </div>
         </div>
@@ -136,9 +126,13 @@
             $box.prop("checked", false);
         }
     })
-    getName().then(()=>shadeQNum()).then(()=>initQn()).then(()=>getMainTime());
-    window.addEventListener("focus",updateMainTime);
+    buildQNum().then(
+        () => getName().then(
+            () => shadeQNum()).then(
+                () => initQn()).then(
+                    () => getMainTime()));
+    window.addEventListener("focus", updateMainTime);
     var yr = new Date().getFullYear();
-    document.getElementById("acmc").innerHTML += " "+ yr; 
-    document.title += " "+ yr;
+    document.getElementById("acmc").innerHTML += " " + yr;
+    document.title += " " + yr;
 </script>

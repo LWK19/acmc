@@ -2,10 +2,12 @@ var script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 var qn;
+var numsa;
+var nummcq;
 ////////////////////////////////////////////////////////////////
 
 //CLOUDFLARE
-async function post(payload){
+async function post(payload) {
     document.getElementById("load").classList.remove("hidden");
     document.getElementById("load").classList.add("visible");
 
@@ -16,17 +18,17 @@ async function post(payload){
     // Cloudflare workers TODO
     const url = "https://acmc-server.lwk19.workers.dev";
     //const url = "http://127.0.0.1:8787";
-            
-    var req = await fetch( url, {
+
+    var req = await fetch(url, {
         method: "POST",
         headers: {
             "Access-Control-Request-Private-Network": "true",
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Access-Control-Allow-Headers': '*',
-			'Access-Control-Allow-Methods': ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
-			'Access-Control-Allow-Origin': '*',
-        },          
+            'Access-Control-Allow-Methods': ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
+            'Access-Control-Allow-Origin': '*',
+        },
         body: JSON.stringify(payload)
     })
     req = await req.json();
@@ -38,11 +40,11 @@ async function post(payload){
 async function login() {
     usern = document.getElementById("username").value.replace(/\s/g, '');
     pword = document.getElementById("password").value.replace(/\s/g, '');
-    var resp = await post({'method':"login", 'id':usern, 'password':pword});
+    var resp = await post({ 'method': "login", 'id': usern, 'password': pword });
     if (resp.success) {
         document.cookie = "token=" + resp.token + ";max-age=7200;path=/";
         location.href = 'instructions'
-    } else{
+    } else {
         if (resp.msg == "Wrong Password") {
             document.getElementById("incorrect").innerHTML = "Incorrect Password";
         } else if (resp.msg == "Wrong Username") {
@@ -50,36 +52,50 @@ async function login() {
         } else {
             handleErrors(resp);
         }
-    }  
+    }
 }
 
 async function getInstructions() {
     const instruct = document.getElementById("instructions")
-    var resp = await post({'method':"get_instructions", "token":getCookie("token")});
+    var resp = await post({ 'method': "get_instructions", "token": getCookie("token") });
     if (resp.success) {
-        for(var i=0;i<resp.reply.length;i++){
+        for (var i = 0; i < resp.reply.length; i++) {
             var li = document.createElement("li");
             li.innerHTML = resp.reply[i]
             instruct.appendChild(li);
         }
-        
-    } else{
-        if (resp.msg == "Wrong Password") {
-            document.getElementById("incorrect").innerHTML = "Incorrect Password";
-        } else if (resp.msg == "Wrong Username") {
-            document.getElementById("incorrect").innerHTML = "Incorrect Username";
-        } else {
-            handleErrors(resp);
+
+    } else {
+        handleErrors(resp);
+    }
+}
+
+async function buildQNum() {
+    const template = document.getElementById("q-template")
+    var resp = await post({ 'method': "get_numQ", "token": getCookie("token") });
+    if (resp.success) {
+        nummcq = parseInt(resp.reply.nummcq);
+        numsa = parseInt(resp.reply.numsa);
+        for (var i = 0; i < numsa+nummcq; i++) {
+            const clone = template.cloneNode(true);
+            clone.id = "q" + (i+1);
+            clone.innerHTML = i+1;
+
+            clone.setAttribute("onclick", "changeQn(" + (i+1) + ")");
+            template.parentElement.insertBefore(clone, template.parentElement.lastElementChild);
         }
-    }  
+        template.remove();
+    } else {
+        handleErrors(resp);
+    }
 }
 
 async function updateMainTime() {
-    var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
-    if(resp.success) {
+    var resp = await post({ "method": "get_time", "token": getCookie("token"), "timermode": "main" });
+    if (resp.success) {
         time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
-    }else{
+    } else {
         if (resp.msg == "Error. Start Quiz") {
             location.href = "instructions";
         } else if (resp.msg == "Time Up") {
@@ -94,33 +110,33 @@ async function updateMainTime() {
 }
 
 async function updateTime() {
-    var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"inst"});
-    if(resp.success){
+    var resp = await post({ "method": "get_time", "token": getCookie("token"), "timermode": "inst" });
+    if (resp.success) {
         time = parseInt(resp.reply / 1000);
         starts = new Date().getTime() / 1000;
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
 
 async function getTime() {
-    var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"inst"});
-    if(resp.success){
+    var resp = await post({ "method": "get_time", "token": getCookie("token"), "timermode": "inst" });
+    if (resp.success) {
         time = parseInt(resp.reply / 1000);
         starts = new Date().getTime() / 1000;
         instructTimer();
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
 
 async function getMainTime() {
-    var resp = await post({"method":"get_time", "token":getCookie("token"), "timermode":"main"});
-    if(resp.success){
+    var resp = await post({ "method": "get_time", "token": getCookie("token"), "timermode": "main" });
+    if (resp.success) {
         time = parseInt(resp.reply) / 1000;
         mainStarts = new Date().getTime() / 1000;
         mainTimer(time);
-    }else{
+    } else {
         if (resp.msg == "Error. Start Quiz") {
             location.href = "instructions";
         } else if (resp.msg == "Time is Up") {
@@ -132,12 +148,10 @@ async function getMainTime() {
             handleErrors(resp);
         }
     }
-    
-
 }
 
 async function start() {
-    var resp = await post({"method":"start_time", "token":getCookie("token")});
+    var resp = await post({ "method": "start_time", "token": getCookie("token") });
     if (resp.success) {
         var ans_list = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
         document.cookie = "ans_local=" + JSON.stringify(ans_list) + ";max-age=7200;path=/";
@@ -148,23 +162,23 @@ async function start() {
 }
 
 async function getName() {
-    var resp = await post({"method":"get_name", "token":getCookie("token")});
-    if(resp.success){
+    var resp = await post({ "method": "get_name", "token": getCookie("token") });
+    if (resp.success) {
         document.getElementById("name").innerHTML = resp.reply;
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
 
 async function saveAns() {
-    if (qn < 11) {
+    if (qn < nummcq+1) {
         var checked = document.querySelectorAll('input[type=checkbox]:checked');
         if (checked.length == 0) {
             alert("No answer selected");
         } else if (checked.length == 1) {
             ans = checked[0].value;
 
-            var resp = await post({"method":"save_ans", "token":getCookie("token"), "ans":ans, "qn":qn});
+            var resp = await post({ "method": "save_ans", "token": getCookie("token"), "ans": ans, "qn": qn });
             if (resp.success) {
                 var ans_list = JSON.parse(getCookie("ans_local"));
                 ans_list[qn - 1] = ans;
@@ -172,7 +186,7 @@ async function saveAns() {
 
                 shadeQNum();
                 nextQn();
-            }else{
+            } else {
                 handleErrors(resp);
             }
         } else {
@@ -182,18 +196,18 @@ async function saveAns() {
         var ans = document.getElementById('open').value.replace(/\s/g, '');
         if (ans == "") {
             alert("No answer entered");
-        } else{
-            var resp = await post({"method":"save_ans", "token":getCookie("token"), "ans":ans, "qn":qn});
+        } else {
+            var resp = await post({ "method": "save_ans", "token": getCookie("token"), "ans": ans, "qn": qn });
             if (resp.success) {
                 var ans_list = JSON.parse(getCookie("ans_local"));
                 ans_list[qn - 1] = ans;
                 document.cookie = "ans_local=" + JSON.stringify(ans_list) + ";max-age=7200;path=/";
-    
+
                 shadeQNum();
                 nextQn();
-            }else if(resp.msg=="Input Error"){
+            } else if (resp.msg == "Input Error") {
                 document.getElementById("inputerror").innerHTML = "Enter numbers 0-9 only";
-            }else{
+            } else {
                 handleErrors(resp);
             }
         }
@@ -202,23 +216,23 @@ async function saveAns() {
 
 async function initQn() {
     var qnlink;
-    var resp = await post({"method":"get_qn", "token":getCookie("token")});
-    if(resp.success){
+    var resp = await post({ "method": "get_qn", "token": getCookie("token") });
+    if (resp.success) {
         qnlink = resp.reply;
         for (var i = 0; i < 15; i++) {
             preload(qnlink[i], i);
         }
         changeQn(1);
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
 
 async function shadeQNum() {
-    var resp = await post({"method":"get_completed_qn", "token":getCookie("token")});
-    if(resp.success) {
+    var resp = await post({ "method": "get_completed_qn", "token": getCookie("token") });
+    if (resp.success) {
         var ansqn = resp.reply;
-        for (var i = 1; i < 16; i++) {
+        for (var i = 1; i < numsa+nummcq+1; i++) {
             if (ansqn[i - 1] == "") {
                 document.getElementById("q" + i).style.backgroundColor = '';
             } else {
@@ -227,16 +241,16 @@ async function shadeQNum() {
             }
         }
         //showAns(qn);
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
 
 async function finish() {
-    var resp = await post({"method":"end_time", "token":getCookie("token")});
+    var resp = await post({ "method": "end_time", "token": getCookie("token") });
     if (resp.success) {
         submit();
-    }else{
+    } else {
         handleErrors(resp);
     }
 }
@@ -270,7 +284,7 @@ function instructTimer() {
     }, 100);
 }
 function mainTimer() {
-    const mainInterval = setInterval(function () {
+    const mainInterval = setInterval(() => {
         var now = new Date().getTime() / 1000;
         var elapsed = now - mainStarts;
         var timeleft = time - elapsed;
@@ -280,7 +294,7 @@ function mainTimer() {
         var secs = Math.floor(timeleft % 60);
         document.getElementById("clock").innerHTML = hours + ':' + str_pad_left(mins, '0', 2) + ':' + str_pad_left(secs, '0', 2);
         document.getElementById("progress").style.width = timeleft * 150 / tsec + "px";
-        
+
         if (timeleft < 1) {
             clearInterval(mainInterval);
             finish();
@@ -303,7 +317,9 @@ function changeQn(q) {
     showAns(qn);
 
     getQn(qn);
-    if (qn < 11) {
+
+    //TODO
+    if (qn < nummcq + 1) {
         toggle_visibility('input-mcq', 'show');
         toggle_visibility('input-open', 'hide');
     } else {
@@ -312,22 +328,26 @@ function changeQn(q) {
     }
 }
 function nextQn() {
-    if (qn < 15) {
-        qn+=1;
+    if (qn < nummcq+numsa) {
+        qn += 1;
         changeQn(qn);
     }
 }
 function showAns(qn) {
-    var ans_list = JSON.parse(getCookie("ans_local"));
-    if (qn > 10) {
-        document.getElementById('open').value = ans_list[qn - 1];
-    } else {
-        //check the checkbox corresponds to .value = ans_list[qn-1]
-        if (ans_list[qn - 1] != "") {
-            document.getElementById("opt" + ans_list[qn - 1]).checked = true;
-            
+    var ans_list = getCookie("ans_local");
+    if (ans_list != "") {
+        ans_list = JSON.parse(ans_list);
+        if (qn > 10) {
+            document.getElementById('open').value = ans_list[qn - 1];
+        } else {
+            //check the checkbox corresponds to .value = ans_list[qn-1]
+            if (ans_list[qn - 1] != "") {
+                document.getElementById("opt" + ans_list[qn - 1]).checked = true;
+
+            }
         }
     }
+
 }
 function toggle_visibility(id, cs) {
     if (cs == "show") {
@@ -369,7 +389,7 @@ function preload(url, i) {
     images[i].style = "max-width: 100%;max-height:100%;object-fit:cover;margin:auto";
 }
 
-function handleErrors(resp){
+function handleErrors(resp) {
     if (resp.msg == "Token Error") {
         location.href = "index";
         alert("Login timeout. Please sign in again.");
@@ -382,7 +402,7 @@ function handleErrors(resp){
     } else if (resp.msg == "Already Submitted") {
         location.href = "finish";
         alert("Already Submitted");
-    } else{
+    } else {
         console.log(resp.msg);
         alert("Response error");
     }

@@ -227,7 +227,6 @@ async function updateParticipants(section) {
     for (var i = 0; i < cells.length; i++) {
         if (!cells[i].reportValidity()) return;
     }
-    // TODO delete first, then split if more than 50 rows
     const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token") });
     if (!resp.success) {
         handleErrors(resp);
