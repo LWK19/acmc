@@ -297,6 +297,57 @@ async function getParticipants(section) {
     }
 }
 
+async function updateMCMSPassword() {
+    var table = document.getElementById('mcmscredentialstable');
+
+    var cells = table.querySelectorAll("[required]")
+    for (var i = 0; i < cells.length; i++) {
+        if (!cells[i].reportValidity()) return;
+    }
+
+    var credentials = [];
+    for (var i = 1; i < table.rows.length; i++) {
+        var currRow = table.rows[i].cells;
+        credentials[i - 1] = {
+            "id": currRow[0].children[0].value,
+            "password": currRow[1].children[0].value,
+        }
+    }
+    const resp2 = await post({ "method": "updateMCMSPassword", "token": getCookie("token"), "credentials": credentials });
+    if (resp2.success) {
+        //TODO: display confirmation message
+    } else {
+        handleErrors(resp2);
+    }
+}
+
+async function getMCMSCredentials() {
+    var table = document.getElementById('mcmscredentialstable');
+
+    const resp = await post({ "method": "getParticipants", "section": "mcms", "token": getCookie("token") });
+    if (resp.success) {
+        for (var i = 0; i < resp.reply.length; i++) {
+            var currRow = table.rows[i + 1].cells;
+            currRow[0].children[0].value = resp.reply[i].id;
+            currRow[1].children[0].value = resp.reply[i].password;
+
+            //add rows
+            if (i < resp.reply.length - 1) {
+                var numcol = table.rows[0].cells.length;
+                var row = table.insertRow(i + 2);
+                var cells = [];
+                for (var j = 0; j < numcol; j++) {
+                    cells.push(row.insertCell(j));
+                    cells[j].innerHTML = currRow[j].innerHTML;
+                }
+                cells[0].getElementsByTagName('input')[0].focus();
+            }
+        }
+    } else {
+        handleErrors(resp);
+    }
+}
+
 async function getResults(section) {
     var table;
     if (section == 'junior') {
