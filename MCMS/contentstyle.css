@@ -89,6 +89,12 @@ h2 {
     margin: 0px;
 }
 
+h3 {
+    font: var(--small-text) 'Montserrat', sans-serif;
+    color: var(--blue);
+    margin: 0px;
+}
+
 i {
     margin: 6px;
 }
