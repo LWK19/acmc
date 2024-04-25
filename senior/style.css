@@ -260,6 +260,7 @@ input{
   padding:10px 0px;
   top: 0;
   width: 100%;
+  position:fixed;
   text-align: center;
   display: flex;
   align-items: center;
