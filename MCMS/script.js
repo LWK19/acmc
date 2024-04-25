@@ -71,9 +71,11 @@ async function updateCompetitionDetails() {
 async function getCompetitionDetails() {
     const resp = await post({ "method": "getCompetitionDetails", "token": getCookie("token") });
     if (resp.success) {
-        const acmc_time = new Date(resp.reply.acmc_time);
-        document.getElementById('date').valueAsDate = acmc_time;
-        document.getElementById('starttime').valueAsDate = acmc_time;
+        var acmc_time = new Date(resp.reply.acmc_time);
+        acmc_time = new Date(acmc_time.getTime() - acmc_time.getTimezoneOffset()*60*1000);
+
+        document.getElementById('date').value = acmc_time.toISOString().split('T')[0];
+        document.getElementById('starttime').value = acmc_time.toISOString().split('T')[1].split('.')[0];
         document.getElementById('duration').value = resp.reply.duration;
         document.getElementById('buffer').value = resp.reply.buffer;
         document.getElementById('nummcq').value = resp.reply.nummcq;
