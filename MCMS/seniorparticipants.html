@@ -32,7 +32,7 @@
         <h3 style="margin-top: 0px; margin-bottom: 12px;">Warning: Reset Answers will delete all submitted answers and recorded times. Use this only when testing or after the results have been downloaded. </h3>
         <div class="centre-button">
             <button style="width: max-content; padding: 18px;" onClick="updateParticipants('senior')"><i class="fa-solid fa-floppy-disk"></i> <span>Save</span></button>
-            <button style="width: max-content; padding: 18px;" onClick="resetParticipants('senior')"><i class="fa-solid fa-rotate-left"></i> <span>Reset Answers</span></button>
+            <button style="width: max-content; padding: 18px;" onClick="document.getElementById('confirmReset').classList.remove('hidden');document.getElementById('confirmReset').classList.add('visible')"><i class="fa-solid fa-rotate-left"></i> <span>Reset Answers</span></button>
         </div>
         <div class="table-container">
             <table id="srparticipanttable">
@@ -55,6 +55,23 @@
         <div class="centre-button">
             <button style="width: max-content; padding: 18px;" onClick="addNewInputRow(srparticipanttable)"><i class="fa-solid fa-plus"></i> <span>Add New Participant</span></button>
         </div>
+    </div>
+    <div id="confirmReset" class="hidden">
+        <div class="popup" style="padding: 20px 50px;height:auto;">
+            <div>
+                <h1 style="font-size: 30px;">Attention!</h1>
+            </div>
+            <hr>
+            <div style="padding: 20px 30px 30px;">Are you sure you want to reset answers for <b><i>all participants</i></b>? </div>
+            <div>
+                <button type="button" class="confirm" style="background-color: lightgreen;" onclick="resetParticipants('senior')">
+                    Confirm</button>
+                <button type="button" class="confirm" style="background-color: red;"
+                    onclick="document.getElementById('confirmReset').classList.remove('visible');document.getElementById('confirmReset').classList.add('hidden');">
+                    Cancel</button>
+            </div>
+        </div>
+        <div class="dimmer"></div>
     </div>
     <div id="load" class="hidden">
         <div class="popup">
