@@ -272,7 +272,7 @@ function instructTimer() {
         var secs = Math.floor(timeleft % 60);
         var str = "";
         if (days > 0) {
-            str = days + ' days, ';
+            str = days + ' d, ';
         }
         str = str + str_pad_left(hours, '0', 2) + ' h, ' + str_pad_left(mins, '0', 2) + ' m, ' + str_pad_left(secs, '0', 2) + ' s';
         document.getElementById("startBtn").innerHTML = str;
