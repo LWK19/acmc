@@ -61,9 +61,7 @@ async function updateCompetitionDetails() {
 
     const details = { "acmc_time": acmc_time, "duration": duration, "buffer": buffer, "nummcq": nummcq, "numsa": numsa }
     const resp = await post({ "method": "updateCompetitionDetails", "token": getCookie("token"), "details": details });
-    if (resp.success) {
-        //TODO: display confirmation message
-    } else {
+    if (!resp.success) {
         handleErrors(resp);
     }
 }
@@ -95,9 +93,7 @@ async function updateInstructions() {
         arr[i] = cells[i].value;
     }
     const resp = await post({ "method": "updateInstructions", "token": getCookie("token"), "instructions": arr });
-    if (resp.success) {
-        //TODO: display confirmation message
-    } else {
+    if (!resp.success) {
         handleErrors(resp);
     }
 }
@@ -150,9 +146,7 @@ async function updateQuestions(section, arr) {
         if (arr[i].file != null) {
             arr[i].file = await blobToBase64(arr[i].file);
             const resp = await post({ "method": "updateQuestions", "section": section, "token": getCookie("token"), "qn": arr[i] });
-            if (resp.success) {
-                //TODO: display confirmation message
-            } else {
+            if (!resp.success) {
                 handleErrors(resp);
             }
         }
@@ -229,15 +223,11 @@ async function updateParticipants(section) {
     for (var i = 0; i < cells.length; i++) {
         if (!cells[i].reportValidity()) return;
     }
-    const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token") });
-    if (!resp.success) {
-        handleErrors(resp);
-    }
+    
     var participants = [];
-    var idx = 1;
     for (var i = 1; i < table.rows.length; i++) {
         var currRow = table.rows[i].cells;
-        participants[idx - 1] = {
+        participants[i - 1] = {
             'name': currRow[0].children[0].value,
             "class": currRow[1].children[0].value,
             "id": currRow[2].children[0].value,
@@ -247,22 +237,19 @@ async function updateParticipants(section) {
             "time": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             "token": "init_token"
         }
-        idx++;
-        if (idx % 40 == 0) {
-            const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
-            if (!resp2.success) {
-                handleErrors(resp2);
-            }
-            participants = [];
-            idx = 1;
-        }
-
     }
-    const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
-    if (resp2.success) {
-        //TODO: display confirmation message
-    } else {
-        handleErrors(resp2);
+    // delete entries not in current list
+    const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token"), "names": participants.map(x => x.name)});
+    if (!resp.success) {
+        handleErrors(resp);
+    }
+
+    // upsert entries
+    for (var i = 0; i < participants.length/40 + 1; i++) {
+        const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants.slice(i*40, min(participants.length, (i+1)*40+1)) });
+        if (!resp2.success) {
+            handleErrors(resp2);
+        }
     }
 }
 
@@ -299,6 +286,13 @@ async function getParticipants(section) {
     }
 }
 
+async function resetParticipants(section) {
+    const resp = await post({ "method": "resetParticipants", "section": section, "token": getCookie("token") });
+    if (!resp.success) {
+        handleErrors(resp);
+    }
+}
+
 async function updateMCMSPassword() {
     var table = document.getElementById('mcmscredentialstable');
 
@@ -316,9 +310,7 @@ async function updateMCMSPassword() {
         }
     }
     const resp2 = await post({ "method": "updateMCMSPassword", "token": getCookie("token"), "credentials": credentials });
-    if (resp2.success) {
-        //TODO: display confirmation message
-    } else {
+    if (!resp2.success) {
         handleErrors(resp2);
     }
 }

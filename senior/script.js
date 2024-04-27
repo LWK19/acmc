@@ -318,7 +318,6 @@ function changeQn(q) {
 
     getQn(qn);
 
-    //TODO
     if (qn < nummcq + 1) {
         toggle_visibility('input-mcq', 'show');
         toggle_visibility('input-open', 'hide');
