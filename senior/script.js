@@ -398,6 +398,8 @@ function handleErrors(resp) {
         finish();
     } else if (resp.msg == "Competition Not Started") {
         location.href = "instructions";
+    } else if (resp.msg == "Participant Has Not Started") {
+        location.href = "instructions";
     } else if (resp.msg == "Already Submitted") {
         location.href = "finish";
         alert("Already Submitted");
