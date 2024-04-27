@@ -258,6 +258,10 @@ async function finish() {
 
 //////////////////////////////////////////////////////////////
 //shared.js
+function autoZoom() {
+    document.body.style.zoom = document.documentElement.clientHeight/1080;
+}
+
 function str_pad_left(string, pad, length) {
     return (new Array(length + 1).join(pad) + string).slice(-length);
 }
