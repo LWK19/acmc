@@ -239,7 +239,7 @@ async function updateParticipants(section) {
         }
     }
     // delete entries not in current list
-    const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token"), "names": participants.map(x => x.id)});
+    const resp = await post({ "method": "deleteParticipants", "section": section, "token": getCookie("token"), "ids": participants.map(x => x.id)});
     if (!resp.success) {
         handleErrors(resp);
     }
