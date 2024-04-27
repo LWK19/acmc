@@ -245,17 +245,12 @@ async function updateParticipants(section) {
     }
 
     // upsert entries
-    const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants });
-    if (!resp2.success) {
-        handleErrors(resp2);
-    }
-    /*
     for (var i = 0; i < participants.length/40 + 1; i++) {
-        const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants.slice(i*40, min(participants.length, (i+1)*40+1)) });
+        const resp2 = await post({ "method": "insertParticipants", "section": section, "token": getCookie("token"), "participants": participants.slice(i*40, Math.min(participants.length, (i+1)*40+1)) });
         if (!resp2.success) {
             handleErrors(resp2);
         }
-    }*/
+    }
 }
 
 async function getParticipants(section) {
